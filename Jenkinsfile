@@ -16,9 +16,10 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
+        DOCKER_HOST = 'tcp://localhost:2222'
         DOCKER_IMAGE = "sreep1207/my-app15:${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('dockerhub-pwd')
-         DOCKER_HOST = 'tcp://localhost:2222'
+         
       }
       steps {
         script {
