@@ -24,7 +24,7 @@ pipeline {
           // Check the contents of the workspace for debugging
           sh 'ls -la'
           
-         
+                    docker.withServer('tcp://localhost:2375') {        
                     // Use the specified Docker image to execute Docker commands
                     docker.image('sreep1207/docker:latest').inside {
                         // Build the Docker image
@@ -39,7 +39,7 @@ pipeline {
         }
       }
     }
-
+  }
     stage('Run Composer, Drush, and Gulp') {
       steps {
         script {
