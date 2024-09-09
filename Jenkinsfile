@@ -34,7 +34,7 @@ pipeline {
                         
                         // Log in to Docker Hub and push the Docker image
                         withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-                            sh "echo ${DOCKER_HUB_PASSWORD} | docker -H tcp://localhost:2375 login -u ${DOCKER_HUB_USERNAME} --password-stdin"
+                            sh "echo ${DOCKER_HUB_PASSWORD} | docker -H tcp://localhost:2222 login -u ${DOCKER_HUB_USERNAME} --password-stdin"
                         }
                         
                         // Push the Docker image to Docker Hub
