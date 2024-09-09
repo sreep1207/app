@@ -19,12 +19,13 @@ pipeline {
           // Check the contents of the workspace for debugging
           sh 'ls -la'
           
-          // Build the Docker image using the Dockerfile in the workspace
-          sh 'docker build -t ${DOCKER_IMAGE} .'
+         // Use Docker Pipeline plugin to build the Docker image
+          docker.build("${DOCKER_IMAGE}")
           
-          def dockerImage = docker.image("${DOCKER_IMAGE}")
-          docker.withRegistry('https://index.docker.io/v1/', "dockerhub-pwd") {
-            dockerImage.push()
+          // Use Docker Pipeline plugin to push the Docker image
+          docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-pwd') {
+            docker.image("${DOCKER_IMAGE}").push('latest')
+            docker.image("${DOCKER_IMAGE}").push("${BUILD_NUMBER}")
           }
         }
       }
