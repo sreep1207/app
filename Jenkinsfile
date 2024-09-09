@@ -27,18 +27,16 @@ pipeline {
                     // Check the contents of the workspace for debugging
                     sh 'ls -la'
                     
-                    // Use the specified Docker image to execute Docker commands
-                    docker.image('sreep1207/docker:latest').inside {
-                        // Build the Docker image
+                   try {
                         sh "docker -H tcp://localhost:2222 build -t ${DOCKER_IMAGE} ."
-                        
-                        // Log in to Docker Hub and push the Docker image
-                        withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-                            sh "echo ${DOCKER_HUB_PASSWORD} | docker -H tcp://localhost:2222 login -u ${DOCKER_HUB_USERNAME} --password-stdin"
-                        }
-                        
-                        // Push the Docker image to Docker Hub
+                        sh "echo ${DOCKER_HUB_PASSWORD} | docker -H tcp://localhost:2222 login -u ${DOCKER_HUB_USERNAME} --password-stdin"
                         sh "docker -H tcp://localhost:2222 push ${DOCKER_IMAGE}"
+                    } catch (Exception e) {
+                        error "Failed to build and push Docker image: ${e.getMessage()}"
+                    }
+                }
+            }
+        }
                     }
                 }
             }
