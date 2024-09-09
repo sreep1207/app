@@ -6,41 +6,32 @@ pipeline {
         }
     }
 
-  stages {
-    stage('Checkout') {
-      steps {
-        sh 'echo passed'
-        // Uncomment the following line if you need to checkout from git
-         git branch: 'main', url: 'https://github.com/sreep1207/app.git'
-      }
+   environment {
+        DOCKER_HOST = 'tcp://localhost:2375'
     }
-    stage('Build and Push Docker Image') {
-      environment {
-        DOCKER_HOST = 'tcp://localhost:2222'
-        DOCKER_IMAGE = "sreep1207/my-app15:${BUILD_NUMBER}"
-        REGISTRY_CREDENTIALS = credentials('dockerhub-pwd')
-         
-      }
-      steps {
-        script {
-          // Check the contents of the workspace for debugging
-          sh 'ls -la'
-          
+
+    stages {
+        stage('Build and Push Docker Image') {
+            steps {
+                script {
+                    // Verify the Docker daemon can be reached via TCP
+                    sh "docker -H tcp://localhost:2375 info"
                     
-                    // Use the specified Docker image to execute Docker commands
-                    docker.image('sreep1207/docker:latest').inside {
-                        // Build the Docker image
-                        sh "docker build -t ${DOCKER_IMAGE} ."
-                        
-                        // Log in to Docker Hub and push the Docker image
-                        sh "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin"
-                        
-                        // Push the Docker image to Docker Hub
-                        sh "docker push ${DOCKER_IMAGE}"
-         }
+                    // Build the Docker image
+                    sh "docker -H tcp://localhost:2375 build -t ${DOCKER_IMAGE} ."
+                    
+                    // Log in to Docker Hub and push the Docker image
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+                        sh "echo ${DOCKER_HUB_PASSWORD} | docker -H tcp://localhost:2375 login -u ${DOCKER_HUB_USERNAME} --password-stdin"
+                    }
+
+                    // Push the Docker image to Docker Hub
+                    sh "docker -H tcp://localhost:2375 push ${DOCKER_IMAGE}"
+                }
+            }
         }
-      }
     }
+}
   
     stage('Run Composer, Drush, and Gulp') {
       steps {
