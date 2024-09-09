@@ -7,7 +7,7 @@ pipeline {
     }
 
    environment {
-        DOCKER_HOST = 'tcp://localhost:2375'
+        DOCKER_HOST = 'tcp://localhost:2222'
     }
 
     stages {
@@ -15,18 +15,18 @@ pipeline {
             steps {
                 script {
                     // Verify the Docker daemon can be reached via TCP
-                    sh "docker -H tcp://localhost:2375 info"
+                    sh "docker -H tcp://localhost:2222 info"
                     
                     // Build the Docker image
-                    sh "docker -H tcp://localhost:2375 build -t ${DOCKER_IMAGE} ."
+                    sh "docker -H tcp://localhost:2222 build -t ${DOCKER_IMAGE} ."
                     
                     // Log in to Docker Hub and push the Docker image
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-                        sh "echo ${DOCKER_HUB_PASSWORD} | docker -H tcp://localhost:2375 login -u ${DOCKER_HUB_USERNAME} --password-stdin"
+                        sh "echo ${DOCKER_HUB_PASSWORD} | docker -H tcp://localhost:2222 login -u ${DOCKER_HUB_USERNAME} --password-stdin"
                     }
 
                     // Push the Docker image to Docker Hub
-                    sh "docker -H tcp://localhost:2375 push ${DOCKER_IMAGE}"
+                    sh "docker -H tcp://localhost:2222 push ${DOCKER_IMAGE}"
                 }
             }
         }
