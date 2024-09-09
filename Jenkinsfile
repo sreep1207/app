@@ -18,13 +18,14 @@ pipeline {
       environment {
         DOCKER_IMAGE = "sreep1207/my-app15:${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('dockerhub-pwd')
+         DOCKER_HOST = 'tcp://localhost:2222'
       }
       steps {
         script {
           // Check the contents of the workspace for debugging
           sh 'ls -la'
           
-                    docker.withServer('tcp://127.0.0.1:2222') {        
+                    
                     // Use the specified Docker image to execute Docker commands
                     docker.image('sreep1207/docker:latest').inside {
                         // Build the Docker image
@@ -39,7 +40,7 @@ pipeline {
         }
       }
     }
-  }
+  
     stage('Run Composer, Drush, and Gulp') {
       steps {
         script {
