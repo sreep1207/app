@@ -1,0 +1,22 @@
+uuid: 146f3716-d946-4fa7-99b1-a47e9ba2cb4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_html_content
+    - paragraphs.paragraphs_type.portfolio_section
+  module:
+    - text
+id: paragraph.portfolio_section.field_html_content
+field_name: field_html_content
+entity_type: paragraph
+bundle: portfolio_section
+label: 'HTML Content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

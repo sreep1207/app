@@ -1,0 +1,19 @@
+uuid: d7025e8d-b17b-4ac2-8b77-5819ab313b8e
+langcode: en
+status: false
+dependencies: {  }
+id: dev
+label: Dev
+description: ''
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/split/dev
+module:
+  dblog: 0
+  field_ui: 0
+  views_ui: 0
+theme: {  }
+complete_list: {  }
+partial_list: {  }

@@ -1,0 +1,19 @@
+uuid: a8cbde14-a119-4019-888a-b7135eb83419
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_client_designation
+    - paragraphs.paragraphs_type.what_client
+id: paragraph.what_client.field_client_designation
+field_name: field_client_designation
+entity_type: paragraph
+bundle: what_client
+label: 'Client Designation'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

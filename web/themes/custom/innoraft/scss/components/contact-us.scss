@@ -1,0 +1,164 @@
+@use "../import" as *;
+.breadcrumb {
+  box-shadow: 0 0 0 100vmax $primary-blue;
+  background: $primary-blue;
+  clip-path: inset(0 -100vmax);
+  margin: 0;
+  padding: $indent-20 0;
+  .breadcrumb-item {
+    color: $white;
+    > * {
+      color: $white;
+    }
+    &::before {
+      color: $white !important;
+    }
+  }
+}
+.paragraph--type--contact-us {
+  position: relative;
+  padding: $indent-64 0;
+  box-shadow: 0 0 0 100vmax $primary-blue;
+  background: $primary-blue;
+  clip-path: inset(0 -100vmax);
+  &::after {
+    content: '';
+    position: absolute;
+    top: 66%;
+    left: 0;
+    box-shadow: 0 0 0 100vmax $white;
+    background: $white;
+    clip-path: inset(0 -100vmax);
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
+  &:has(.webform-confirmation) {
+    &::after {
+      top: 99%;
+      @media (max-width: $md-1) {
+        top: 76%;
+      }
+    }
+  }
+  .row {
+    .field--name-field-html-content {
+      > * {
+        color: $white;
+      }
+      h2 {
+        color: $orange;
+      }
+    }
+    @media screen and (max-width: $md-1) {
+      gap: $indent-50 + 6;
+    }
+  }
+  @media (max-width: $sm) {
+    padding-top: $indent-60;
+  }
+  .ring {
+    position: absolute;
+    right: calc(110% - 100vw);
+    bottom: -13%;
+    z-index: -1;
+    mix-blend-mode: plus-lighter;
+    @media (max-width: $lg) {
+      right: calc(80% - 100vw);
+    }
+    @media (max-width: $asm) {
+      bottom: 10%;
+    }
+  }
+  .field--name-field-html-content {
+    padding-right: $indent-88;
+    @media (max-width: $xm) {
+      padding-right: 0;
+    }
+    .icons-display {
+      padding-top: $indent-50;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      .icon-item {
+        display: flex;
+        gap: 16px;
+        .icon-image {
+          width: 55px;
+        }
+        .icon-information {
+          width: 280px;
+          color: $dark-grey;
+          .icon-info {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+  .contact-us-form {
+    background-color: $white;
+    box-shadow: $box-shadow-80;
+    padding: $indent-40;
+    form {
+      .js-form-item {
+        position: relative;
+        margin-bottom: 46px !important;
+        label {
+          position: absolute;
+          bottom: 9px;
+          transition: transform 0.3s, color 0.3s;
+          font-size: $font-size-14;
+          color: $mid-grey;
+          z-index: 1;
+        }
+        &:focus-within label {
+          font-size: $font-size-12 !important;
+        }
+        input[type=text],
+        input[type=email],
+        input[type=number],
+        textarea {
+          border-bottom: 1px solid $light-grey !important;
+          color: $mid-grey;
+          font-size: $font-size-16 !important;
+        }
+        textarea {
+          resize: none;
+          background-color: $white;
+        }
+      }
+      .js-form-type-processed-text {
+        margin-bottom: 26px !important;
+      }
+      .js-form-item-captcha-response {
+        margin-bottom: 0 !important;
+        label {
+          position: relative;
+          bottom: 0;
+          transition: none;
+          transform: none;
+        }
+        &:focus-within label {
+          transform: none !important;
+          font-size: $font-size-14 !important;
+        }
+      }
+      .webform-button--submit {
+        margin-top: 20px;
+        @include button(primary);
+
+        color: transparent;
+        &::before {
+          content: "Submit";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          color: $white;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+uuid: 256fa309-29bc-42a6-8242-cd675cc5460d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_service_level
+field_name: field_service_level
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: level_1_service
+      label: 'Level 1 Service (L1)'
+    -
+      value: level_2_service
+      label: 'Level 2 Service (L2)'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

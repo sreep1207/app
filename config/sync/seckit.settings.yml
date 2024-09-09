@@ -1,0 +1,59 @@
+_core:
+  default_config_hash: x6bhN6WZwfVUI_LLMvRJIUW_2c26VTaBozbfXmJWmro
+seckit_xss:
+  csp:
+    checkbox: true
+    vendor-prefix:
+      x: false
+      webkit: false
+    report-only: false
+    default-src: "'self'"
+    script-src: "'self' 'nonce-{SERVER-GENERATED-NONCE}'  data: https://use.fontawesome.com/ https://maps.googleapis.com/ https://cdn.jsdelivr.net/ https://cdnjs.cloudflare.com/  https://www.googletagmanager.com/   https://assets.apollo.io/"
+    object-src: "'self'"
+    style-src: "'self' 'unsafe-inline' https://fonts.googleapis.com/ https://fonts.gstatic.com/ https://cdn.lineicons.com/ https://fontawesome.com https://cdn.jsdelivr.net/ https://cdnjs.cloudflare.com/"
+    img-src: "* 'self' data: https://maps.gstatic.com/ https://maps.googleapis.com/"
+    media-src: "'self' https://www.youtube.com/ "
+    frame-src: "'self' https://www.youtube.com/  https://www.google.com/"
+    frame-ancestors: ''
+    child-src: ''
+    font-src: "'self' https://fonts.gstatic.com/ https://cdn.lineicons.com/ https://fontawesome.com https://cdnjs.cloudflare.com/"
+    connect-src: "'self' https://maps.googleapis.com/ https://www.youtube.com https://www.google-analytics.com/  https://aplo-evnt.com/"
+    report-uri: /report-csp-violation
+    upgrade-req: false
+    policy-uri: ''
+  x_xss:
+    seckit_x_xss_option_disable: Disabled
+    seckit_x_xss_option_0: '0'
+    seckit_x_xss_option_1: 1;
+    seckit_x_xss_option_1_block: '1; mode=block'
+    select: 2
+seckit_csrf:
+  origin: false
+  origin_whitelist: ''
+seckit_clickjacking:
+  js_css_noscript: false
+  noscript_message: 'Sorry, you need to enable JavaScript to visit this website.'
+  x_frame: '1'
+  x_frame_allow_from: ''
+seckit_ssl:
+  hsts: true
+  hsts_subdomains: true
+  hsts_max_age: 31536000
+  hsts_preload: false
+seckit_ct:
+  expect_ct: false
+  max_age: 86400
+  report_uri: ''
+  enforce: false
+seckit_fp:
+  feature_policy: false
+  feature_policy_policy: "geolocation 'self'; camera 'none'; payment 'none'"
+seckit_pp:
+  permissions_policy: true
+  permissions_policy_policy: 'camera=(), geolocation=(self), payment=(self)'
+seckit_various:
+  from_origin: false
+  from_origin_destination: same
+  referrer_policy: true
+  referrer_policy_policy: same-origin
+  disable_autocomplete: false

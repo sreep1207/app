@@ -1,0 +1,34 @@
+uuid: b912e508-83dc-4f29-ab57-4c08744d2f42
+langcode: en
+status: true
+dependencies:
+  module:
+    - cookies
+    - system
+    - user
+  theme:
+    - innoraft
+id: innoraft_cookiesui
+theme: innoraft
+region: footer_sixth
+weight: -12
+provider: null
+plugin: cookies_ui_block
+settings:
+  id: cookies_ui_block
+  label: 'Cookies UI'
+  label_display: '0'
+  provider: cookies
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      anonymous: anonymous
+  response_status:
+    id: response_status
+    negate: false
+    status_codes:
+      - 200

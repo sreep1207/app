@@ -1,0 +1,113 @@
+@use "../import" as *;
+
+/* general global classes */
+.h1--banner {
+  @extend %h1--banner;
+}
+.h4--heading-bsd {
+  @extend %h4--heading-bsd;
+}
+.h5--heading-bsd {
+  @extend %h5--heading-bsd;
+}
+.h5--heading-bl {
+  @extend %h5--heading-bl;
+}
+.p-sm {
+  @extend %p--sm;
+}
+.text--white {
+  color: $white;
+}
+.text--blue {
+  color: $primary-blue;
+}
+.text--default {
+  color: $dark-grey;
+}
+.text--orange {
+  color: $orange;
+}
+.text--light-grey {
+  color: $light-grey;
+}
+.no-line-height {
+  line-height: 0;
+}
+.pe-6 {
+  padding-right: $indent-60;
+}
+.lni {
+  font-size: 0;
+  &::before {
+    font-family: $font-family-lineicons !important;
+    font-size: 1rem;
+    line-height: 1;
+  }
+}
+.ico {
+  font-size: 0;
+  &::before {
+    font-family: 'icomoon', sans-serif !important;
+    font-size: 1rem;
+    line-height: 1;
+  }
+}
+.node__content {
+  margin-top: 0;
+}
+.custom-button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $indent-20;
+}
+#go-top {
+  border-radius: 100%;
+  background: $primary-blue;
+  position: absolute;
+  right: $indent-12;
+  bottom: 116px;
+  padding: $indent-16;
+  width: 48px;
+  height: 48px;
+  line-height: 1;
+  color: $white;
+  cursor: pointer;
+  z-index: 99;
+}
+.error-page {
+  margin: 0 auto;
+  max-width: 420px;
+  width: 100%;
+}
+.shadow {
+  box-shadow: $box-shadow-60 !important;
+}
+.shadow-lg {
+  box-shadow: $box-shadow-80 !important;
+}
+.toast-body .placeholder,
+.messages--error .placeholder {
+  opacity: 1;
+  background-color: transparent;
+  font-weight: 600;
+}
+.section-spacer {
+  padding: $indent-80 0;
+  @media only screen and (max-width: $sm) {
+    padding: $indent-60 0;
+  }
+}
+.icon-white-filter {
+  &:hover {
+    .icon-hover-filter {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+.front-page-div {
+  display: none;
+}
+.career-spotlight {
+  display: none;
+}

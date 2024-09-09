@@ -1,0 +1,5 @@
+purgers:
+  -
+    instance_id: 7732c33ed3
+    plugin_id: cloudfront
+    order_index: 2

@@ -1,0 +1,19 @@
+uuid: 4725998f-ac0d-46d4-b916-bd6bf371fe0a
+langcode: en
+status: true
+dependencies: {  }
+id: marketing_cookies
+label: 'Marketing Cookies'
+group: marketing
+info:
+  value: '<p>These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.</p>'
+  format: basic_html
+consentRequired: true
+purpose: 'Marketing Cookies'
+placeholderMainText: 'This content is blocked because advertising cookies have not been accepted.'
+placeholderAcceptText: 'Only accept advertising cookies'
+processor: ''
+processorContact: ''
+processorUrl: ''
+processorPrivacyPolicyUrl: ''
+processorCookiePolicyUrl: ''

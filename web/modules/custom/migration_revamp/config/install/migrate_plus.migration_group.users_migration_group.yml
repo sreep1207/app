@@ -1,0 +1,5 @@
+id: users_migration_group
+label: 'Users Migration Group'
+description: 'Group for users migration from Drupal 9 to Drupal 10'
+migrations:
+  - users_migration

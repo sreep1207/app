@@ -1,0 +1,11 @@
+uuid: d863115a-5533-420b-b84e-243daaa60de3
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: w1WnCmP2Xfgx24xbx5u9T27XLF_ZFw5R0MlO-eDDPpQ
+id: video
+label: Videos
+weight: 40
+title: Video
+details: 'Video cookies are required by Youtube for the videos that we have posted on our site. They may be used by third parties to build a profile of your interests and show you relevant ads on other sites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device.'

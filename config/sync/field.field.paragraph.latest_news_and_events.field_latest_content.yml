@@ -1,0 +1,27 @@
+uuid: 13315ce0-ecfd-46a2-a4f5-2ea701d234e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_latest_content
+    - paragraphs.paragraphs_type.latest_news_and_events
+  module:
+    - block_field
+id: paragraph.latest_news_and_events.field_latest_content
+field_name: field_latest_content
+entity_type: paragraph
+bundle: latest_news_and_events
+label: 'Latest News & Events'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  selection: blocks
+  selection_settings:
+    plugin_ids:
+      'views_block:events_view_block-latest_events': 'views_block:events_view_block-latest_events'
+      'views_block:news_insights-news_insights_display': 'views_block:news_insights-news_insights_display'
+      'views_block:news_view_block-latest_news': 'views_block:news_view_block-latest_news'
+field_type: block_field

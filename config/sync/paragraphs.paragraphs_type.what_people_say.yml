@@ -1,0 +1,10 @@
+uuid: 21e79f60-6996-4e7f-8509-ce92d4c695af
+langcode: en
+status: true
+dependencies: {  }
+id: what_people_say
+label: 'What People Say'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

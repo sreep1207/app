@@ -1,0 +1,10 @@
+uuid: b0832ad3-4b6f-44fc-b695-b95e96123580
+langcode: en
+status: true
+dependencies: {  }
+id: place_block
+label: 'Place Block'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

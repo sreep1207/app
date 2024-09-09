@@ -1,0 +1,19 @@
+uuid: 7e4b6812-e9aa-41b8-a6af-0be53d1c91b1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_client_name
+    - paragraphs.paragraphs_type.what_client
+id: paragraph.what_client.field_client_name
+field_name: field_client_name
+entity_type: paragraph
+bundle: what_client
+label: 'Client Name'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

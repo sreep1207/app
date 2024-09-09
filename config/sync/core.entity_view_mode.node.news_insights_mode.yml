@@ -1,0 +1,11 @@
+uuid: 4bacb5da-b990-435b-b66a-e2f7e76580eb
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.news_insights_mode
+label: 'news & insights mode'
+description: ''
+targetEntityType: node
+cache: true

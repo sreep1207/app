@@ -1,0 +1,25 @@
+uuid: 54053fa7-3a65-4205-b479-0512affdb1b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.frequently_asked_questions.field_blog_tags
+    - field.field.paragraph.frequently_asked_questions.field_faq_content
+    - paragraphs.paragraphs_type.frequently_asked_questions
+id: paragraph.frequently_asked_questions.default
+targetEntityType: paragraph
+bundle: frequently_asked_questions
+mode: default
+content:
+  field_faq_content:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: full
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_blog_tags: true
+  search_api_excerpt: true

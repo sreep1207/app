@@ -1,0 +1,58 @@
+@use "../import" as *;
+.our-journey {
+  @include full-bleed($primary-blue);
+
+  background: $primary-blue;
+  position: relative;
+  overflow-y: clip;
+  padding: $indent-96 0 ($indent-120 * 2 + $indent-12);
+  .journey-image {
+    mix-blend-mode: hard-light;
+    position: absolute;
+    bottom: 0;
+    right: $bleed;
+    z-index: 1;
+    width: 100vw;
+    max-width: 1840px;
+    @media only screen and (max-width: $md) {
+      width: 115vw;
+    }
+  }
+  .ring {
+    position: absolute;
+    z-index: 0;
+    right: $bleed;
+    bottom: -100%;
+  }
+  .our-journey--inner {
+    position: relative;
+    z-index: 2;
+    h2 {
+      color: $pale-orange;
+    }
+    h3,
+    p,
+    span {
+      color: red;
+    }
+    .number-counter {
+      .number {
+        font-size: $font-size-52;
+        line-height: 1;
+        font-weight: 700;
+        @media only screen and (max-width: $xlg) {
+          font-size: $font-size-40;
+        }
+        @media only screen and (max-width: $sm) {
+          font-size: $font-size-32;
+        }
+      }
+      p {
+        @extend %p--bl;
+      }
+    }
+  }
+  @media only screen and (max-width: $md) {
+    padding: $indent-96 0 35vw;
+  }
+}

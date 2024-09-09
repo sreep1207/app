@@ -1,0 +1,10 @@
+uuid: 623ba389-9acd-4778-9732-4b7949b239f4
+langcode: en
+status: true
+dependencies: {  }
+id: portfolio_section
+label: 'Portfolio Section'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

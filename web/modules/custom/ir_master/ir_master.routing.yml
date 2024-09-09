@@ -1,0 +1,22 @@
+ir_master.settings:
+  path: '/admin/config/user-interface/counter-setting'
+  defaults:
+    _title: 'Number Counter Settings'
+    _form: 'Drupal\ir_master\Form\IrMasterSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
+ir_master.aliases_fix_form:
+  path: '/admin/config/system/fix-blog-aliases'
+  defaults:
+    _form: '\Drupal\ir_master\Form\FixBlogAliasForm'
+    _title: 'Blog Aliases Fixing'
+  requirements:
+    _permission: 'administer site configuration'
+
+ir_master.example:
+  path: '/ir-master/example'
+  defaults:
+    _title: 'Testing controller'
+    _controller: '\Drupal\ir_master\Controller\IrMasterController'
+  requirements:
+    _permission: 'access content'

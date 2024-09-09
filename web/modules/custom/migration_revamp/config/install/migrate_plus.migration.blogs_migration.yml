@@ -1,0 +1,60 @@
+id: blogs_migration
+label: 'Blogs Content Migration'
+migration_group: blogs_migrations
+source:
+  plugin: blogs_migration_source
+  ids:
+    nid:
+      type: integer
+process:
+  title: title
+  body: body
+  status: status
+  created: created
+  field_meta_tags: meta_tags
+  uid:
+    plugin: migration_lookup
+    migration: users_migration
+    source: uid
+    no_stub: true
+  field_blog_tags:
+  -
+    plugin: sub_process
+    source: blog_tags
+    process:
+      target_id:
+        plugin: entity_lookup
+        source: name
+        value_key: name
+        bundle_key: vid
+        bundle: tags
+        entity_type: taxonomy_term
+        ignore_case: true
+      name: name
+  field_banner_image:
+  -
+    plugin: image_file_url_to_media
+    url: banner_image/src
+    title: banner_image/title
+    alt: banner_image/alt
+    file: banner_image/filename
+  field_teaser_image:
+  -
+    plugin: skip_on_empty
+    method: process
+    source: teaser_image/src
+  -
+    plugin: image_import
+    title: teaser_image/title
+    alt: teaser_image/alt
+    reuse: true
+  _ignore_existing:
+    plugin: migration_lookup
+    migration: blogs_migration
+destination:
+  plugin: entity:node
+  default_bundle: blog
+migration_dependencies:
+  required:
+    - blogs_migration_source
+    - taxonomy_terms_migration

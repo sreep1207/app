@@ -1,0 +1,107 @@
+@use "../import" as *;
+.our-portfolio {
+  padding: $indent-80 0;
+  .our-portfolio-slider {
+    .slider-wrap {
+      margin: 0 auto;
+      position: relative;
+      perspective: 1000px;
+      height: 100%;
+      .slider-inner {
+        height: 480px;
+        .slider-item {
+          display: block;
+          position: absolute;
+          transition: all 0.5s linear;
+          width: 85%;
+          filter: blur(3px);
+          visibility: hidden;
+          &[data-position="2"] {
+            z-index: 9;
+            visibility: visible;
+            transform: rotateY(0deg) translateX(18%) scale(0.8);
+          }
+          &[data-position="3"] {
+            z-index: 8;
+            visibility: visible;
+            transform: rotateY(0deg) translateX(36%) scale(0.6);
+          }
+          &:first-child {
+            visibility: visible;
+            z-index: 10 !important;
+            transform: rotateY(0deg) translateX(0) !important;
+            filter: none;
+          }
+          &:hover {
+            &:not(:first-child) {
+              cursor: pointer;
+            }
+          }
+        }
+        .slider-content {
+          position: absolute;
+          bottom: 50px;
+          background: $white;
+          box-shadow: $box-shadow-60;
+          max-width: 400px;
+          padding: $indent-32;
+          z-index: 1;
+          @media only screen and (max-width: $axsm) {
+            padding: $indent-20;
+            max-width: 270px;
+            p {
+              font-size: $font-size-14;
+            }
+          }
+        }
+        .slider-img {
+          padding-left: $indent-80;
+          img {
+            object-fit: cover;
+            object-position: top left;
+            height: 480px;
+            width: 100%;
+            box-shadow: $box-shadow-80;
+          }
+          @media only screen and (max-width: $md) {
+            padding-left: $indent-48;
+          }
+          @media only screen and (max-width: $axsm) {
+            padding-left: $indent-24;
+          }
+        }
+        @media only screen and (max-width: $md) {
+          &,
+          .slider-img img {
+            height: 320px;
+          }
+        }
+      }
+    }
+  }
+  .progress-bar {
+    width: 100%;
+    height: 4px;
+    background: $light-bg-blue;
+    position: relative;
+    .progress-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: $primary-blue;
+      z-index: 1;
+      transition: $transition300ms;
+    }
+  }
+  .slick-arrow,
+  .slick-prev,
+  .slick-next {
+    position: static;
+    bottom: unset;
+    top: unset;
+    left: unset;
+    right: unset;
+  }
+}

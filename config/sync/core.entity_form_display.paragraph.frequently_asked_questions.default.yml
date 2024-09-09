@@ -1,0 +1,36 @@
+uuid: 3a731928-2b03-4bc4-a9cf-6672d9573a94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.frequently_asked_questions.field_blog_tags
+    - field.field.paragraph.frequently_asked_questions.field_faq_content
+    - paragraphs.paragraphs_type.frequently_asked_questions
+id: paragraph.frequently_asked_questions.default
+targetEntityType: paragraph
+bundle: frequently_asked_questions
+mode: default
+content:
+  field_blog_tags:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_faq_content:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

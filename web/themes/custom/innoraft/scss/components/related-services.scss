@@ -1,0 +1,88 @@
+@use "../import" as *;
+.related-services {
+  position: relative;
+  background: $primary-blue;
+  @include full-bleed($primary-blue);
+  &--inner {
+    display: flex;
+    margin-top: $indent-60;
+    @media only screen and (max-width: $lg) {
+      flex-wrap: wrap;
+    }
+  }
+  .section-header {
+    color: $orange;
+  }
+  .section-sub-header {
+    color: $white;
+  }
+  .service {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: $indent-32;
+    padding: $indent-32;
+    width: 100%;
+    transition: $transition300ms;
+    background: $light-bg-blue;
+    overflow: clip;
+    border-right: 1px solid $primary-blue;
+    border-top: 6px solid $orange;
+    &:last-child {
+      border-right: 0;
+    }
+    * {
+      transition: $transition300ms;
+    }
+    .ico {
+      &::before {
+        font-size: $font-size-44;
+        transition: $transition300ms;
+      }
+    }
+    .read-more {
+      gap: 12px;
+      @include read-more($primary-blue, $orange, $white, $white);
+      span {
+        color: $dark-grey;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    &:hover {
+      background: $midnight-blue;
+      * {
+        color: $white;
+      }
+      .ico {
+        &::before {
+          color: $orange;
+        }
+      }
+      .read-more {
+        @include read-more-hover($primary-blue, $orange, $white, $white);
+      }
+    }
+    @media only screen and (max-width: $lg) {
+      flex-basis: 25%;
+    }
+    @media only screen and (max-width: $md) {
+      flex-basis: 33.33%;
+    }
+    @media only screen and (max-width: $sm) {
+      flex-basis: 50%;
+      .read-more {
+        @include read-more-hover($primary-blue, $primary-blue, $dark-grey, $white);
+      }
+    }
+    @media only screen and (max-width: $axsm) {
+      flex-basis: 100%;
+    }
+  }
+  .ring {
+    position: absolute;
+    right: calc((100% - 100vw));
+    bottom: -45%;
+    z-index: -1;
+  }
+}

@@ -1,0 +1,25 @@
+uuid: 0c30b2fe-a8ec-4496-a676-23c5538e7cab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_manual_news_events
+    - paragraphs.paragraphs_type.news_insights
+id: paragraph.news_insights.field_manual_news_events
+field_name: field_manual_news_events
+entity_type: paragraph
+bundle: news_insights
+label: 'Selective news &  events'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: news_insights
+      display_name: news_insights_reference
+      arguments: {  }
+field_type: entity_reference

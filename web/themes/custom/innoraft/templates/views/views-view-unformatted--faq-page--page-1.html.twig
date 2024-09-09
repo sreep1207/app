@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Theme override to display a view of unformatted rows with accordion functionality.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ */
+#}
+{% if title %}
+  <h3>{{ title }}</h3>
+{% endif %}
+<div class="faq-title">
+  <h4>{{ 'FAQ'|t }}</h4>
+  <h2>{{ 'Frequently asked questions'|t }}</h2>
+</div>
+<div class="accordion accordion-flush" id="faqAccordion">
+  {% for row in rows %}
+    {% set row_classes = [
+        default_row_class ? 'views-row',
+      ] %}
+    <div{{ row.attributes.addClass(row_classes) }}>
+      <div class="accordion-item" id="faq-{{ row.content['#row']._entity.nid.value }}">
+        <h2 class="accordion-header" id="heading{{ loop.index }}">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+            {{ row.content['#row']._entity.title.value }}
+          </button>
+        </h2>
+        <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            {{ row.content['#row']._entity.body.value|raw }}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

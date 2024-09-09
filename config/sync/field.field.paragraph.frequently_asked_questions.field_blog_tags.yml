@@ -1,0 +1,29 @@
+uuid: 9cd0483b-cb9e-418f-8a5e-16670483f580
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_blog_tags
+    - paragraphs.paragraphs_type.frequently_asked_questions
+    - taxonomy.vocabulary.tags
+id: paragraph.frequently_asked_questions.field_blog_tags
+field_name: field_blog_tags
+entity_type: paragraph
+bundle: frequently_asked_questions
+label: Tags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

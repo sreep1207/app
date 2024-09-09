@@ -1,0 +1,25 @@
+uuid: ea65e93f-cb1b-491f-a3c0-9e31624c0a46
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.banner
+  module:
+    - views
+  theme:
+    - innoraft
+id: innoraft_views_block__banner_block_1
+theme: innoraft
+region: featured_top
+weight: 0
+provider: null
+plugin: 'views_block:banner-block_1'
+settings:
+  id: 'views_block:banner-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility: {  }

@@ -1,0 +1,22 @@
+uuid: feafffe8-15f2-4c52-9b70-0e987529cdb6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_client_description
+    - paragraphs.paragraphs_type.what_client
+  module:
+    - text
+id: paragraph.what_client.field_client_description
+field_name: field_client_description
+entity_type: paragraph
+bundle: what_client
+label: 'Client Description'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

@@ -1,0 +1,34 @@
+uuid: 0e1365d8-f38b-4f70-8a13-6e4a02b44f6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.html_section.field_html_content
+    - field.field.paragraph.html_section.field_section_class
+    - paragraphs.paragraphs_type.html_section
+  module:
+    - text
+id: paragraph.html_section.default
+targetEntityType: paragraph
+bundle: html_section
+mode: default
+content:
+  field_html_content:
+    type: text_textarea
+    weight: 0
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_class:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

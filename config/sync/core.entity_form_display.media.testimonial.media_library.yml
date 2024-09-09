@@ -1,0 +1,48 @@
+uuid: 068ffab4-2749-4b6f-b7cc-97d16784ae7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.testimonial.field_designation
+    - field.field.media.testimonial.field_media_image_1
+    - field.field.media.testimonial.field_testimonial_quote
+    - image.style.thumbnail
+    - media.type.testimonial
+  module:
+    - svg_image
+id: media.testimonial.media_library
+targetEntityType: media
+bundle: testimonial
+mode: media_library
+content:
+  field_media_image_1:
+    type: image_image
+    weight: 5
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_designation: true
+  field_testimonial_quote: true
+  path: true
+  status: true
+  uid: true

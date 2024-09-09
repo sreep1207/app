@@ -1,0 +1,5 @@
+id: blogs_migrations
+label: 'Blogs Migration'
+description: 'Group of blogs migration.'
+migration_tags:
+  - blogs_migrations

@@ -1,0 +1,35 @@
+uuid: 2dbcf62e-74c5-4b38-876d-ddd6519b8c64
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.apply_job.field_apply_job_form
+    - field.field.paragraph.apply_job.field_job_background_image
+    - paragraphs.paragraphs_type.apply_job
+  module:
+    - webform
+id: paragraph.apply_job.default
+targetEntityType: paragraph
+bundle: apply_job
+mode: default
+content:
+  field_apply_job_form:
+    type: webform_entity_reference_entity_view
+    label: hidden
+    settings:
+      source_entity: true
+      lazy: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_job_background_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

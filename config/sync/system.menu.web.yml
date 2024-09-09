@@ -1,0 +1,8 @@
+uuid: eb5b7864-b61c-410d-8916-65579cf44b13
+langcode: en
+status: true
+dependencies: {  }
+id: web
+label: Web
+description: "Add menu links for footer's web section."
+locked: false

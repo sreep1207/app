@@ -1,0 +1,157 @@
+diff --git a/cloudfront_purger.links.menu.yml b/cloudfront_purger.links.menu.yml
+new file mode 100644
+index 0000000..fd4bdcc
+--- /dev/null
++++ b/cloudfront_purger.links.menu.yml
+@@ -0,0 +1,5 @@
++cloudfront_purge.admin_overview:
++  title: 'Clear CF Cache'
++  description: 'Invalidates cache by entering asset path.'
++  route_name: cloudfront_purger.invalidate_form
++  parent: system.admin_config_services
+diff --git a/cloudfront_purger.permissions.yml b/cloudfront_purger.permissions.yml
+new file mode 100644
+index 0000000..86f55c3
+--- /dev/null
++++ b/cloudfront_purger.permissions.yml
+@@ -0,0 +1,3 @@
++administer CF configuration:
++  title: 'Administer CF configuration'
++  restrict access: true
+diff --git a/cloudfront_purger.routing.yml b/cloudfront_purger.routing.yml
+new file mode 100644
+index 0000000..1865f6c
+--- /dev/null
++++ b/cloudfront_purger.routing.yml
+@@ -0,0 +1,7 @@
++cloudfront_purger.invalidate_form:
++  path: '/admin/config/services/invalidate'
++  defaults:
++    _form: 'Drupal\cloudfront_purger\Form\CloudFrontInvalidatorForm'
++    _title: Invalidate CF Cache
++  requirements:
++    _permission: administer CF configuration
+diff --git a/src/Form/CloudFrontInvalidatorForm.php b/src/Form/CloudFrontInvalidatorForm.php
+new file mode 100644
+index 0000000..b85d2b8
+--- /dev/null
++++ b/src/Form/CloudFrontInvalidatorForm.php
+@@ -0,0 +1,118 @@
++<?php
++
++namespace Drupal\cloudfront_purger\Form;
++
++use Drupal\Core\Config\ConfigFactoryInterface;
++use Drupal\Core\Form\ConfigFormBase;
++use Drupal\Core\Form\FormStateInterface;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++use Drupal\cloudfront_purger\CloudFrontInvalidatorInterface;
++
++/**
++ *
++ */
++class CloudFrontInvalidatorForm extends ConfigFormBase {
++
++  /**
++   * The CloudFront invalidator.
++   *
++   * @var \Drupal\cloudfront_purger\CloudFrontInvalidatorInterface
++   */
++  protected $invalidation;
++
++  /**
++   * Constructs a CloudFrontInvalidatorForm object.
++   *
++   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
++   *   The configuration factory.
++   */
++  public function __construct(ConfigFactoryInterface $config_factory, CloudFrontInvalidatorInterface $invalidation) {
++    parent::__construct($config_factory);
++    $this->invalidation = $invalidation;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container) {
++    return new static(
++      $container->get('config.factory'),
++      $container->get('cloudfront_purger.invalidator')
++    );
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getFormId() {
++    return 'cloudfront_invalidator_form_settings';
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function getEditableConfigNames() {
++    return [
++      'cloudfront_purger.invalidator_settings',
++    ];
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function buildForm(array $form, FormStateInterface $form_state) {
++    $config = $this->config('cloudfront_purger.invalidator_settings');
++
++    $form['path'] = [
++      '#type' => 'textarea',
++      '#title' => $this->t('Enter Path URL'),
++      '#description' => $this->t("Specify assests by using their paths. Enter one path per line. The '*' character is a wildcard. An example path is /sites/default/files/styles/portfolio_hover_ig/public/2018-08/* ."),
++      '#default_value' => $config->get('path'),
++      '#required' => TRUE,
++    ];
++
++    return parent::buildForm($form, $form_state);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function validateForm(array &$form, FormStateInterface $form_state) {
++    $paths = array_map('trim', explode("\n", $form_state->getValue('path')));
++    if (count($paths) !== count(array_unique($paths))) {
++      $form_state->setErrorByName('path', 'Please remove duplicate paths.');
++    }
++    else {
++      foreach ($paths as $key => $path) {
++        if (!empty($path)) {
++          if (substr($path, 0, 1) != '/') {
++            $form_state->setErrorByName('path', $path . ' is not a valid path.');
++          }
++        }
++        else {
++          $form_state->setErrorByName('path', 'There is an empty path entered.');
++        }
++      }
++    }
++
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function submitForm(array &$form, FormStateInterface $form_state) {
++    $this->config('cloudfront_purger.invalidator_settings')
++      ->set('path',
++        $form_state->getValue('path')
++      )
++      ->save();
++    parent::submitForm($form, $form_state);
++    $paths = array_map('trim', explode("\n", $form_state->getValue('path')));
++    $settings = $this->config('cloudfront_purger.settings');
++    $distribution_id = $settings->get('distribution_id');
++    if (!empty($paths) && isset($distribution_id)) {
++      $this->invalidation->invalidate($paths, $distribution_id);
++    }
++  }
++
++}

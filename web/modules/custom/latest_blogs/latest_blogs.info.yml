@@ -1,0 +1,5 @@
+name: Latest Blogs
+type: module
+description: This module alters the functionality of the latest blogs section.
+package: Custom
+core_version_requirement: ^10

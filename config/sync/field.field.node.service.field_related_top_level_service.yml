@@ -1,0 +1,28 @@
+uuid: 59c465c0-3270-4d04-bbbf-68e772bc37c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_top_level_service
+    - node.type.service
+id: node.service.field_related_top_level_service
+field_name: field_related_top_level_service
+entity_type: node
+bundle: service
+label: 'Related top level service'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      service: service
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

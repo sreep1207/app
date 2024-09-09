@@ -1,0 +1,10 @@
+uuid: e7e240b8-a792-451f-9880-a4818bb0dc45
+langcode: en
+status: true
+dependencies: {  }
+id: html_section
+label: 'HTML Section'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

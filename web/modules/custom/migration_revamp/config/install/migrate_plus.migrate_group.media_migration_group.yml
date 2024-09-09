@@ -1,0 +1,3 @@
+id: media_migration_group
+label: 'Media Migration Group'
+description: 'Group for media migration from Drupal 9 to Drupal 10'

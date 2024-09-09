@@ -1,0 +1,5 @@
+services:
+  ir_general.csp_response_subscriber:
+      class: Drupal\ir_general\EventSubscriber\CSPResponseSubscriber
+      tags:
+        - {name: event_subscriber}

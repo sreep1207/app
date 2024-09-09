@@ -1,0 +1,23 @@
+uuid: 41d900e3-78cb-4742-a4e6-50874142a0ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_read_more
+    - node.type.news
+  module:
+    - link
+id: node.news.field_read_more
+field_name: field_read_more
+entity_type: node
+bundle: news
+label: 'External Url'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

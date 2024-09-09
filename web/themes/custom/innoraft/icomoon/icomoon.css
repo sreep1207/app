@@ -1,0 +1,478 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('icomoon.eot');
+  src:  url('icomoon.eot') format('embedded-opentype'),
+    url('icomoon.ttf') format('truetype'),
+    url('icomoon.woff') format('woff'),
+    url('icomoon.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-compliance-2:before {
+  content: "\e90e";
+  color: #1b3ecd;
+}
+.icon-digital-marketing:before {
+  content: "\e90f";
+  color: #1b3ecd;
+}
+.icon-drupal-logo:before {
+  content: "\e910";
+  color: #1b3ecd;
+}
+.icon-ecommerce:before {
+  content: "\e911";
+  color: #1b3ecd;
+}
+.icon-mobile1:before {
+  content: "\e912";
+  color: #1b3ecd;
+}
+.icon-web-design:before {
+  content: "\e913";
+  color: #1b3ecd;
+}
+.hybrid-app-development .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Scalability and Flexibility.svg");
+  color: #fff;
+}
+.hybrid-app-development .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Cross-Platform Compatibility.svg");
+  color: #fff;
+}
+.hybrid-app-development  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Rapid Development Cycles.svg");
+  color: #fff;
+}
+.hybrid-app-development .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Optimized Performance.svg");
+  color: #1b3ecd;
+}
+.hybrid-app-development .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Native-Like Performance.svg");
+  color: #fff;
+}
+.hybrid-app-development .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Cost-Effective Solutions.svg");
+}   
+.mobile-app-support .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Data Backup and Recovery.svg");
+  color: #fff;
+}
+.mobile-app-support .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Proactive Issue Resolution.svg");
+  color: #fff;
+}
+.mobile-app-support .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Customer-Centric Approach.svg");
+  color: #fff;
+}
+.mobile-app-support .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Performance Analytics and Reporting.svg");
+  color: #1b3ecd;
+}
+.mobile-app-support .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/24-7 Technical Support.svg");
+  color: #fff;
+}
+.mobile-app-support .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Timely Updates and Upgrades.svg");
+  color: #1b3ecd;
+}
+.android-app-development .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Design Excellence.svg");
+  color: #1b3ecd;
+}
+.android-app-development .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/User-Centric UAT Experience.svg");
+  color: #fff;
+}
+.android-app-development .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Tailored Solutions.svg");
+  color: #fff;
+}
+.android-app-development  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Post-Launch Maintenance and Support.svg");
+  color: #fff;
+}
+.android-app-development .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Quality Assurance Standards.svg");
+  color: #1b3ecd;
+}
+.android-app-development .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Hire Android App Developer.svg");
+  color: #fff;
+}
+.ios-app-development .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Agile Development Methodology.svg");
+  color: #1b3ecd;
+}
+.ios-app-development .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Continuous Testing and Quality Assurance.svg");
+  color: #fff;
+}
+.ios-app-development .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Security-First Approach.svg");
+  color: #fff;
+}
+.ios-app-development  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/App Store Submission and Maintenance.svg");
+  color: #fff;
+}
+.ios-app-development .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/iOS App Optimization.svg");
+  color: #1b3ecd;
+}
+.ios-app-development .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Cross-Device Compatibility.svg");
+  color: #fff;
+}
+.mobile-app-design .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Customized Approaches.svg");
+  color: #1b3ecd;
+}
+.mobile-app-design .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Innovative Designs.svg");
+  color: #fff;
+}
+.mobile-app-design .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/User-Centric Design.svg");
+  color: #fff;
+}
+.mobile-app-design  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Cross-Platform Excellence.svg");
+  color: #fff;
+}
+.mobile-app-design .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Performance Optimization.svg");
+  color: #1b3ecd;
+}
+.mobile-app-design .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Responsive and Adaptive Design.svg");
+  color: #fff;
+}
+.ecommerce-app-development .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Industry-Leading Technologies.svg");
+  color: #1b3ecd;
+}
+.ecommerce-app-development .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Scalability and Future-Readiness.svg");
+  color: #fff;
+}
+.ecommerce-app-development .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/End-to-End Development Services.svg");
+  color: #fff;
+}
+.ecommerce-app-development  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Continuous Support and Maintenance.svg");
+  color: #fff;
+}
+.ecommerce-app-development .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Security and Data Protection.svg");
+  color: #1b3ecd;
+}
+.ecommerce-app-development .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Cross-Platform Compatibility ecommerce.svg");
+  color: #fff;
+}
+
+
+.ecommerce-web-support .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Website Support and Maintenance Services.svg");
+  color: #1b3ecd;
+}
+.ecommerce-web-support .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/24-7 Support and Maintenance Services.svg");
+  color: #fff;
+}
+.ecommerce-web-support .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Ecommerce Web Support.svg");
+  color: #fff;
+}
+.ecommerce-web-support  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Content Updates and Management.svg");
+  color: #fff;
+}
+.ecommerce-web-support .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Data Backup and Recovery Web Support.svg");
+  color: #1b3ecd;
+}
+.ecommerce-web-support .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Performance Optimization Web Support.svg");
+}
+.progressive-web-app .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/PWA Consultation and Strategy.svg");
+  color: #1b3ecd;
+}
+.progressive-web-app .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Cross-Platform PWA Development.svg");
+  color: #fff;
+}
+.progressive-web-app .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/PWA Development Services.svg");
+  color: #fff;
+}
+.progressive-web-app  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Continuous Support and Maintenance PWA.svg");
+  color: #fff;
+}
+.progressive-web-app .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/PWA Integration and Migration.svg");
+  color: #1b3ecd;
+}
+.progressive-web-app .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/PWA Optimization and Performance.svg");
+  color: #fff;
+}
+
+.website-support-and-maintenance .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Trusted Website Maintenance Company.svg");
+  color: #1b3ecd;
+}
+.website-support-and-maintenance .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Cross-Platform PWA Development.svg");
+  color: #fff;
+}
+.website-support-and-maintenance .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Comprehensive Website Support - Maintenance Solutions.svg");
+  color: #fff;
+}
+.website-support-and-maintenance  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Strategic Maintenance Planning.svg");
+  color: #fff;
+}
+.website-support-and-maintenance .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/24-7 Monitoring and Technical Support.svg");
+  color: #1b3ecd;
+}
+.website-support-and-maintenance .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Tailored Website Maintenance and Support.svg");
+  color: #fff;
+}
+
+.web-app-development-page .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Progressive Web App Development.svg");
+  color: #1b3ecd;
+}
+.web-app-development-page .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Full-Stack Web Application Development.svg");
+  color: #fff;
+}
+.web-app-development-page .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Custom Web Application Development.svg");
+  color: #fff;
+}
+.web-app-development-page  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Maintenance and Support.svg");
+  color: #fff;
+}
+.web-app-development-page .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/API Integration and Development.svg");
+  color: #1b3ecd;
+}
+.web-app-development-page .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Web App Development Consulting.svg");
+  color: #fff;
+}
+
+.web-development .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Responsive Design.svg");
+  color: #1b3ecd;
+}
+.web-development .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Security Assurance.svg");
+  color: #fff;
+}
+.web-development .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Bespoke Websites.svg");
+  color: #fff;
+}
+.web-development  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/SEO Strategies.svg");
+  color: #fff;
+}
+.web-development  .icon-analytics-integration:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Analytics Integration.svg");
+  color: #fff;
+}
+.web-development .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Efficient CMS.svg");
+  color: #1b3ecd;
+}
+.web-development .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/UI-UX Excellence.svg");
+  color: #fff;
+}
+
+.web-design .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/User Experience Design.svg");
+  color: #1b3ecd;
+}
+.web-design .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Wireframing and Prototyping.svg");
+  color: #fff;
+}
+.web-design .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/User Interface Design.svg");
+  color: #fff;
+}
+.web-design  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Animation and Interaction Design.svg");
+  color: #fff;
+}
+.web-design  .icon-analytics-integration:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Analytics Integration.svg");
+  color: #fff;
+}
+.web-design .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Accessibility.svg");
+  color: #1b3ecd;
+}
+.web-design .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Responsive Design WDS.svg");
+  color: #fff;
+}
+
+.ecommerce-web-development .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Tailored Ecommerce Development Services.svg");
+  color: #1b3ecd;
+}
+.ecommerce-web-development .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Continuous Support and Maintenance ecommerce.svg");
+  color: #fff;
+}
+.ecommerce-web-development .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Custom Ecommerce Web Development.svg");
+  color: #fff;
+}
+.ecommerce-web-development  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Results-Driven Solutions.svg");
+  color: #fff;
+}
+.ecommerce-web-development  .icon-analytics-integration:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Analytics Integration.svg");
+  color: #fff;
+}
+.ecommerce-web-development .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Robust Functionality.svg");
+  color: #1b3ecd;
+}
+.ecommerce-web-development .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Responsive Ecommerce Web Development.svg");
+  color: #fff;
+}
+
+
+.ecommerce-mobile-app-support .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Mobile Application Maintenance and Support.svg");
+  color: #1b3ecd;
+}
+.ecommerce-mobile-app-support .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Security Audits and Updates.svg");
+  color: #fff;
+}
+.ecommerce-mobile-app-support .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/App Maintenance Services.svg");
+  color: #fff;
+}
+.ecommerce-mobile-app-support  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Strategic Backup and Recovery Solutions.svg");
+  color: #fff;
+}
+.ecommerce-mobile-app-support  .icon-analytics-integration:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Analytics Integration.svg");
+  color: #fff;
+}
+.ecommerce-mobile-app-support .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Performance Enhancements.svg");
+  color: #1b3ecd;
+}
+.ecommerce-mobile-app-support .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/24-7 Mobile App Maintenance Services.svg");
+  color: #fff;
+}
+
+.ecommerce-design .icon-ux:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Tailored Web Design Packages.svg");
+  color: #1b3ecd;
+}
+.ecommerce-design .icon-content-first:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Best Practices in Ecommerce Design.svg");
+  color: #fff;
+}
+.ecommerce-design .icon-custom-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Innovative Design Solutions.svg");
+  color: #fff;
+}
+.ecommerce-design  .icon-design-system:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Optimization and Support.svg");
+  color: #fff;
+}
+.ecommerce-design  .icon-analytics-integration:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Analytics Integration.svg");
+  color: #fff;
+}
+.ecommerce-design .icon-information-design:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/Responsive & Mobile-Optimized Design.svg");
+  color: #1b3ecd;
+}
+.ecommerce-design .icon-responsive:before {
+  content: url("/themes/custom/innoraft/images/icons/custom_icons/End-to-End Design Services.svg");
+  color: #fff;
+}
+
+
+.icon-quote:before {
+  content: "\e907";
+  color: #ff774c;
+}
+.icon-mouse-scroll:before {
+  content: "\e906";
+  color: #ff774c;
+}
+.icon-compliance:before {
+  content: "\e900";
+  color: #ff774c;
+}
+.icon-dm:before {
+  content: "\e901";
+  color: #ff774c;
+}
+.icon-drupal:before {
+  content: "\e902";
+  color: #ff774c;
+}
+.icon-ecom:before {
+  content: "\e903";
+  color: #ff774c;
+}
+.icon-mobile:before {
+  content: "\e904";
+  color: #ff774c;
+}
+.icon-web:before {
+  content: "\e905";
+  color: #ff774c;
+}
+.icon-styles::before {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+}

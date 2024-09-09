@@ -1,0 +1,35 @@
+uuid: 1550cc77-4d94-4596-9baa-8183f658d7fe
+langcode: en
+status: true
+dependencies:
+  module:
+    - better_social_sharing_buttons
+    - system
+  theme:
+    - innoraft
+id: innoraft_bettersocialsharingbuttons
+theme: innoraft
+region: content
+weight: -7
+provider: null
+plugin: social_sharing_buttons_block
+settings:
+  id: social_sharing_buttons_block
+  label: 'Better Social Sharing Buttons'
+  label_display: '0'
+  provider: better_social_sharing_buttons
+  iconset: social-icons--no-color
+  services:
+    facebook: facebook
+    x: x
+    email: email
+    linkedin: linkedin
+  width: 20px
+  radius: 3px
+  print_css: ''
+  facebook_app_id: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/blog/*'

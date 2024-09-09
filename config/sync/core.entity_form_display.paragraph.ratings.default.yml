@@ -1,0 +1,41 @@
+uuid: 4530c393-c24c-4a2c-8ab9-71e668e8293f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.ratings.field_logo_image
+    - field.field.paragraph.ratings.field_rating_points
+    - field.field.paragraph.ratings.field_stars
+    - paragraphs.paragraphs_type.ratings
+  module:
+    - media_library
+id: paragraph.ratings.default
+targetEntityType: paragraph
+bundle: ratings
+mode: default
+content:
+  field_logo_image:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_rating_points:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_stars:
+    type: media_library_widget
+    weight: 1
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,80 @@
+@use "../import" as *;
+.slick-list {
+  overflow: visible !important;
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  }
+}
+.slick-slider {
+  position: relative;
+}
+.slick-slide {
+  opacity: 0.5;
+  transition: $transition300ms;
+  &.slick-active {
+    opacity: 1;
+  }
+}
+.slick-dots {
+  margin: $indent-60 auto 0;
+  max-width: 576px;
+  width: 100%;
+  display: flex;
+  li {
+    width: 100%;
+    button {
+      width: 100%;
+      background: $light-bg-blue;
+      padding: 0;
+      height: 4px;
+      border: 0;
+      outline-color: transparent;
+      font-size: 0;
+      transition: $transition300ms;
+    }
+    &.slick-active {
+      button {
+        background: $primary-blue;
+      }
+    }
+  }
+  @media only screen and (max-width: $lg) {
+    max-width: calc(100% - 150px) !important;
+    margin-left: 0;
+  }
+}
+.slick-arrow {
+  border: 2px solid $primary-blue;
+  color: $primary-blue;
+  background: none;
+  font-size: 0;
+  padding: $indent-16;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  position: absolute;
+  bottom: -#{$indent-16};
+  right: 0;
+  &::before {
+    content: "\eb0d";
+    font-family: "lineicons", sans-serif;
+    font-size: $font-size-14;
+    font-weight: bold;
+    vertical-align: middle;
+    line-height: 1;
+  }
+  &.slick-prev {
+    right: 60px;
+    &::before {
+      content: "\eb0f";
+      margin-left: -1px;
+    }
+  }
+  &.slick-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

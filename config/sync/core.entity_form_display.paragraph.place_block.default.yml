@@ -1,0 +1,35 @@
+uuid: e05e25ab-1c57-40b6-850f-df061879be0d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.place_block.field_section_class
+    - field.field.paragraph.place_block.field_select_block
+    - paragraphs.paragraphs_type.place_block
+  module:
+    - block_field
+id: paragraph.place_block.default
+targetEntityType: paragraph
+bundle: place_block
+mode: default
+content:
+  field_section_class:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_select_block:
+    type: block_field_default
+    weight: 0
+    region: content
+    settings:
+      plugin_id: ''
+      settings: {  }
+      configuration_form: full
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

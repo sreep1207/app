@@ -1,0 +1,31 @@
+uuid: 90843861-74fe-4e3a-ab94-38df5ddfc8b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - webform.webform.contact_us_form
+  module:
+    - system
+    - webform
+  theme:
+    - innoraft
+id: innoraft_webform
+theme: innoraft
+region: pre_footer_right
+weight: 0
+provider: null
+plugin: webform_block
+settings:
+  id: webform_block
+  label: 'Get in touch'
+  label_display: visible
+  provider: webform
+  webform_id: contact_us_form
+  default_data: ''
+  redirect: false
+  lazy: false
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/careers\r\n/contact-us"

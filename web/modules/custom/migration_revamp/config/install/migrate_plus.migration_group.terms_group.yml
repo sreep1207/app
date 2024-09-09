@@ -1,0 +1,6 @@
+id: terms_group
+label: 'Term Migration'
+description: 'Group of term migration.'
+migration_tags:
+  - migration_revamp
+  

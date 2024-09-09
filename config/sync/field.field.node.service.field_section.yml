@@ -1,0 +1,75 @@
+uuid: a58d7385-aa48-467a-b162-92333886a631
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_section
+    - node.type.service
+    - paragraphs.paragraphs_type.dynamic_content_section
+    - paragraphs.paragraphs_type.frequently_asked_questions
+    - paragraphs.paragraphs_type.html_section
+    - paragraphs.paragraphs_type.place_block
+    - paragraphs.paragraphs_type.portfolio_section
+  module:
+    - entity_reference_revisions
+id: node.service.field_section
+field_name: field_section
+entity_type: node
+bundle: service
+label: 'Content Section'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      html_section: html_section
+      dynamic_content_section: dynamic_content_section
+      frequently_asked_questions: frequently_asked_questions
+      portfolio_section: portfolio_section
+      place_block: place_block
+    negate: 0
+    target_bundles_drag_drop:
+      banner:
+        weight: 3
+        enabled: false
+      block_plugin:
+        weight: 15
+        enabled: false
+      clients_and_credentials:
+        weight: 11
+        enabled: false
+      cta:
+        weight: 4
+        enabled: false
+      dynamic_content_section:
+        weight: 7
+        enabled: true
+      frequently_asked_questions:
+        weight: 16
+        enabled: true
+      html_section:
+        weight: 6
+        enabled: true
+      latest_news_and_events:
+        weight: 15
+        enabled: false
+      news_insights:
+        weight: 19
+        enabled: false
+      place_block:
+        weight: 23
+        enabled: true
+      portfolio_section:
+        weight: 17
+        enabled: true
+      portfolios:
+        weight: 16
+        enabled: false
+      testimonial_data:
+        weight: 18
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,104 @@
+uuid: 6d3bf30b-7f1e-455b-93d2-db18cb8a6ec1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_section
+    - node.type.landing_page
+    - paragraphs.paragraphs_type.apply_job
+    - paragraphs.paragraphs_type.clients_and_credentials
+    - paragraphs.paragraphs_type.contact_us
+    - paragraphs.paragraphs_type.dynamic_content_section
+    - paragraphs.paragraphs_type.frequently_asked_questions
+    - paragraphs.paragraphs_type.html_section
+    - paragraphs.paragraphs_type.latest_news_and_events
+    - paragraphs.paragraphs_type.modal_webform
+    - paragraphs.paragraphs_type.news_insights
+    - paragraphs.paragraphs_type.portfolio_section
+    - paragraphs.paragraphs_type.testimonial_data
+    - paragraphs.paragraphs_type.what_people_say
+  module:
+    - entity_reference_revisions
+id: node.landing_page.field_section
+field_name: field_section
+entity_type: node
+bundle: landing_page
+label: 'Content Section'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      dynamic_content_section: dynamic_content_section
+      html_section: html_section
+      clients_and_credentials: clients_and_credentials
+      latest_news_and_events: latest_news_and_events
+      portfolio_section: portfolio_section
+      apply_job: apply_job
+      testimonial_data: testimonial_data
+      news_insights: news_insights
+      frequently_asked_questions: frequently_asked_questions
+      modal_webform: modal_webform
+      contact_us: contact_us
+      what_people_say: what_people_say
+    negate: 0
+    target_bundles_drag_drop:
+      apply_job:
+        weight: 15
+        enabled: true
+      banner:
+        weight: 3
+        enabled: false
+      clients_and_credentials:
+        weight: 11
+        enabled: true
+      contact_us:
+        weight: 22
+        enabled: true
+      cta:
+        weight: 4
+        enabled: false
+      dynamic_content_section:
+        weight: 7
+        enabled: true
+      frequently_asked_questions:
+        weight: 18
+        enabled: true
+      html_section:
+        weight: 8
+        enabled: true
+      latest_news_and_events:
+        weight: 12
+        enabled: true
+      modal_webform:
+        weight: 21
+        enabled: true
+      news_insights:
+        weight: 17
+        enabled: true
+      place_block:
+        weight: 23
+        enabled: false
+      portfolio_section:
+        weight: 12
+        enabled: true
+      portfolios:
+        weight: 11
+        enabled: false
+      ratings:
+        weight: 31
+        enabled: false
+      testimonial_data:
+        weight: 16
+        enabled: true
+      what_client:
+        weight: 33
+        enabled: false
+      what_people_say:
+        weight: 34
+        enabled: true
+field_type: entity_reference_revisions

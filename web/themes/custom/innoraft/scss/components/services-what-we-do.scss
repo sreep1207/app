@@ -1,0 +1,31 @@
+@use "../import" as *;
+.services-what-we-do {
+  padding: $indent-96 0;
+  .row {
+    justify-content: center;
+  }
+  .custom-card-container {
+    background: $primary-blue;
+    padding: $indent-32 $indent-32 $indent-40;
+    height: 100%;
+    p {
+      @extend %p--sm;
+    }
+    .custom-card-icon {
+      .ico {
+        &::before {
+          font-size: $font-size-40;
+        }
+      }
+    }
+    &.dark {
+      background: $midnight-blue;
+    }
+    &.light {
+      background: $light-bg-blue;
+    }
+  }
+  @media only screen and (max-width: $sm) {
+    padding: $indent-60 0;
+  }
+}

@@ -1,0 +1,8 @@
+uuid: 3ee2e026-fa4e-4602-83b3-524748bd0d1f
+langcode: en
+status: true
+dependencies: {  }
+id: ecommerce
+label: eCommerce
+description: 'Add menu link for footer-third ecommerce section'
+locked: false

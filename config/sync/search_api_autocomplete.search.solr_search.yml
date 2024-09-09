@@ -1,0 +1,46 @@
+uuid: d039c950-77db-44a4-ac2c-f4fa110c19c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.content_indexing
+    - views.view.solr_search
+  module:
+    - views
+    - search_api_autocomplete
+id: solr_search
+label: 'Solr Search'
+index_id: content_indexing
+suggester_settings:
+  live_results:
+    fields: {  }
+    highlight:
+      enabled: false
+      field: ''
+    suggest_keys: false
+    view_modes:
+      'entity:node':
+        blog: ''
+        events: ''
+        frequently_asked_questions: ''
+        landing_page: ''
+        news: ''
+        service: ''
+  server:
+    fields: {  }
+suggester_weights:
+  live_results: 0
+  server: 0
+suggester_limits: {  }
+search_settings:
+  'views:solr_search':
+    displays:
+      default: true
+      selected: {  }
+options:
+  limit: 10
+  min_length: 1
+  show_count: false
+  delay: null
+  submit_button_selector: ':submit'
+  autosubmit: true

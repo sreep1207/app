@@ -1,0 +1,8 @@
+_core:
+  default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
+mode: simple
+ignored_config_entities:
+  - block.block.innoraft_contactus
+  - google_analytics.settings
+  - google_analytics_counter.settings
+  - ir_master.settings

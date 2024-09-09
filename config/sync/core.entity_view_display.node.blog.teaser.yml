@@ -1,0 +1,68 @@
+uuid: 732e2c1f-d46d-4ea5-b3eb-09f4df395708
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.blog.body
+    - field.field.node.blog.field_banner_image
+    - field.field.node.blog.field_blog_tags
+    - field.field.node.blog.field_google_analytics_counter
+    - field.field.node.blog.field_meta_tags
+    - field.field.node.blog.field_reading_time
+    - field.field.node.blog.field_section
+    - field.field.node.blog.field_teaser_image
+    - node.type.blog
+  module:
+    - estimated_read_time
+    - svg_image
+    - user
+id: node.blog.teaser
+targetEntityType: node
+bundle: blog
+mode: teaser
+content:
+  field_reading_time:
+    type: estimated_read_time_text
+    label: hidden
+    settings:
+      tokenized_string: '@minutes min read'
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_teaser_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  google_analytics_counter:
+    type: textfield
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  body: true
+  field_banner_image: true
+  field_blog_tags: true
+  field_google_analytics_counter: true
+  field_meta_tags: true
+  field_section: true
+  langcode: true
+  search_api_excerpt: true

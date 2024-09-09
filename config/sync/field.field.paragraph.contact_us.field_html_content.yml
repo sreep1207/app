@@ -1,0 +1,22 @@
+uuid: ca3504af-0249-43f7-a2ee-89b56cd55ad8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_html_content
+    - paragraphs.paragraphs_type.contact_us
+  module:
+    - text
+id: paragraph.contact_us.field_html_content
+field_name: field_html_content
+entity_type: paragraph
+bundle: contact_us
+label: 'HTML Content'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

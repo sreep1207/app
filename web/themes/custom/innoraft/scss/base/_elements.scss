@@ -1,0 +1,66 @@
+@use "import" as *;
+
+/* tag types */
+h1,
+.h1--heading {
+  @extend %h1--heading;
+}
+h2,
+.h2--heading {
+  @extend %h2--heading;
+}
+h3,
+.h3--heading {
+  @extend %h3--heading;
+}
+h4,
+.h4--heading {
+  @extend %h4--heading;
+}
+h5,
+.h5--heading {
+  @extend %h5--heading;
+}
+h6,
+.h6--heading {
+  @extend %h6--heading;
+}
+p {
+  @extend %p;
+
+  margin: 0 0 16px;
+}
+*,
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-family-base !important;
+  color: $dark-grey;
+  letter-spacing: $letter-spacing;
+  #page-wrapper {
+    overflow-x: hidden;
+    font-size: $font-size-base;
+  }
+}
+.strong,
+strong,
+b {
+  font-weight: 600;
+}
+a {
+  color: $primary-blue;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    outline-color: transparent;
+  }
+}
+ul {
+  padding: 0;
+  li {
+    list-style: none;
+  }
+}

@@ -1,0 +1,25 @@
+uuid: 1d824768-b828-4bc1-abef-6056ae7aa61c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:36074cef-7884-4546-b85a-8b2fcf728738'
+  module:
+    - block_content
+  theme:
+    - innoraft
+id: innoraft_contactus
+theme: innoraft
+region: footer_fifth
+weight: -12
+provider: null
+plugin: 'block_content:36074cef-7884-4546-b85a-8b2fcf728738'
+settings:
+  id: 'block_content:36074cef-7884-4546-b85a-8b2fcf728738'
+  label: 'Contact us'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

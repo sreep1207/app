@@ -1,0 +1,2 @@
+ hcl-dev.innoraft-sites.com
+ hcltech-staging.innoraft-sites.com

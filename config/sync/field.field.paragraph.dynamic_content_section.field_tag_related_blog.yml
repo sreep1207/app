@@ -1,0 +1,29 @@
+uuid: 0c893241-1d03-477c-9401-ebf2d2fa9191
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_tag_related_blog
+    - node.type.blog
+    - paragraphs.paragraphs_type.dynamic_content_section
+id: paragraph.dynamic_content_section.field_tag_related_blog
+field_name: field_tag_related_blog
+entity_type: paragraph
+bundle: dynamic_content_section
+label: 'Tag Related Blog'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      blog: blog
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

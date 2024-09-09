@@ -1,0 +1,13 @@
+uuid: 1e7293b1-cd42-49d2-ad25-243c2f106c7e
+langcode: en
+status: true
+dependencies: {  }
+id: testimonial
+label: Testimonial
+description: 'Use this for testimonial section belonging to the landing page'
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image_1
+field_map: {  }

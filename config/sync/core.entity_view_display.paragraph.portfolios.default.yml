@@ -1,0 +1,49 @@
+uuid: 0e81b77f-1c93-42ac-b0e1-8c3589318f5e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.portfolios.field_description
+    - field.field.paragraph.portfolios.field_site_logo
+    - field.field.paragraph.portfolios.field_site_screenshot
+    - field.field.paragraph.portfolios.field_site_url
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.portfolios
+  module:
+    - image_link_formatter
+    - text
+id: paragraph.portfolios.default
+targetEntityType: paragraph
+bundle: portfolios
+mode: default
+content:
+  field_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_site_logo:
+    type: image_link_formatter
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: field_site_url
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_site_screenshot:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: portfolio
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  field_site_url: true
+  search_api_excerpt: true

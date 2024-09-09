@@ -1,0 +1,100 @@
+@use "../import" as * ;
+.user-login-form,
+.user-pass,
+.user-pass-reset {
+  padding: $indent-60 0;
+  max-width: 32%;
+  margin: 0 auto;
+  h2 {
+    padding-bottom: $indent-40;
+  }
+  label {
+    color: $mid-grey;
+    padding-bottom: $indent-8;
+  }
+  .js-form-item {
+    padding-bottom: $indent-8;
+    input[type=password],
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      border: 1px solid $light-grey;
+      &:focus {
+        border-color: $light-grey;
+      }
+      &:hover {
+        border-color: $light-grey;
+      }
+    }
+  }
+  .captcha__element {
+    align-items: center;
+    margin-top: 10px;
+    .js-form-item-captcha-response {
+      width: 52%;
+    }
+  }
+  .invalid-feedback {
+    position: relative !important;
+    display: block !important;
+  }
+  .forgot-link {
+    text-decoration: underline;
+  }
+  .js-form-wrapper {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    .js-form-submit {
+      margin-top: 32px;
+      color: $white;
+    }
+  }
+}
+.pre-footer {
+  display: none;
+}
+.user-pass {
+  p {
+    display: none;
+  }
+  .js-form-item {
+    input[type="text"] {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: $lg) {
+  .user-login-form,
+  .user-pass,
+  .user-pass-reset {
+    max-width: 40%;
+  }
+}
+@media only screen and (max-width: $md) {
+  .user-login-form,
+  .user-pass,
+  .user-pass-reset {
+    max-width: 55%;
+  }
+}
+@media only screen and (max-width: $sm) {
+  .user-login-form,
+  .user-pass,
+  .user-pass-reset {
+    max-width: 70%;
+  }
+}
+@media only screen and (max-width: $xs) {
+  .user-login-form,
+  .user-pass,
+  .user-pass-reset {
+    max-width: 100%;
+    .captcha__element {
+      .js-form-item-captcha-response {
+        width: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+id: taxonomy_terms_migration
+label: 'Taxonomy Terms Migration'
+migration_group: terms_group
+source:
+  plugin: taxonomy_terms_migration_source
+  ids:
+    nid:
+      type: integer
+process:
+  name: name
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: 'tags'
+migration_dependencies: {}
+

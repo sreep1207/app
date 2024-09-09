@@ -1,0 +1,22 @@
+uuid: 48958eaf-f2fe-425f-b0dc-cd0425b4d2a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_testimonial_header
+    - paragraphs.paragraphs_type.testimonial_data
+  module:
+    - text
+id: paragraph.testimonial_data.field_testimonial_header
+field_name: field_testimonial_header
+entity_type: paragraph
+bundle: testimonial_data
+label: 'Testimonial Header'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

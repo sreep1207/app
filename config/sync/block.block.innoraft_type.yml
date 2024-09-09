@@ -1,0 +1,29 @@
+uuid: 75f6759f-6652-4a77-bf2a-9f8bd362674d
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.type
+  module:
+    - facets
+    - system
+  theme:
+    - innoraft
+id: innoraft_type
+theme: innoraft
+region: content
+weight: -11
+provider: null
+plugin: 'facet_block:type'
+settings:
+  id: 'facet_block:type'
+  label: Type
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: innoraft_type
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /search

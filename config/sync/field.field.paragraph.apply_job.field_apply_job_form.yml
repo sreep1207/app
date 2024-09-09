@@ -1,0 +1,25 @@
+uuid: 9db988dd-abb8-45ae-b080-066369e5f7ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_apply_job_form
+    - paragraphs.paragraphs_type.apply_job
+  module:
+    - webform
+id: paragraph.apply_job.field_apply_job_form
+field_name: field_apply_job_form
+entity_type: paragraph
+bundle: apply_job
+label: 'Apply job form'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:webform'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: webform

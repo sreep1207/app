@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+{# {{ attach_library('bootstrap_barrio/form') }} #}
+{{ attach_library('innoraft/login-form') }}
+<form{{ attributes.addClass('form-wrapper') }}>
+  <h2 class="text--blue">{{ 'Forgot Password?'|t }}</h2>
+  {{ children }}
+  <a href="{{ path('user.login') }}" class="forgot-link">{{ 'Back to login'|t }}</a>
+</form>

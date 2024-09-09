@@ -1,0 +1,72 @@
+@use "../import" as *;
+.hire-developers {
+  padding: $indent-96 0;
+  overflow-y: clip;
+  @include full-width-backdrop($light-bg-blue);
+  .bg-image,
+  .ring {
+    position: absolute;
+    width: 100vw;
+    left: $bleed;
+    bottom: 0;
+    z-index: -1;
+  }
+  .bg-image {
+    @media only screen and (max-width: $lg) {
+      width: 150%;
+    }
+    @media only screen and (max-width: $sm) {
+      transform: scaleX(-1);
+      left: unset;
+      right: $bleed;
+    }
+    @media only screen and (max-width: $axsm) {
+      left: unset;
+      right: -#{$indent-20};
+    }
+  }
+  .ring {
+    width: initial;
+    bottom: -50%;
+  }
+  button.button-primary {
+    color: $white;
+  }
+  .hire-developer-list {
+    max-width: 85%;
+    width: 100%;
+    ul {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      column-gap: $indent-16;
+      row-gap: $indent-16;
+      .technology {
+        a {
+          display: inline-block;
+          padding: $indent-4 $indent-16;
+          color: $primary-blue;
+          border: 1px solid $primary-blue;
+          transition: $transition200ms;
+          background: $light-bg-blue;
+          &:hover {
+            background: $primary-blue;
+            color: $white;
+          }
+        }
+      }
+    }
+    @media only screen and (max-width: $sm) {
+      max-width: 100%;
+    }
+  }
+  @media (max-width: $xm) {
+    .shadow-background {
+      color: $white;
+      background-color: rgba($black, 0.5);
+    }
+  }
+  @media only screen and (max-width: $sm) {
+    padding: $indent-60 0 $indent-96;
+  }
+}

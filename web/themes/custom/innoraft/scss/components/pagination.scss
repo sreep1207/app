@@ -1,0 +1,67 @@
+@use "../import" as *;
+.pagination {
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  .page-item {
+    &:first-child,
+    &:last-child {
+      .page-link {
+        border-radius: $border-radius-half;
+      }
+    }
+    &[role="presentation"] {
+      display: none;
+    }
+    a {
+      &[rel="prev"] {
+        span {
+          display: none;
+        }
+        &::before {
+          content: "";
+          background: url("../../images/icons/nextarrow.svg");
+          background-size: contain;
+          position: absolute;
+          height: 30px;
+          width: 30px;
+          left: 0;
+          top: 0;
+          transform: rotate(180deg);
+        }
+      }
+      &[rel="next"] {
+        span {
+          display: none;
+        }
+        &::after {
+          content: "";
+          background: url("../../images/icons/nextarrow.svg");
+          background-size: contain;
+          position: absolute;
+          height: 30px;
+          width: 30px;
+          left: 0;
+          top: 0;
+        }
+      }
+      &[title^="Go to first page"],
+      &[title^="Go to last page"] {
+        display: none;
+      }
+    }
+  }
+  .page-link {
+    border: none;
+    border-radius: $border-radius-half;
+    padding: 4px 12px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}

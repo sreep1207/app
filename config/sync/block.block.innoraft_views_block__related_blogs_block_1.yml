@@ -1,0 +1,30 @@
+uuid: f95fb2f8-ee77-4028-a547-7beb7bc80cdb
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.related_blogs
+  module:
+    - system
+    - views
+  theme:
+    - innoraft
+id: innoraft_views_block__related_blogs_block_1
+theme: innoraft
+region: content
+weight: -6
+provider: null
+plugin: 'views_block:related_blogs-block_1'
+settings:
+  id: 'views_block:related_blogs-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/blog/*'

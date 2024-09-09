@@ -1,0 +1,79 @@
+uuid: fcf99fbb-5802-4b22-a9eb-efd86faa8f81
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_rating_number
+    - paragraphs.paragraphs_type.ratings
+    - paragraphs.paragraphs_type.what_people_say
+  module:
+    - entity_reference_revisions
+id: paragraph.what_people_say.field_rating_number
+field_name: field_rating_number
+entity_type: paragraph
+bundle: what_people_say
+label: 'Rating Number'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      ratings: ratings
+    negate: 0
+    target_bundles_drag_drop:
+      apply_job:
+        weight: 18
+        enabled: false
+      banner:
+        weight: 19
+        enabled: false
+      clients_and_credentials:
+        weight: 20
+        enabled: false
+      cta:
+        weight: 21
+        enabled: false
+      dynamic_content_section:
+        weight: 22
+        enabled: false
+      frequently_asked_questions:
+        weight: 23
+        enabled: false
+      html_section:
+        weight: 24
+        enabled: false
+      latest_news_and_events:
+        weight: 25
+        enabled: false
+      modal_webform:
+        weight: 26
+        enabled: false
+      news_insights:
+        weight: 27
+        enabled: false
+      place_block:
+        weight: 28
+        enabled: false
+      portfolio_section:
+        weight: 30
+        enabled: false
+      portfolios:
+        weight: 29
+        enabled: false
+      ratings:
+        weight: 31
+        enabled: true
+      testimonial_data:
+        weight: 32
+        enabled: false
+      what_client:
+        weight: 33
+        enabled: false
+      what_people_say:
+        weight: 34
+        enabled: false
+field_type: entity_reference_revisions

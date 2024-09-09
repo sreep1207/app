@@ -1,0 +1,8 @@
+uuid: def0c584-aab6-49a6-9864-b8c7ef7289e9
+langcode: en
+status: true
+dependencies: {  }
+id: services
+label: Services
+description: 'Add menu link for footer-second services section'
+locked: false

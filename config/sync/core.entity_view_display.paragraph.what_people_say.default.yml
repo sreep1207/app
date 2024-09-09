@@ -1,0 +1,54 @@
+uuid: f7fe54ba-a847-42b9-ad2a-74f1cb39b171
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.what_people_say.field_client
+    - field.field.paragraph.what_people_say.field_rating_number
+    - field.field.paragraph.what_people_say.field_what_people_header
+    - field.field.paragraph.what_people_say.field_what_people_image
+    - paragraphs.paragraphs_type.what_people_say
+  module:
+    - entity_reference_revisions
+    - text
+id: paragraph.what_people_say.default
+targetEntityType: paragraph
+bundle: what_people_say
+mode: default
+content:
+  field_client:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_rating_number:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_what_people_header:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_what_people_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

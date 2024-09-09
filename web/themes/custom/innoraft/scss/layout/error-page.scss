@@ -1,0 +1,24 @@
+@use "../import" as *;
+header {
+  .navbar-brand {
+    img {
+      filter: none;
+    }
+  }
+  #navbar-main {
+    background-color: $white !important;
+    box-shadow: $box-shadow-60;
+    .menu--main {
+      ul.navbar-nav {
+        .nav-link {
+          color: $dark-grey;
+        }
+      }
+    }
+  }
+}
+.error-page {
+  margin: 0 auto;
+  max-width: 420px;
+  width: 100%;
+}

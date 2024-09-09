@@ -1,0 +1,247 @@
+@use "../import" as *;
+#edit-search--2,
+#edit-search {
+  width: 100px;
+}
+.page-view-solr-search {
+  .search-icon {
+    display: none;
+  }
+}
+.banner-wrapper {
+  background:
+    radial-gradient(
+      231% 135.8% at 0.9% 2.98%,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.1) 100%
+    ),
+    url("../../images/seachbanner.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: calc(100vh - 72px);
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    backdrop-filter: blur(15px);
+    width: 50%;
+    height: 100%;
+    @media screen and (max-width: $md) {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: $lg) {
+    height: calc(100vh - 52px);
+  }
+  @media screen and (max-width: $md) {
+    height: calc(100vh - 72px);
+  }
+  @media screen and (max-width: $md) {
+    height: calc(100vh - 72px);
+  }
+  .banner-inner-box {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    max-width: 600px;
+    h1 {
+      @extend %h1--banner;
+    }
+    p {
+      font-family: $font-family-bigshoulders !important;
+      font-size: $font-size-24;
+      font-style: normal;
+      font-weight: $font-weight-600 + 100;
+      line-height: normal;
+      letter-spacing: 4px;
+    }
+    h1,
+    p {
+      color: $white;
+    }
+    span {
+      color: $orange;
+    }
+    @media screen and (max-width: $lg) {
+      max-width: 496px;
+    }
+  }
+  .scroller {
+    position: absolute;
+    bottom: 0;
+    left: 48%;
+    @extend %p--sm;
+
+    color: $white;
+    font-family: $font-family-base;
+    font-weight: $font-weight-600;
+    &::before {
+      content: "\e906";
+      font-family: "icomoon", sans-serif;
+      font-size: 1.5rem;
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      color: #fff;
+      font-weight: $font-weight-400;
+      cursor: pointer;
+      @media screen and (max-width: $xs) {
+        left: 44%;
+      }
+    }
+  }
+}
+.search-filters {
+  display: flex;
+  align-items: center;
+  gap: $indent-20;
+  margin-top: $indent-30;
+  .inline-filters {
+    display: flex;
+    align-items: center;
+    flex: 80%;
+    .block-views-exposed-filter-blocksolr-search-page-1 form > div {
+      gap: $indent-16;
+    }
+    #block-innoraft-exposedformsolr-searchpage-1 {
+      flex: 70%;
+      @media screen and (max-width: $lg) {
+        flex: 50%;
+      }
+    }
+    .js-form-type-search-api-autocomplete {
+      margin-left: 0;
+    }
+    .item-list__dropdown {
+      cursor: pointer;
+      padding: $indent-16 $indent-25+1;
+      appearance: none;
+      background: url("../../images/icons/filter.svg");
+      background-repeat: no-repeat;
+      background-position: right;
+      width: 150px;
+      background-position-x: 97%;
+      background-size: 16px;
+      border: 1px solid $dark-grey;
+      border-right: none;
+      @media screen and (max-width: $md) {
+        border-right: 1px solid $dark-grey;
+      }
+      @media screen and (max-width: $sm) {
+        padding: $indent-12 $indent-20;
+      }
+    }
+    @media screen and (max-width: $lg) {
+      width: 100%;
+      flex: 0 0 100%;
+    }
+    @media screen and (max-width: $md) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $indent-20;
+      flex: 60%;
+    }
+  }
+  #block-innoraft-sortbyviewsolrsearchdisplaypage-2 {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    border: 1px solid $dark-grey;
+    padding: $indent-12+2 $indent-20;
+    h2 {
+      font-family: $font-family-base;
+      font-size: $font-size-18;
+      font-style: normal;
+      font-weight: $font-weight-400;
+      line-height: 27px;
+      letter-spacing: $letter-spacing;
+      margin-bottom: 0;
+    }
+    .list-group-item {
+      padding: 0 10px;
+      border: none;
+      .sort-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+    @media screen and (max-width: $sm) {
+      padding: $indent-12 $indent-20;
+    }
+  }
+  @media screen and (max-width: $lg) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  @media screen and (max-width: $md) {
+    align-items: flex-start;
+  }
+  @media screen and (max-width: $sm) {
+    flex-direction: column;
+    align-items: baseline;
+  }
+}
+.view-solr-search {
+  padding-top: $indent-60;
+  .row {
+    margin-right: auto;
+    margin-left: auto;
+    .views-row {
+      position: relative;
+      padding: $indent-30 0;
+      border-bottom: 1px solid $light-grey;
+      &:last-child {
+        border-bottom: none;
+      }
+      &:first-child {
+        padding-top: 0;
+      }
+      .search-result {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: $indent-20;
+        @media screen and (max-width: $md) {
+          flex-wrap: wrap;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+      .search-content {
+        flex: 60%;
+        .node__title {
+          .field--name-title {
+            font-family: $font-family-base;
+            font-size: 22px;
+            font-style: normal;
+            font-weight: $font-weight-600;
+            line-height: normal;
+            letter-spacing: $letter-spacing;
+            color: $primary-blue;
+          }
+        }
+        .node__content {
+          .field--type-text-with-summary {
+            > * > b,
+            strong,
+            em {
+              font-weight: $font-weight-400;
+              @extend %p;
+            }
+            p {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+      .content-type {
+        text-transform: uppercase;
+        padding: $indent-10 $indent-20;
+        border-radius: $border-radius-20 + 5;
+        border: 1px solid $dark-grey;
+      }
+    }
+  }
+}

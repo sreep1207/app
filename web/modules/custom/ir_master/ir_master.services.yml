@@ -1,0 +1,10 @@
+services:
+  ir_master.redirect_to_home_subscriber:
+    class: Drupal\ir_master\EventSubscriber\RedirectToHomeSubscriber
+    tags:
+      - { name: event_subscriber }
+    arguments:
+      - '@current_route_match'
+  ir_master.blog_alias_fixer:
+    class: Drupal\ir_master\BlogAliasFixer
+    arguments: ['@entity_type.manager', '@path_alias.manager']

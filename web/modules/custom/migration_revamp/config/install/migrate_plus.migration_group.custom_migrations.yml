@@ -1,0 +1,9 @@
+id: custom_migrations
+label: 'Custom Migrations'
+description: 'Custom migration group for webform submissions'
+source_type: Webform submission
+status: true
+dependencies:
+  enforced:
+    module:
+      - migration_revamp

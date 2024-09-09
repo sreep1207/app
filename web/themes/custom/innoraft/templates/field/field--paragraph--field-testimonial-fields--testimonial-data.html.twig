@@ -1,0 +1,95 @@
+{#
+/**
+ * @file
+ * Theme override for a field.
+ *
+ * To override output, copy the "field.html.twig" from the templates directory
+ * to your theme's directory and customize it, just like customizing other
+ * Drupal templates such as page.html.twig or node.html.twig.
+ *
+ * Instead of overriding the theming for all fields, you can also just override
+ * theming for a subset of fields using
+ * @link themeable Theme hook suggestions. @endlink For example,
+ * here are some theme hook suggestions that can be used for a field_foo field
+ * on an article node type:
+ * - field--node--field-foo--article.html.twig
+ * - field--node--field-foo.html.twig
+ * - field--node--article.html.twig
+ * - field--field-foo.html.twig
+ * - field--text-with-summary.html.twig
+ * - field.html.twig
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ *
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{% set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+    'testimonial-slider',
+    'row',
+  ]
+%}
+
+<div {{ attributes.addClass(classes, 'field__items') }}>
+	<div class="testimonial-slider-nav col-12 col-md-7 pe-sm-5 pt-4 order-2 order-md-1">
+		<div class="testimonial-slider-nav--inner pe-sm-4">
+			{% for item in items %}
+				<div {{ item.attributes.addClass('field__item') }}>
+					<div class="testimonial-slide-quote">
+            {% set text = item.content['#media'].field_testimonial_quote.value|striptags %}
+            {% set trimmed_text = text|length > 200 ? text|slice(0, 200) ~ '...' : text %}
+            <p>{{ trimmed_text|raw }}</p>
+            {% set popup_id = 'popup-' ~ item.content['#media'].id %}
+            {% set popup_show = text|length > 200 ? 'd-block' : 'd-none' %}
+            <a data-lity href="#{{ popup_id }}" class="{{ popup_show }} read-more-btn">{{ 'Read more'|t }}</a>
+            <div class="popup-content" id="{{ popup_id }}">
+                {{ item.content['#media'].field_testimonial_quote.value|raw }}
+                <div class="testimonial-slide-client pt-4 pt-lg-5 mt-lg-2">
+                  <h4 class="testimonial-slide-name text--orange">
+                    {{ item.content['#media'].name.value }}
+                  </h4>
+                  <div class="testimonial-slide-designation">
+                    {{ item.content['#media'].field_designation.value }}
+                  </div>
+                </div>
+            </div>
+					</div>
+					<div class="testimonial-slide-client pt-4 pt-lg-5 mt-lg-2">
+						<h4 class="testimonial-slide-name text--orange">
+							{{ item.content['#media'].name.value }}
+						</h4>
+						<div class="testimonial-slide-designation">
+							{{ item.content['#media'].field_designation.value }}
+						</div>
+					</div>
+				</div>
+		  {% endfor %}
+		</div>
+	</div>
+	<div class="testimonial-slider-for col-12 col-md-5 order-1 order-md-2">
+		{% for item in items %}
+			<div {{ item.attributes.addClass('field__item') }}>
+				<div class="testimonial-slide-image">
+					<img src="{{ file_url(item.content['#media'].field_media_image_1.entity.fileuri) }}"  alt="{{ item.content['#media'].field_media_image_1[0].alt }}" width="278" height="368" />
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>

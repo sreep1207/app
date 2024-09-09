@@ -1,0 +1,22 @@
+uuid: 01ef9c3b-2d2b-4b4f-81ff-ebaf19a227e8
+langcode: en
+status: true
+dependencies:
+  theme:
+    - innoraft
+_core:
+  default_config_hash: nGE3EoPQQaQCuqTUtZgw0-KIzmrqdKDzdNQf2JyPUt4
+id: innoraft_primary_local_tasks
+theme: innoraft
+region: highlighted
+weight: -10
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primary tabs'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: false
+visibility: {  }

@@ -1,0 +1,250 @@
+<?php
+
+/**
+ * @file
+ * Implementing hooks for Latest Blogs module.
+ */
+
+use Drupal\Core\Url;
+use Drupal\Core\Cache\Cache;
+use Drupal\node\Entity\Node;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Cache\CacheBackendInterface;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+
+/**
+ * Implements hook_FORM_ID_alter().
+ */
+function latest_blogs_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (isset($form['category']['#options'])) {
+    foreach ($form['category']['#options'] as $key => $value) {
+
+      if (is_numeric($key)) {
+        $query = \Drupal::database()->select('taxonomy_index', 'ti');
+        $query->fields('ti', ['nid']);
+        $query->condition('ti.tid', $key);
+        $nodes = $query->execute()->fetchAssoc();
+        if (!$nodes) {
+          unset($form['category']['#options'][$key]);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function latest_blogs_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && isset($form['#id']) && $form['#id'] == 'views-exposed-form-latest-blogs-latest-blogs-block') {
+    if (isset($form['created'])) {
+      // Changing the type of the filter to 'select'.
+      $form['created']['#type'] = 'select';
+      $years = latest_blogs_get_node_creation_years();
+      $form['created']['#options'] = $years;
+      $form['created']['#default_value'] = 'all';
+      unset($form['created']['#size']);
+    }
+    if (isset($form['sort_bef_combine'])) {
+      // Adding the "Sort by" option at the beginning of the options list.
+      $form['sort_bef_combine']['#options'] = ['' => ('Sort by')] + $form['sort_bef_combine']['#options'];
+      $form['sort_bef_combine']['#default_value'] = '';
+    }
+  }
+  if ($form_id == 'views_exposed_form' && isset($form['#id']) && $form['#id'] == 'views-exposed-form-blogs-repository-blogs-repository-block') {
+    if (isset($form['created'])) {
+      // Changing the type of the filter to 'select'.
+      $form['created']['#type'] = 'select';
+      $years = latest_blogs_get_node_creation_years();
+      $form['created']['#options'] = $years;
+      $form['created']['#default_value'] = 'all';
+      unset($form['created']['#size']);
+    }
+    if (isset($form['sort_bef_combine'])) {
+      // Adding the "Sort by" option at the beginning of the options list.
+      $form['sort_bef_combine']['#options'] = ['' => ('Sort by')] + $form['sort_bef_combine']['#options'];
+      $form['sort_bef_combine']['#default_value'] = '';
+    }
+  }
+}
+
+/**
+ * Helper function to get distinct years of node creation.
+ *
+ * @return array
+ *   An associative array of distinct years as options for the select list.
+ */
+function latest_blogs_get_node_creation_years() {
+  // Query the database to get distinct years of node creation.
+  $options = &drupal_static(__FUNCTION__);
+  if (is_null($options)) {
+    $cid = 'latest_blogs:archives:year';
+    $data = \Drupal::cache()->get($cid);
+    if (!$data) {
+      $options = [];
+      $options['all'] = new TranslatableMarkup('Archives');
+      $query = \Drupal::entityQuery('node');
+      $query->condition('type', 'blog')
+        ->condition('status', 1)
+        ->sort('created', 'ASC');
+      $result = $query->accessCheck(TRUE)->execute();
+      if ($result) {
+        $nodes = Node::loadMultiple($result);
+        foreach ($nodes as $node) {
+          $date = $node->get('created')->value;
+          if ($date) {
+            $year = \Drupal::service('date.formatter')->format($date, 'html_year');
+            if (!isset($options[$year])) {
+              $options[$year] = $year;
+            }
+          }
+        }
+      }
+
+      $cache_tags = ['node:archives:year'];
+      \Drupal::cache()->set($cid, $options, CacheBackendInterface::CACHE_PERMANENT, $cache_tags);
+    }
+    else {
+      $options = $data->data;
+    }
+
+  }
+
+  return $options;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function latest_blogs_node_presave(EntityInterface $entity) {
+
+  $bundle = $entity->bundle();
+  if ($bundle == 'blog') {
+    $cid = 'latest_blogs:archives:year';
+    $data = \Drupal::cache()->get($cid);
+    if ($data) {
+      $options = $data->data;
+      $date = $entity->get('created')->value;
+      if ($date) {
+        $year = \Drupal::service('date.formatter')->format($date, 'html_year');
+        if (!isset($options[$year])) {
+          Cache::invalidateTags(['node:archives:year']);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function latest_blogs_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  // Targetting a particular view by its id.
+  if ($view->id() == 'latest_blogs') {
+    // Checking if the "All" option is selected.
+    $input = $view->exposed_raw_input;
+    if (isset($input['created']) && $input['created'] == 'all') {
+      // Looping conditions and remove any related to 'node_field_data.created'.
+      foreach ($query->where[1]['conditions'] as $key => $condition) {
+        if (is_array($condition) && isset($condition['field']) && strpos($condition['field'], 'node_field_data.created') !== FALSE) {
+          // Unset the condition if found.
+          unset($query->where[1]['conditions'][$key]);
+        }
+      }
+    }
+  }
+  if ($view->id() == 'blogs_repository') {
+    // Checking if the "All" option is selected.
+    $input = $view->exposed_raw_input;
+    if (isset($input['created']) && $input['created'] == 'all') {
+      // Looping conditions and remove any related to 'node_field_data.created'.
+      foreach ($query->where[1]['conditions'] as $key => $condition) {
+        if (is_array($condition) && isset($condition['field']) && strpos($condition['field'], 'node_field_data.created') !== FALSE) {
+          // Unset the condition if found.
+          unset($query->where[1]['conditions'][$key]);
+        }
+      }
+    }
+  }
+  if ($view->id() == 'blogs' && $view->current_display == 'block_1') {
+    $current_node = \Drupal::routeMatch()->getParameter('node');
+    if ($current_node != NULL) {
+      $relatedBlogs = [];
+      $paragraphs = $current_node?->field_section?->getValue();
+      foreach ($paragraphs as $key => $para) {
+        $entity = \Drupal::entityTypeManager()->getStorage('paragraph')->load($para['target_id']);
+        if ($entity?->getType() == "dynamic_content_section") {
+          $tagged_blogs = $entity->field_tag_related_blog?->getValue();
+          $taxonomy_ids = $entity->field_blog_tags?->getValue();
+          // Check for tagged blogs.
+          if (!empty($tagged_blogs)) {
+            foreach ($tagged_blogs as $key => $value) {
+              $relatedBlogs[] = $value['target_id'];
+            }
+          }
+          elseif (!empty($taxonomy_ids)) {
+            foreach ($taxonomy_ids as $key => $value) {
+              $tids[] = $value['target_id'];
+            }
+            $node_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+            $node_query->condition('type', 'blog');
+            $node_query->condition('field_blog_tags', $tids, 'IN');
+            $node_query->condition('status', 1, '=');
+            $node_query->range(0, 5);
+            $node_query->sort('nid', 'DESC');
+            $node_query->accessCheck(TRUE);
+            $relatedBlogs = $node_query->execute();
+          }
+        }
+      }
+      // If empty then don't modify query.
+      $relatedBlogs = array_values($relatedBlogs);
+      $view->custom_order_nids = $relatedBlogs;
+      if (!empty($relatedBlogs)) {
+        foreach ($query->where as $key => $where) {
+          array_unshift($query->where[$key]['conditions'], [
+            'field' => 'nid',
+            'value' => $relatedBlogs,
+            'operator' => 'IN',
+          ]);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function latest_blogs_views_pre_render(ViewExecutable $view) {
+  if ($view->id() == 'blogs' && $view->current_display == 'block_1') {
+    $order = $view?->custom_order_nids;
+    if (!empty($order)) {
+      $result = [];
+      foreach ($view->result as $value) {
+        foreach ($order as $k => $v) {
+          if ($value->nid == $v) {
+            $result[$k] = $value;
+          }
+        }
+      }
+      $view->result = $result;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_page__CONTENT_TYPE() for specific content types.
+ */
+function latest_blogs_preprocess_node__landing_page(&$variables) {
+  $current_url = Url::fromRoute('<current>');
+  // Get the path from the current URL object.
+  $current_path = $current_url->toString();
+  // Checking if the current path matches the desired path alias.
+  if ($current_path == '/blogs') {
+    $variables['#attached']['library'][] = 'innoraft/blogs-page';
+  }
+}

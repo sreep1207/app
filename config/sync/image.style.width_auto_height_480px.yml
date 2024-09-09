@@ -1,0 +1,15 @@
+uuid: 1ba6d334-d10f-4844-9aec-5f624f1f12f4
+langcode: en
+status: true
+dependencies: {  }
+name: width_auto_height_480px
+label: 'Width auto Height 480px'
+effects:
+  abebbd3e-c908-4915-8406-1d8c05eec0cc:
+    uuid: abebbd3e-c908-4915-8406-1d8c05eec0cc
+    id: image_scale
+    weight: 1
+    data:
+      width: null
+      height: 480
+      upscale: false

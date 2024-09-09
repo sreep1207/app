@@ -1,0 +1,11 @@
+ir_master.settings:
+  title: 'Number Counter'
+  description: 'Configure the Number counters.'
+  route_name: ir_master.settings
+  parent: system.admin_config_ui
+ir_master.fix_blog_aliases_form:
+  title: 'Fix blog aliases'
+  description: 'Run the Drush command to fix blog aliases.'
+  parent: system.admin_config_system
+  route_name: ir_master.aliases_fix_form
+  weight: 100

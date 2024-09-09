@@ -1,0 +1,28 @@
+uuid: 084f6468-a363-4e5f-9e48-a283715138df
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_block
+    - paragraphs.paragraphs_type.dynamic_content_section
+  module:
+    - block_field
+id: paragraph.dynamic_content_section.field_block
+field_name: field_block
+entity_type: paragraph
+bundle: dynamic_content_section
+label: Block
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  selection: blocks
+  selection_settings:
+    plugin_ids:
+      'views_block:blogs-block_1': 'views_block:blogs-block_1'
+      'views_block:blogs_repository-blogs_repository_block': 'views_block:blogs_repository-blogs_repository_block'
+      'views_block:latest_blogs-latest_blogs_block': 'views_block:latest_blogs-latest_blogs_block'
+      'views_block:latest_blogs_three-latest_blogs_three': 'views_block:latest_blogs_three-latest_blogs_three'
+field_type: block_field

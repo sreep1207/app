@@ -1,0 +1,13 @@
+_core:
+  default_config_hash: 0q05ESSjlfR5LASPlCbPg0lVHAOI6fAJJAQcnMbnLdc
+iconset: social-icons--no-color
+services:
+  facebook: facebook
+  x: x
+  email: email
+  linkedin: linkedin
+width: 20px
+radius: 3px
+print_css: ''
+facebook_app_id: ''
+node_field: false

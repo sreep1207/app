@@ -1,0 +1,279 @@
+global-styling:
+  version: VERSION
+  css:
+    theme:
+      //cdn.lineicons.com/4.0/lineicons.css: { type: external }
+      css/main.css: {}
+      icomoon/icomoon.css: {}
+  js:
+    js/general.js: {}
+    js/header.js: {}
+    js/contact-us.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+
+slick-slider:
+  css:
+    theme:
+      //cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css:
+        { type: external }
+  js:
+    //cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js:
+      { type: external }
+
+lity:
+  css:
+    theme:
+      //cdn.jsdelivr.net/npm/lity@2.4.1/dist/lity.min.css: { type: external }
+  js:
+    //cdn.jsdelivr.net/npm/lity@2.4.1/dist/lity.min.js: { type: external }
+
+our-journey:
+  css:
+    theme:
+      css/components/our-journey.css: {}
+  js:
+    js/our-journey.js: {}
+
+faq-accordion:
+  css:
+    theme:
+      css/components/faq-accordion.css: {}
+
+error-page:
+  css:
+    theme:
+      css/layout/error-page.css: {}
+
+leadership:
+  css:
+    theme:
+      css/components/leadership.css: {}
+
+hire-developers:
+  css:
+    theme:
+      css/components/hire-developers.css: {}
+  js:
+    js/hire-developers.js: {}
+
+services-what-we-do:
+  css:
+    theme:
+      css/components/services-what-we-do.css: {}
+  js:
+    js/what-we-do.js: {}
+
+two-col-text-image:
+  css:
+    theme:
+      css/components/two-col-text-image.css: {}
+
+career-opportunities:
+  css:
+    theme:
+      css/components/career-opportunities.css: {}
+
+services-how-we-do-it:
+  css:
+    theme:
+      css/components/services-how-we-do-it.css: {}
+
+why-choose-us:
+  css:
+    theme:
+      css/components/why-choose-us.css: {}
+  js:
+    js/why-choose-us.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+    - innoraft/slick-slider
+
+our-services:
+  css:
+    theme:
+      css/components/our-services.css: {}
+
+our-key-services:
+  css:
+    theme:
+      css/components/our-key-services.css: {}
+
+related-services:
+  css:
+    theme:
+      css/components/related-services.css: {}
+
+solr-search:
+  css:
+    theme:
+      css/components/solr-search.css: {}
+  js:
+    js/solr-search.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+
+blogs-page:
+  css:
+    theme:
+      css/components/blogs-page.css: {}
+
+our-portfolio:
+  css:
+    theme:
+      css/components/our-portfolio.css: {}
+  js:
+    js/our-portfolio.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+
+latest-blogs:
+  css:
+    theme:
+      css/components/latest-blogs.css: {}
+  js:
+    js/latest-blogs.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+    - innoraft/slick-slider
+
+spotlight:
+  css:
+    theme:
+      css/components/spotlight.css: {}
+  js:
+    js/spotlight.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+    - innoraft/slick-slider
+
+branding-section:
+  css:
+    theme:
+      css/components/branding-section.css: {}
+
+client-testimonial:
+  css:
+    theme:
+      css/components/client-testimonial.css: {}
+  js:
+    js/client-testimonial.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+    - innoraft/slick-slider
+    - innoraft/lity
+
+blog-landing:
+  css:
+    theme:
+      css/layout/blog-landing.css: {}
+
+related-blogs:
+  css:
+    theme:
+      css/components/related-blogs.css: {}
+
+gallery-section:
+  css:
+    theme:
+      css/components/gallery-section.css: {}
+  js:
+    js/gallery-section.js: {}
+  dependencies:
+    - innoraft/font-awesome
+
+blogs-and-articles:
+  css:
+    theme:
+      css/layout/blogs-and-articles.css: {}
+  dependencies:
+    - innoraft/font-awesome
+
+bootstrap:
+  css:
+    theme:
+      //cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css: { type: external }
+  js:
+    //cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js: { type: external }
+    //cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js: { type: external }
+
+font-awesome:
+  css:
+    theme:
+       //cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css: {type: external}
+
+login-form:
+  css:
+    theme:
+      css/components/log-in.css: {}
+
+hire-developers-form:
+  css:
+    theme:
+      css/components/hire-developers-popup.css: {}
+
+apply-job-form:
+  css:
+    theme:
+      css/components/apply-job-form.css: {}
+  js:
+    js/apply-job.js: {}
+
+what-people-say:
+  css:
+    theme:
+      css/components/what-people-say.css: {}
+  js:
+    js/what-people-say.js: {}
+
+contact-us:
+  css:
+    theme:
+      css/components/contact-us.css: {}
+  js:
+    js/contact-us.js: {}
+
+blogs-repository:
+  css:
+    theme:
+      css/layout/blogs-repository.css: {}
+
+views-pagination:
+  css:
+    theme:
+      css/components/pagination.css: {}
+
+privacy-policy:
+  css:
+    theme:
+      css/layout/privacy-policy.css: {}
+
+faq:
+  css:
+    theme:
+      css/layout/faq-page.css: {}
+  js:
+    js/faq.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+
+tags:
+  css:
+    theme:
+      css/layout/taxonomy-page.css: {}

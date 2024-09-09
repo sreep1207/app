@@ -1,0 +1,8 @@
+uuid: 82eb2519-21d0-446e-8cc1-a6941a705ac0
+langcode: en
+status: true
+dependencies: {  }
+id: trimmed_short_date
+label: 'Trimmed short date'
+locked: false
+pattern: 'd M, Y'

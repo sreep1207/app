@@ -1,0 +1,13 @@
+uuid: cfd59df7-53bd-4a7c-bc80-7d13b79d6410
+langcode: en
+status: true
+dependencies: {  }
+id: clients
+label: Clients
+description: 'Use this for clients image to be put in the testimonial section'
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image_2
+field_map: {  }

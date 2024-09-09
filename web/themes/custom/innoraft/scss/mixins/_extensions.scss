@@ -1,0 +1,351 @@
+@use "../base/variables" as *;
+@use "../base/typography" as *;
+@use "mixins" as *;
+
+%h1--banner {
+  font-size: $font-size-70;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: $letter-spacing;
+  margin: 0;
+  @media only screen and (max-width: $xlg) {
+    font-size: $font-size-54;
+  }
+  @media only screen and (max-width: $sm) {
+    font-size: $font-size-42;
+  }
+}
+%h1--heading {
+  font-size: $font-size-44;
+  font-weight: 600;
+  letter-spacing: $letter-spacing;
+  line-height: 1.2;
+  @media only screen and (max-width: $xlg) {
+    font-size: $font-size-40;
+  }
+  @media only screen and (max-width: $sm) {
+    font-size: $font-size-32;
+  }
+}
+
+%h2--heading {
+  font-size: $font-size-36;
+  color: green;
+  font-weight: 600;
+  letter-spacing: $letter-spacing;
+  line-height: 1.2;
+  @media only screen and (max-width: $xlg) {
+    font-size: $font-size-34;
+  }
+  @media only screen and (max-width: $sm) {
+    font-size: $font-size-28;
+  }
+}
+
+%h3--heading {
+  font-size: $font-size-30;
+  font-weight: 600;
+  letter-spacing: $letter-spacing;
+  line-height: 1.2;
+  @media only screen and (max-width: $lg) {
+    font-size: $font-size-26;
+  }
+  @media only screen and (max-width: $sm) {
+    font-size: $font-size-24;
+  }
+}
+
+%h4--heading-bsd {
+  font-size: $font-size-24;
+  font-family: "Big Shoulders Display", cursive, sans-serif !important;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  @media only screen and (max-width: $xlg) {
+    font-size: $font-size-22;
+  }
+  @media only screen and (max-width: $sm) {
+    font-size: $font-size-20;
+  }
+}
+%h4--heading {
+  font-size: $font-size-24;
+  font-weight: 600;
+  letter-spacing: $letter-spacing;
+  line-height: 1.2;
+  @media only screen and (max-width: $xlg) {
+    font-size: $font-size-22;
+  }
+  @media only screen and (max-width: $sm) {
+    font-size: $font-size-20;
+  }
+}
+
+%h5--heading-bsd {
+  font-size: $font-size-20;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: "Big Shoulders Display", cursive, sans-serif !important;
+  @media only screen and (max-width: $xm) {
+    font-size: $font-size-18;
+  }
+}
+%h5--heading {
+  font-size: $font-size-20;
+  font-weight: 500;
+  letter-spacing: $letter-spacing;
+  line-height: 1.2;
+  @media only screen and (max-width: $xm) {
+    font-size: $font-size-19;
+  }
+}
+%h5--heading-bl {
+  font-size: $font-size-20;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: $letter-spacing;
+  @media only screen and (max-width: $xm) {
+    font-size: $font-size-19;
+  }
+}
+
+%h6--heading {
+  font-size: $font-size-18;
+  letter-spacing: $letter-spacing;
+  line-height: 1.2;
+  font-weight: 600;
+  @media only screen and (max-width: $xm) {
+    font-size: $font-size-16;
+  }
+}
+
+%p--lg {
+  font-size: $font-size-18;
+  line-height: $line-height-base;
+  letter-spacing: $letter-spacing;
+  @media screen and (max-width: 767px) {
+    font-size: $font-size-16;
+  }
+}
+%p {
+  font-size: $font-size-16;
+  line-height: $line-height-base;
+  letter-spacing: $letter-spacing;
+  @media screen and (max-width: 767px) {
+    font-size: $font-size-16;
+  }
+}
+%p--bl {
+  font-size: $font-size-16;
+  line-height: $line-height-base;
+  font-weight: 600;
+  letter-spacing: $letter-spacing;
+  @media screen and (max-width: 767px) {
+    font-size: $font-size-18;
+  }
+}
+%p--sm {
+  font-size: $font-size-14;
+  line-height: $line-height-base;
+  letter-spacing: $letter-spacing;
+  @media screen and (max-width: 767px) {
+    font-size: $font-size-14;
+  }
+}
+%p--sm-bl {
+  font-size: $font-size-14;
+  line-height: $line-height-base;
+  font-weight: 500;
+  letter-spacing: $letter-spacing;
+  @media screen and (max-width: 767px) {
+    font-size: $font-size-14;
+  }
+}
+%p--sm-lt {
+  font-size: $font-size-14;
+  font-weight: 300;
+  line-height: $line-height-base;
+  letter-spacing: $letter-spacing;
+  @media screen and (max-width: 767px) {
+    font-size: $font-size-14;
+  }
+}
+%p--sm-bsd {
+  font-size: $font-size-14;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-family: "Big Shoulders Display", cursive, sans-serif !important;
+  line-height: $line-height-base;
+  @media screen and (max-width: 767px) {
+    font-size: $font-size-14;
+  }
+}
+
+%menu-link {
+  padding: 0;
+  margin-bottom: $indent-12;
+  a {
+    color: $dark-grey;
+    transition: $transition200ms;
+    &:hover {
+      color: $black;
+      font-weight: 600;
+    }
+  }
+  &::before {
+    content: "\eb0d";
+    font-family: "lineicons", sans-serif;
+    color: $primary-blue;
+    font-weight: bold;
+    vertical-align: middle;
+    margin-right: $indent-8;
+    font-size: 0.7em;
+  }
+  &:hover {
+    background: none;
+  }
+}
+
+%dropdown-arrow {
+  @include dropdown-arrow;
+}
+
+%events-card {
+  padding: $indent-32;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $indent-20;
+  @include custom-card-hover($primary-blue);
+  &::after {
+    content: "";
+    background: rgba($black, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+  .card-header {
+    @extend %h5--heading-bsd;
+
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+  .read-more {
+    @include read-more($primary-blue, $primary-blue, $white, $primary-blue);
+
+    text-align: right;
+  }
+  &:hover {
+    .read-more {
+      @include read-more-hover($primary-blue, $orange, $white, $white);
+    }
+  }
+  @media only screen and (max-width: $sm) {
+    padding: $indent-24;
+    .read-more {
+      @include read-more-hover($primary-blue, $orange, $white, $white);
+    }
+  }
+  @media only screen and (max-width: $axsm) {
+    padding: $indent-32;
+  }
+}
+
+%news-card {
+  display: flex;
+  flex-direction: column;
+  box-shadow: $box-shadow-60;
+  background: $white;
+  .card-header {
+    position: relative;
+    height: 240px;
+    overflow: clip;
+    &::after {
+      content: "";
+      background: rgba($black, 0.5);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+    .card-header-label {
+      @extend %h5--heading-bsd;
+
+      position: absolute;
+      top: $indent-20;
+      left: $indent-32;
+      color: $white;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+    @media only screen and (max-width: $lg) {
+      height: 200px;
+    }
+  }
+  .card-body {
+    padding: $indent-32;
+    transition: $transition300ms;
+    &,
+    &--inner {
+      display: flex;
+      flex-direction: column;
+      gap: $indent-20;
+      justify-content: space-between;
+    }
+    &:hover {
+      background: $light-bg-blue;
+    }
+  }
+  .read-more {
+    @include read-more($primary-blue, $primary-blue, $dark-grey, $white);
+
+    text-align: right;
+    i {
+      color: $white;
+    }
+  }
+  &:hover {
+    .read-more {
+      @include read-more-hover(
+        $primary-blue,
+        $primary-blue,
+        $dark-grey,
+        $white
+      );
+    }
+  }
+  @media only screen and (max-width: $sm) {
+    .read-more {
+      @include read-more-hover($primary-blue, $primary-blue, $dark-grey, $white);
+    }
+  }
+}
+.dropdown-item.active {
+  background-color: $white !important;
+}

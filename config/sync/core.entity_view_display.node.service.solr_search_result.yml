@@ -1,0 +1,30 @@
+uuid: 081c10ec-5d6b-41fe-9c8d-41445b93e6a0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.solr_search_result
+    - field.field.node.service.field_banner
+    - field.field.node.service.field_icomoon_class
+    - field.field.node.service.field_meta_tags
+    - field.field.node.service.field_related_top_level_service
+    - field.field.node.service.field_section
+    - field.field.node.service.field_service_level
+    - node.type.service
+  module:
+    - user
+id: node.service.solr_search_result
+targetEntityType: node
+bundle: service
+mode: solr_search_result
+content: {  }
+hidden:
+  field_banner: true
+  field_icomoon_class: true
+  field_meta_tags: true
+  field_related_top_level_service: true
+  field_section: true
+  field_service_level: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

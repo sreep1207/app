@@ -1,0 +1,33 @@
+uuid: 5e72773d-de5b-4f78-96be-96056c22956e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.testimonial_data.field_testimonial_fields
+    - field.field.paragraph.testimonial_data.field_testimonial_header
+    - paragraphs.paragraphs_type.testimonial_data
+  module:
+    - text
+id: paragraph.testimonial_data.default
+targetEntityType: paragraph
+bundle: testimonial_data
+mode: default
+content:
+  field_testimonial_fields:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_testimonial_header:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

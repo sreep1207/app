@@ -1,0 +1,32 @@
+uuid: 3707dfc5-5dc8-42f2-b912-5cefd7f794e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.latest_news_and_events.field_html_content
+    - field.field.paragraph.latest_news_and_events.field_latest_content
+    - paragraphs.paragraphs_type.latest_news_and_events
+  module:
+    - block_field
+    - text
+id: paragraph.latest_news_and_events.default
+targetEntityType: paragraph
+bundle: latest_news_and_events
+mode: default
+content:
+  field_html_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_latest_content:
+    type: block_field
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

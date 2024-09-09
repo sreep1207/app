@@ -1,0 +1,37 @@
+uuid: 0d7a126c-f023-4caf-8fa3-74d63fb7dab3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.news_insights.field_manual_news_events
+    - field.field.paragraph.news_insights.field_news_insights
+    - paragraphs.paragraphs_type.news_insights
+  module:
+    - block_field
+id: paragraph.news_insights.default
+targetEntityType: paragraph
+bundle: news_insights
+mode: default
+content:
+  field_manual_news_events:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: "Search by content's title or the content type...."
+    third_party_settings: {  }
+  field_news_insights:
+    type: block_field_default
+    weight: 0
+    region: content
+    settings:
+      plugin_id: ''
+      settings: {  }
+      configuration_form: full
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

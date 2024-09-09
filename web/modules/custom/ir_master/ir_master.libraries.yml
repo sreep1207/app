@@ -1,0 +1,27 @@
+global-scripts:
+  version: 1.x
+  js:
+    js/email-validator.js: {}
+file-validator:
+  version: 1.x
+  js:
+    js/file-validate.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+faq-search:
+  version: 1.x
+  js:
+    js/faq-search.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+expand-faq:
+  version: 1.x
+  js:
+    js/expand-faq.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal    
+

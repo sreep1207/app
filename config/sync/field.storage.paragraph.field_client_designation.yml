@@ -1,0 +1,21 @@
+uuid: 49e2e2fd-0bb5-479b-9cc9-5f36ba879841
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_client_designation
+field_name: field_client_designation
+entity_type: paragraph
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

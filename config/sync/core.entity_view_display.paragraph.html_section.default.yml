@@ -1,0 +1,25 @@
+uuid: 912bbcad-9d90-4cfe-87fb-77eb33bc3642
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.html_section.field_html_content
+    - field.field.paragraph.html_section.field_section_class
+    - paragraphs.paragraphs_type.html_section
+  module:
+    - text
+id: paragraph.html_section.default
+targetEntityType: paragraph
+bundle: html_section
+mode: default
+content:
+  field_html_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_section_class: true
+  search_api_excerpt: true

@@ -1,0 +1,15 @@
+uuid: aa9ed9ff-46e1-459e-8598-106c0eb216c2
+langcode: en
+status: true
+dependencies: {  }
+name: w_auto_h_100px
+label: 'Width auto height 100px'
+effects:
+  a4945bad-7508-47ec-8de5-f18e3f89bfc9:
+    uuid: a4945bad-7508-47ec-8de5-f18e3f89bfc9
+    id: image_scale
+    weight: 2
+    data:
+      width: null
+      height: 100
+      upscale: false

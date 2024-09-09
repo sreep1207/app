@@ -1,0 +1,40 @@
+uuid: 3a091cd6-df3e-42db-b383-59230e7c1349
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.news_and_insights
+    - field.field.media.image.field_media_image
+    - image.style.news_event_image
+    - media.type.image
+  module:
+    - svg_image
+_core:
+  default_config_hash: 73xaTNkI5J6sfFcBmNYeuk070X3mQS_iwwWaPYyfG2M
+id: media.image.news_and_insights
+targetEntityType: media
+bundle: image
+mode: news_and_insights
+content:
+  field_media_image:
+    type: image
+    label: visually_hidden
+    settings:
+      image_link: ''
+      image_style: news_event_image
+      image_loading:
+        attribute: lazy
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

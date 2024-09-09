@@ -1,0 +1,19 @@
+@use "../import" as *;
+.breadcrumb {
+  margin: $indent-20 0 0;
+  .breadcrumb-item {
+    color: $dark-grey;
+    font-size: $font-size-14;
+    display: inline-flex;
+    align-items: center;
+  }
+  .breadcrumb-item + .breadcrumb-item {
+    &::before {
+      content: "\eb0d";
+      font-family: $font-family-lineicons;
+      color: $dark-grey;
+      font-size: $font-size-12;
+      line-height: 1;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+uuid: 4ef38141-1447-4fa8-a2ec-77c12f2e055d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.dynamic_content_section.field_block
+    - field.field.paragraph.dynamic_content_section.field_blog_tags
+    - field.field.paragraph.dynamic_content_section.field_html_dynamic_content
+    - field.field.paragraph.dynamic_content_section.field_tag_related_blog
+    - paragraphs.paragraphs_type.dynamic_content_section
+  module:
+    - block_field
+id: paragraph.dynamic_content_section.default
+targetEntityType: paragraph
+bundle: dynamic_content_section
+mode: default
+content:
+  field_block:
+    type: block_field
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_blog_tags: true
+  field_html_dynamic_content: true
+  field_tag_related_blog: true
+  search_api_excerpt: true

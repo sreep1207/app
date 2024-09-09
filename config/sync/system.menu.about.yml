@@ -1,0 +1,8 @@
+uuid: f730de14-9758-47c8-8ef7-7a30af77ad43
+langcode: en
+status: true
+dependencies: {  }
+id: about
+label: About
+description: "Add menu links for footer's about section."
+locked: false

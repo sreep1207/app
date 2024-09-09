@@ -1,0 +1,50 @@
+uuid: 62338748-22a9-4733-ab70-d39c99877a9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.dynamic_content_section.field_block
+    - field.field.paragraph.dynamic_content_section.field_blog_tags
+    - field.field.paragraph.dynamic_content_section.field_html_dynamic_content
+    - field.field.paragraph.dynamic_content_section.field_tag_related_blog
+    - paragraphs.paragraphs_type.dynamic_content_section
+  module:
+    - block_field
+id: paragraph.dynamic_content_section.default
+targetEntityType: paragraph
+bundle: dynamic_content_section
+mode: default
+content:
+  field_block:
+    type: block_field_default
+    weight: 1
+    region: content
+    settings:
+      plugin_id: ''
+      settings: {  }
+      configuration_form: full
+    third_party_settings: {  }
+  field_blog_tags:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_tag_related_blog:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_html_dynamic_content: true
+  status: true

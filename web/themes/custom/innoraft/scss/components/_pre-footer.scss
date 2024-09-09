@@ -1,0 +1,191 @@
+@use "../import" as *;
+.pre-footer {
+  padding: $indent-60 0;
+  @include full-width-backdrop($lighter-bg-blue);
+  &::before {
+    bottom: 0;
+    top: unset;
+    height: 65%;
+  }
+  &--inner {
+    background: url("/themes/custom/innoraft/images/pre-footer.webp");
+    background-size: cover;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    transform: translateZ(0);
+    * {
+      color: $white;
+    }
+    #edit-description-text {
+      a {
+        &:hover {
+          color: $orange;
+        }
+      }
+    }
+    .toast-container {
+      .toast-header,
+      .toast-body {
+        color: $dark-grey;
+        > * {
+          color: $dark-grey;
+        }
+      }
+    }
+    .region-pre-footer-left,
+    .region-pre-footer-right {
+      flex: 0 0 50%;
+      margin: 0;
+      @media only screen and (max-width: $sm) {
+        flex: 0 0 100%;
+      }
+    }
+    .region-pre-footer-right {
+      .block-webform-block {
+        padding: $indent-60;
+        position: relative;
+        &::before {
+          content: "";
+          background:
+            radial-gradient(
+              238.02% 140.14% at 0.9% 2.98%,
+              rgba(255, 255, 255, 0.1) 0%,
+              rgba(255, 255, 255, 0.04) 100%
+            );
+          backdrop-filter: blur(10px);
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          left: 0;
+          top: 0;
+          z-index: 0;
+        }
+        .content {
+          position: relative;
+          z-index: 1;
+        }
+        h2,
+        .get-in-touch-title {
+          @extend %h4--heading-bsd;
+
+          color: $orange;
+          z-index: 1;
+          position: relative;
+        }
+        .get-in-touch-title {
+          font-size: $font-size-18;
+        }
+        h3 {
+          margin-bottom: $indent-24;
+        }
+        @media only screen and (max-width: $md) {
+          padding: $indent-32;
+        }
+      }
+    }
+    .region-pre-footer-left {
+      padding: $indent-60;
+      .quote-wrapper {
+        position: relative;
+        &::before {
+          content: '\e907';
+          font-family: 'icomoon', sans-serif;
+          font-size: $font-size-54;
+          color: rgba($white, 0.2);
+          position: absolute;
+          top: -40px;
+          left: 0;
+        }
+        h3 {
+          @extend %h1--heading;
+
+          max-width: 90%;
+          margin-bottom: $indent-20;
+          @media only screen and (max-width: $xlg) {
+            font-size: $font-size-36;
+          }
+          @media only screen and (max-width: $md) {
+            font-size: $font-size-30;
+          }
+          @media only screen and (max-width: $sm) {
+            max-width: 100%;
+          }
+        }
+        h4 {
+          @extend %h5--heading;
+
+          font-size: $font-size-19;
+          text-align: right;
+          color: $white;
+          &::before {
+            content: "";
+            width: 30px;
+            height: 1px;
+            background-color: $white;
+            vertical-align: middle;
+            margin-right: $indent-20;
+            display: inline-block;
+          }
+        }
+      }
+      @media only screen and (max-width: $md) {
+        padding: $indent-32;
+      }
+    }
+    .webform-submission-contact-us-form-form {
+      .js-form-item {
+        position: relative;
+        margin-bottom: 46px !important;
+        label {
+          position: absolute;
+          bottom: 9px;
+          transition: transform 0.3s, color 0.3s;
+          font-size: $font-size-14;
+        }
+        &:focus-within label {
+          font-size: $font-size-12 !important;
+        }
+        input[type=text],
+        input[type=email],
+        input[type=number],
+        textarea {
+          border-bottom: 1px solid $white;
+          color: $white;
+          font-size: $font-size-16;
+        }
+        textarea {
+          resize: none;
+          background: none;
+        }
+      }
+      .js-form-type-processed-text {
+        margin-bottom: 26px !important;
+      }
+      .js-form-item-captcha-response {
+        margin-bottom: 0 !important;
+        label {
+          position: relative;
+          bottom: 0;
+          transition: none;
+          transform: none;
+        }
+        &:focus-within label {
+          transform: none !important;
+          font-size: $font-size-14 !important;
+        }
+        .description {
+          color: $white !important;
+        }
+      }
+      .reload-captcha {
+        filter: invert(1);
+      }
+      .webform-button--submit {
+        margin-top: 20px;
+        color: $white;
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+uuid: 48456832-dd1f-43d9-a269-1445d8b40cfe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.testimonial.field_designation
+    - field.field.media.testimonial.field_media_image_1
+    - field.field.media.testimonial.field_testimonial_quote
+    - image.style.width_auto_height_480px
+    - media.type.testimonial
+  module:
+    - svg_image
+    - text
+id: media.testimonial.default
+targetEntityType: media
+bundle: testimonial
+mode: default
+content:
+  field_designation:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_media_image_1:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: width_auto_height_480px
+      image_loading:
+        attribute: lazy
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_testimonial_quote:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  created: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

@@ -1,0 +1,11 @@
+uuid: ad22a23c-8fb1-444c-9427-1a508dc0750d
+langcode: en
+status: true
+dependencies: {  }
+id: views_page---sol__page_1_type_1
+label: Type
+weight: 0
+display_id: views_page---sol__page_1
+field_identifier: type_1
+default_sort: false
+default_order: asc

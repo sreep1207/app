@@ -1,0 +1,49 @@
+uuid: a9ee710a-8acb-44c9-bf09-180c489cb565
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.solr_search_result
+    - field.field.node.blog.body
+    - field.field.node.blog.field_banner_image
+    - field.field.node.blog.field_blog_tags
+    - field.field.node.blog.field_google_analytics_counter
+    - field.field.node.blog.field_meta_tags
+    - field.field.node.blog.field_reading_time
+    - field.field.node.blog.field_section
+    - field.field.node.blog.field_teaser_image
+    - node.type.blog
+  module:
+    - text
+    - user
+id: node.blog.solr_search_result
+targetEntityType: node
+bundle: blog
+mode: solr_search_result
+content:
+  body:
+    type: text_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  google_analytics_counter:
+    type: number
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+hidden:
+  field_banner_image: true
+  field_blog_tags: true
+  field_google_analytics_counter: true
+  field_meta_tags: true
+  field_reading_time: true
+  field_section: true
+  field_teaser_image: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

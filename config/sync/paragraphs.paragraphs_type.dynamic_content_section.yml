@@ -1,0 +1,10 @@
+uuid: 5306baae-be96-4518-a75c-ebfb69cac47e
+langcode: en
+status: true
+dependencies: {  }
+id: dynamic_content_section
+label: 'Latest Blogs'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

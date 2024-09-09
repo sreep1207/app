@@ -1,0 +1,25 @@
+uuid: bcd418ec-21e5-4175-857f-1659a621d8ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.place_block.field_section_class
+    - field.field.paragraph.place_block.field_select_block
+    - paragraphs.paragraphs_type.place_block
+  module:
+    - block_field
+id: paragraph.place_block.default
+targetEntityType: paragraph
+bundle: place_block
+mode: default
+content:
+  field_select_block:
+    type: block_field
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_section_class: true
+  search_api_excerpt: true

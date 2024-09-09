@@ -1,0 +1,25 @@
+uuid: 92ac9eaf-1399-407d-999d-f90e725f557e
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.digital-marketing
+  module:
+    - system
+  theme:
+    - innoraft
+id: innoraft_digitalmarketing
+theme: innoraft
+region: footer_fourth
+weight: 0
+provider: null
+plugin: 'system_menu_block:digital-marketing'
+settings:
+  id: 'system_menu_block:digital-marketing'
+  label: 'Digital Marketing'
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

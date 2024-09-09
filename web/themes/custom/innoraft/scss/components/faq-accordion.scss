@@ -1,0 +1,57 @@
+@use "../import" as *;
+.faq-accordion {
+  background-color: $lighter-bg-blue;
+  @include full-bleed($lighter-bg-blue);
+
+  padding-bottom: 0;
+  .accordion-button {
+    @extend %h4--heading;
+
+    background-color: $lighter-bg-blue;
+    padding: $indent-24 $indent-20;
+    color: $dark-grey;
+    &:focus {
+      border: 0;
+      outline-color: transparent;
+      box-shadow: none;
+    }
+    &::before {
+      content: "\eab8";
+      font-family: $font-family-lineicons;
+      margin-right: $indent-32;
+      font-size: $indent-20;
+      color: $primary-blue;
+    }
+    &:not(.collapsed) {
+      background-color: $white;
+      border-bottom: 0;
+      color: $primary-blue;
+      box-shadow: none;
+      &::before {
+        content: "\eabc";
+      }
+    }
+    &::after {
+      display: none;
+    }
+  }
+  .accordion-body {
+    background: $white;
+    position: relative;
+    padding: 0 $indent-32 $indent-32 $indent-64;
+    &::before {
+      content: '';
+      width: 2px;
+      height: calc(100% - $indent-32);
+      position: absolute;
+      top: 0;
+      left: $indent-32 - 2;
+      background: $primary-blue;
+    }
+  }
+}
+.faq-query-wrapper {
+  padding-top: 40px;
+  background: $lighter-bg-blue;
+  @include full-bleed($lighter-bg-blue);
+}

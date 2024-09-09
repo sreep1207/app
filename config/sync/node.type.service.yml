@@ -1,0 +1,18 @@
+uuid: aa078d7e-2b45-43b5-a08d-f7eb1838020c
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:menu_link_content:cbb23248-dfa4-4ec2-9381-1c0f28b187cb'
+name: Service
+type: service
+description: 'Use for service pages.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

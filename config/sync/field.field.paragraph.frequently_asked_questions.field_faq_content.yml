@@ -1,0 +1,29 @@
+uuid: 8da01b22-da31-40ed-a830-be8d798a912f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_faq_content
+    - node.type.frequently_asked_questions
+    - paragraphs.paragraphs_type.frequently_asked_questions
+id: paragraph.frequently_asked_questions.field_faq_content
+field_name: field_faq_content
+entity_type: paragraph
+bundle: frequently_asked_questions
+label: 'Frequently Asked Questions'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      frequently_asked_questions: frequently_asked_questions
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

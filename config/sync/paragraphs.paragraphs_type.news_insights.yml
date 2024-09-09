@@ -1,0 +1,10 @@
+uuid: e8edc4a9-c1f2-4526-ade7-cd7949d56228
+langcode: en
+status: true
+dependencies: {  }
+id: news_insights
+label: 'News & Insights'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

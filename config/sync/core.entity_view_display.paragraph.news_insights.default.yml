@@ -1,0 +1,33 @@
+uuid: ddbbeffb-ecf6-4a8c-9073-a95292ad745c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.news_insights.field_manual_news_events
+    - field.field.paragraph.news_insights.field_news_insights
+    - paragraphs.paragraphs_type.news_insights
+  module:
+    - block_field
+id: paragraph.news_insights.default
+targetEntityType: paragraph
+bundle: news_insights
+mode: default
+content:
+  field_manual_news_events:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: news_insights_mode
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_news_insights:
+    type: block_field
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

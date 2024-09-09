@@ -1,0 +1,68 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main content
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{# check if there is no data to show then hide block#}
+{% if data %}
+  <div class="related-services section-spacer">
+    <img class="ring" src="/themes/custom/innoraft/images/ring-white.svg" alt="{{ 'White ring graphic'|t }}">
+    <h2 class="h4--heading-bsd mb-2">
+      <h2 class="h4--heading-bsd mb-2 section-header">
+      {{ 'Related services'|t }}
+    </h2>
+    <h3 class="h2--heading mb-4 pb-2 section-sub-header">
+      {{ 'Other services that we provide'|t }}
+    </h3>
+    <div class="related-services--inner">
+      {% for item in data %}
+        <div class="service">
+          <div class="position-relative">
+            <div>
+              <span class="ico {{ item.icon_class }}">{{ item.title }}</span>
+            </div>
+            <h5 class="h5--heading-bl mt-4 pt-2 mb-0">
+              {{ item.title }}
+            </h5>
+          </div>
+          <div class="text-end position-relative">
+            <a class="read-more text--white" href="{{ item.url }}">
+              <span>{{ 'Read more'|t }}</span>
+              <em>
+                <i class="lni lni-chevron-right text--white">
+                  <span>{{ 'Click'|t }}</span>&nbsp;</i>
+              </em>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

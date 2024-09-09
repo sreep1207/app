@@ -1,0 +1,42 @@
+uuid: 19e61a98-b9a5-4c85-9f97-88e557d0659f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.ratings.field_logo_image
+    - field.field.paragraph.ratings.field_rating_points
+    - field.field.paragraph.ratings.field_stars
+    - paragraphs.paragraphs_type.ratings
+id: paragraph.ratings.default
+targetEntityType: paragraph
+bundle: ratings
+mode: default
+content:
+  field_logo_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_rating_points:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_stars:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

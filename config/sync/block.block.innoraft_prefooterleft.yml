@@ -1,0 +1,30 @@
+uuid: fc43dade-faa7-4738-b2e1-ce27a6422819
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:d8551b80-eae7-42ee-a01b-26a1f488f544'
+  module:
+    - block_content
+    - system
+  theme:
+    - innoraft
+id: innoraft_prefooterleft
+theme: innoraft
+region: pre_footer_left
+weight: 0
+provider: null
+plugin: 'block_content:d8551b80-eae7-42ee-a01b-26a1f488f544'
+settings:
+  id: 'block_content:d8551b80-eae7-42ee-a01b-26a1f488f544'
+  label: 'Pre footer left'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/careers\r\n/contact-us"

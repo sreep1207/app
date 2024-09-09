@@ -1,0 +1,28 @@
+uuid: 7dd7d7cf-5fea-40bf-be96-41915830ec00
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+    - system
+  theme:
+    - innoraft
+_core:
+  default_config_hash: yEBET0cqDbk8dkWzaJw-8CKft0961VBflsISoSR6Lj8
+id: innoraft_search_form_narrow
+theme: innoraft
+region: primary_menu
+weight: -12
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form (narrow)'
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: ''

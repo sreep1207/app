@@ -1,0 +1,119 @@
+<?php
+
+/**
+ * @file
+ * ir_master.module
+ */
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function ir_master_theme() {
+  $theme['other_related_services'] = [
+    'variables' => [
+      'data' => [],
+    ],
+  ];
+  return $theme;
+
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function ir_master_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Add FAQ associated with tagged terms to the FAQ section of the page.
+  if ($entity->getEntityTypeId() == "node") {
+    $paraArray = $entity?->field_section?->getValue();
+    if (!empty($paraArray)) {
+      foreach ($paraArray as $para) {
+        $paragraph = \Drupal::entityTypeManager()->getStorage('paragraph')->load($para['target_id']);
+        if ($paragraph?->getType() == "frequently_asked_questions") {
+          $nodes = $paragraph?->field_faq_content?->getValue();
+          $taxonomies = $paragraph?->field_blog_tags?->getValue();
+          // Get FAQ associated with taxonomy terms.
+          if (!empty($taxonomies)) {
+            foreach ($taxonomies as $tid) {
+              $taxonomy = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid['target_id']);
+              $faqs = $taxonomy?->field_faq?->getValue();
+              if (!empty($faqs)) {
+                foreach ($faqs as $val) {
+                  $nodes[] = $val;
+                }
+              }
+            }
+          }
+          // Remove duplicate FAQ nodes from list.
+          $map = [];
+          foreach ($nodes as $key => $value) {
+            if (in_array($value['target_id'], $map)) {
+              unset($nodes[$key]);
+            }
+            else {
+              $map[] = $value['target_id'];
+            }
+          }
+          // Set all FAQs to the field to render on page.
+          $paragraph->set("field_faq_content", $nodes);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function ir_master_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'ir_master/global-scripts';
+  $attachments['#attached']['library'][] = 'ir_master/file-validator';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for form templates.
+ */
+function ir_master_preprocess_form_element(&$variables) {
+  // Checking if the form element is for upload_cv and has a max_filesize.
+  if ($variables['element']['#type'] == 'managed_file' && !empty($variables['element']['#max_filesize'])) {
+    // Passing the max_filesize value to JavaScript.
+    $variables['#attached']['library'][] = 'ir_master/file-validator';
+    $variables['#attached']['drupalSettings']['ir_master']['max_filesize'] = $variables['element']['#max_filesize'];
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function ir_master_page_attachments_alter(array &$attachments) {
+  // Check if the current route is the search page.
+  if (\Drupal::routeMatch()->getRouteName() == 'search.view') {
+    // Attach the library.
+    $attachments['#attached']['library'][] = 'ir_master/faq-search';
+  }
+  if (\Drupal::routeMatch()->getRouteName() == 'view.faq_page.page_1') {
+    // Attach the library.
+    $attachments['#attached']['library'][] = 'ir_master/expand-faq';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views_view templates.
+ */
+function ir_master_preprocess_views_view(&$variables) {
+  if ($variables['view']->id() == 'faq_page') {
+    $items_per_page = $variables['view']->pager->options['items_per_page'];
+    // Fetch all nodes of the 'faq' content type.
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'frequently_asked_questions')
+      ->sort('created', 'DESC')
+      ->accessCheck(TRUE);
+    $nids = $query->execute();
+
+    $variables['#attached']['drupalSettings']['faq_node_ids'] = [...$nids];
+    $variables['#attached']['drupalSettings']['items_per_page'] = $items_per_page;
+  }
+
+}

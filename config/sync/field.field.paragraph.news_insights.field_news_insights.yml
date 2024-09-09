@@ -1,0 +1,25 @@
+uuid: 02bd4e23-988f-4043-a8fe-109c765dc294
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_news_insights
+    - paragraphs.paragraphs_type.news_insights
+  module:
+    - block_field
+id: paragraph.news_insights.field_news_insights
+field_name: field_news_insights
+entity_type: paragraph
+bundle: news_insights
+label: 'Latest News & Events'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  selection: blocks
+  selection_settings:
+    plugin_ids:
+      'views_block:news_insights-news_insights_display': 'views_block:news_insights-news_insights_display'
+field_type: block_field

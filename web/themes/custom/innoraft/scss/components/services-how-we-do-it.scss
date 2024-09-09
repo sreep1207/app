@@ -1,0 +1,259 @@
+@use "../import" as *;
+.services-how-we-do-it {
+  background: url("/themes/custom/innoraft/images/how-we-do-it.jpg") no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 720px;
+  width: 100vw;
+  margin-left: $bleed;
+  position: relative;
+  overflow: hidden;
+  .section-title {
+    position: absolute;
+    left: $bleed;
+    right: $bleed;
+    top: $indent-60;
+    width: 100%;
+    z-index: 2;
+    padding-left: 30px;
+  }
+  .steps-container {
+    margin: 0 $indent-8;
+    height: 100%;
+    align-content: flex-end;
+    flex-direction: row;
+    padding-top: 80px;
+    * {
+      color: $white;
+    }
+    .step {
+      width: 20%;
+      padding: 15rem $indent-32 $indent-60;
+      display: flex;
+      align-items: stretch;
+      height: 100%;
+      position: relative;
+      flex-direction: column;
+      &:last-child {
+        border-right: none;
+      }
+      &::before {
+        content: "";
+        height: 250%;
+        width: 100%;
+        position: absolute;
+        top: -100%;
+        opacity: 0;
+        left: 0;
+        z-index: 0;
+        transition: all 0.2s linear;
+        background:
+          radial-gradient(
+            101.9% 141.42% at 0% 0%,
+            rgba(158, 158, 158, 0.12) 0%,
+            rgba(158, 158, 158, 0.06) 100%
+          );
+        backdrop-filter: blur(10px);
+      }
+      &::after {
+        content: "";
+        height: 250%;
+        width: 1px;
+        background: rgba($white, 0.2);
+        position: absolute;
+        top: -100%;
+        right: 0;
+      }
+      &--inner-container {
+        overflow-y: clip;
+        height: 100%;
+        width: 100%;
+        position: relative;
+      }
+      &--inner {
+        transition: all 0.3s ease-in;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        left: 0;
+        top: 0;
+        flex-direction: column;
+        p {
+          transition: all 0.3s ease-in 0.2s;
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .step-counter {
+        display: flex;
+        gap: $indent-20;
+        margin-bottom: $indent-20;
+        align-items: flex-end;
+        .number {
+          font-family: "Big Shoulders Display", cursive, sans-serif !important;
+          font-size: 100px;
+          font-weight: 700;
+          color: $orange;
+          letter-spacing: 0.4px;
+          line-height: 0.9;
+        }
+      }
+      &:hover {
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $xlg) {
+  .services-how-we-do-it {
+    height: 640px;
+    .steps-container {
+      .step {
+        padding: 12rem $indent-24 $indent-60;
+        &--inner {
+          p {
+            font-size: $font-size-14;
+            margin-bottom: 0;
+          }
+        }
+        .step-counter {
+          .number {
+            font-size: 80px;
+          }
+          img {
+            max-width: 80px;
+            height: 80px;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: $lg) {
+  .services-how-we-do-it {
+    height: auto;
+    padding: $indent-60 0;
+    .steps-container {
+      flex-direction: row;
+      max-width: 100%;
+      margin: 0 auto;
+      width: 100%;
+      height: auto;
+      .step {
+        padding: $indent-32 $indent-12;
+        &:last-child {
+          border-bottom: none;
+        }
+        &--inner {
+          position: static;
+          display: flex;
+          gap: $indent-60;
+          align-items: flex-start;
+          p {
+            font-size: $font-size-16;
+            margin-bottom: 0;
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .step-counter {
+          align-items: center;
+          margin-bottom: 0;
+          .number {
+            font-size: 100px;
+          }
+          img {
+            max-width: initial;
+            height: initial;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: $md) {
+  .services-how-we-do-it {
+    .section-title {
+      padding-left: $indent-12;
+    }
+    .steps-container {
+      max-width: 720px;
+      flex-direction: column;
+      padding-top: $indent-108;
+      .step {
+        flex-direction: row;
+        width: 100%;
+        &--inner {
+          flex-direction: row;
+          align-items: center;
+        }
+        .step-counter {
+          .number {
+            font-size: 80px;
+          }
+          img {
+            max-width: 80px;
+            height: 80px;
+          }
+        }
+        &::after {
+          width: 250%;
+          height: 1px;
+          right: -100%;
+          bottom: 0;
+          top: unset;
+        }
+        &::before {
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: $sm) {
+  .services-how-we-do-it {
+    .steps-container {
+      max-width: 576px;
+      padding-top: $indent-96;
+      .step {
+        .step-counter {
+          .number {
+            font-size: 80px;
+          }
+          img {
+            max-width: 80px;
+            height: 80px;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: $axsm) {
+  .services-how-we-do-it {
+    .steps-container {
+      max-width: 100%;
+      padding-top: $indent-96;
+      .step {
+        &--inner {
+          text-align: center;
+          gap: $indent-20;
+          flex-direction: column;
+        }
+        .step-counter {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: $xxs) {
+  .services-how-we-do-it {
+    .steps-container {
+      padding-top: $indent-120;
+    }
+  }
+}

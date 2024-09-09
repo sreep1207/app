@@ -1,0 +1,70 @@
+uuid: 7ab3b218-863d-49ab-9674-67c9e2665f4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.what_client.field_client_description
+    - field.field.paragraph.what_client.field_client_designation
+    - field.field.paragraph.what_client.field_client_image
+    - field.field.paragraph.what_client.field_client_name
+    - field.field.paragraph.what_client.field_client_title
+    - field.field.paragraph.what_client.field_client_year
+    - paragraphs.paragraphs_type.what_client
+  module:
+    - media_library
+    - text
+id: paragraph.what_client.default
+targetEntityType: paragraph
+bundle: what_client
+mode: default
+content:
+  field_client_description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_client_designation:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_client_image:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_client_name:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_client_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_client_year:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

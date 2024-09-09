@@ -1,0 +1,7 @@
+ir_general.example:
+  path: '/test-path'
+  defaults:
+    _title: 'IR General Controller'
+    _controller: '\Drupal\ir_general\Controller\IrGeneralController'
+  requirements:
+    _permission: 'access content'

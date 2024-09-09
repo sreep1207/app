@@ -1,0 +1,46 @@
+uuid: 657b1f3d-de54-4396-8674-54573eb63069
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_portfolios
+    - paragraphs.paragraphs_type.portfolio_section
+    - paragraphs.paragraphs_type.portfolios
+  module:
+    - entity_reference_revisions
+id: paragraph.portfolio_section.field_portfolios
+field_name: field_portfolios
+entity_type: paragraph
+bundle: portfolio_section
+label: Portfolios
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      portfolios: portfolios
+    negate: 0
+    target_bundles_drag_drop:
+      banner:
+        weight: 7
+        enabled: false
+      cta:
+        weight: 8
+        enabled: false
+      dynamic_content_section:
+        weight: 9
+        enabled: false
+      html_section:
+        weight: 10
+        enabled: false
+      portfolio_section:
+        weight: 12
+        enabled: false
+      portfolios:
+        weight: 11
+        enabled: true
+field_type: entity_reference_revisions

@@ -1,0 +1,10 @@
+uuid: bbd02dea-27c9-43f7-b6d5-f93d63c8cfaa
+langcode: en
+status: true
+dependencies: {  }
+id: ratings
+label: Ratings
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

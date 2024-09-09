@@ -1,0 +1,96 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+ #}
+{% set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ] %}
+{% block paragraph %}
+  <div {{ attributes.addClass(classes) }}>
+    {% block content %}
+      <div class="faq-accordion section-spacer">
+          <h2 class="h4--heading-bsd mb-2 text--blue">
+            {{ 'FAQ'|t }}
+          </h2>
+          <h3 class="h2--heading mb-4 pb-2">
+            {{ content.field_faq_content['#title'] }}
+          </h3>
+          <div class="accordion accordion-flush" id="faqAccordion">
+            {% for key, node in content.field_faq_content %}
+              {% if key matches '/^\\d+$/' %}
+                {% if key == 0 %}
+                  {% set options = {show: 'show', expent: 'true', collaps: ''} %}
+                {% else %}
+                  {% set options = {show: '', expent: 'false', collaps: 'collapsed'} %}
+                {% endif %}
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="heading{{ key }}">
+                      <button class="accordion-button {{ options.collaps }}" type="button"
+                          data-bs-toggle="collapse" data-bs-target="#collapse{{ key }}"
+                          aria-expanded="{{ options.expend }}" aria-controls="collapse{{ key }}">
+                          {{ node['#node'].title.value|raw }}
+                      </button>
+                  </h2>
+                  <div class="accordion-collapse collapse {{ options.show }}" id="collapse{{ key }}"
+                      aria-labelledby="heading{{ key }}" data-bs-parent="#faqAccordion">
+                      <div class="accordion-body">
+                        {{ node['#node'].body.value|raw|striptags }}
+                      </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+      </div>
+    {% endblock %}
+  </div>
+  <div class="faq-query-wrapper section-spacer">
+    <div class="text-center">
+      <p>{{ "Didn’t find what you were looking for here?"|t }}</p>
+      <div class="d-flex gap-4 justify-content-center">
+        <a class="button-primary" href="/faqs">
+          <span>{{ "View all FAQS"|t }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock paragraph %}

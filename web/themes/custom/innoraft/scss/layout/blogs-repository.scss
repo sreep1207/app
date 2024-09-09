@@ -1,0 +1,70 @@
+@use "../import" as *;
+#block-views-block-latest-blogs-three-latest-blogs-three {
+  padding: $indent-80 0;
+  h2 {
+    @extend %h4--heading-bsd;
+
+    color: $primary-blue;
+  }
+  @include blogs-repo;
+}
+#block-views-block-blogs-repository-blogs-repository-block {
+  h2 {
+    @extend %h4--heading-bsd;
+
+    color: $primary-blue;
+    margin-bottom: 0;
+  }
+  .view-filters {
+    padding: $indent-28 0;
+    form {
+      div {
+        justify-content: flex-start;
+        align-items: stretch;
+        position: relative;
+        .js-form-item {
+          width: 15%;
+          border-bottom: 1px solid $mid-grey;
+          margin-right: 20px;
+          margin-bottom: 16px !important;
+          select {
+            border: none;
+            background-size: 20px 20px !important;
+            margin-top: 0;
+            color: $mid-grey;
+          }
+          &:nth-child(1) {
+            width: 25%;
+            &::before {
+              content: url(../../images/icons/search.svg);
+              position: absolute;
+              right: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+              pointer-events: none;
+            }
+          }
+          &:nth-child(4) {
+            position: absolute;
+            right: 0;
+            padding-right: 0;
+            height: 44px;
+            label {
+              display: none;
+            }
+          }
+          @media (max-width: $xm) {
+            width: 40%;
+            &:nth-child(1) {
+              width: 40%;
+            }
+            &:nth-child(4) {
+              bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  @include blogs-repo;
+}

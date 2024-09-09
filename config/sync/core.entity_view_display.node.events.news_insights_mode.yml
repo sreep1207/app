@@ -1,0 +1,59 @@
+uuid: b2d5850a-ca28-4891-a3e0-387ec1850941
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.news_insights_mode
+    - field.field.node.events.field_events_body
+    - field.field.node.events.field_events_date
+    - field.field.node.events.field_events_image
+    - field.field.node.events.field_read_more
+    - image.style.news_event_image
+    - node.type.events
+  module:
+    - datetime
+    - link
+    - media
+    - user
+id: node.events.news_insights_mode
+targetEntityType: node
+bundle: events
+mode: news_insights_mode
+content:
+  field_events_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: trimmed_short_date
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_events_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: news_event_image
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_read_more:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  field_events_body: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

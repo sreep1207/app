@@ -1,0 +1,19 @@
+uuid: a3ded563-ace2-4986-ac39-8a5e9bf4e728
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_designation
+    - media.type.testimonial
+id: media.testimonial.field_designation
+field_name: field_designation
+entity_type: media
+bundle: testimonial
+label: Designation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

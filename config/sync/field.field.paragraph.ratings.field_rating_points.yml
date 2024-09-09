@@ -1,0 +1,19 @@
+uuid: 4b2f2013-6484-4828-a492-a1718295cb30
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_rating_points
+    - paragraphs.paragraphs_type.ratings
+id: paragraph.ratings.field_rating_points
+field_name: field_rating_points
+entity_type: paragraph
+bundle: ratings
+label: 'Rating Points'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

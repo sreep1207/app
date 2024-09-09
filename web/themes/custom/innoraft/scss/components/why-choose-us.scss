@@ -1,0 +1,67 @@
+@use "../import" as *;
+.why-choose-us {
+  padding: $indent-80 0;
+  .why-choose-us-slider {
+    .slick-dots {
+      max-width: 768px;
+    }
+    .why-choose-us-slide {
+      margin-top: $indent-80;
+      background-color: $light-bg-blue;
+      background-position: center;
+      background-size: cover;
+      margin-right: $indent-32;
+      padding: $indent-32;
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
+      min-height: 420px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: $midnight-blue;
+        background:
+          linear-gradient(
+            180deg,
+            rgba($midnight-blue, 0.2) 0%,
+            rgba($midnight-blue, 1) 100%
+          );
+        z-index: 0;
+      }
+      * {
+        color: $white;
+        position: relative;
+        z-index: 1;
+      }
+      p {
+        @extend %p--sm;
+
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $xlg) {
+  .why-choose-us {
+    .why-choose-us-slider {
+      .why-choose-us-slide {
+        min-height: 360px;
+      }
+    }
+  }
+}
+@media only screen and (max-width: $md) {
+  .why-choose-us {
+    .why-choose-us-slider {
+      .why-choose-us-slide {
+        min-height: 320px;
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+uuid: 2b017aaf-2a3e-480b-aa22-35d245811502
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_testimonial_header
+field_name: field_testimonial_header
+entity_type: paragraph
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

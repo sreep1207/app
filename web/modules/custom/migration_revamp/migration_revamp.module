@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Implements uninstallation logic for the  Migration revamp module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Perform tasks to uninstall the module.
+ */
+function migration_revamp_uninstall() {
+  $config_names = [
+    'migrate_plus.migration_group.terms_group',
+    'migrate_plus.migration.taxonomy_terms_migration',
+    'migrate_plus.migration_group.users_migration_group',
+    'migrate_plus.migration.users_migration',
+    'migrate_plus.migration.blogs_migration',
+    'migrate_plus.migration_group.blogs_migrations',
+    'migrate_plus.migration.custom_webform_migration',
+    'migrate_plus.migration_group.custom_migrations',
+    'migrate_plus.migrate_group.media_migration_group',
+    'migrate_plus.migration.media_migration',
+  ];
+
+  foreach ($config_names as $config_name) {
+    \Drupal::configFactory()->getEditable($config_name)->delete();
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function migration_revamp_entity_presave(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == "node" && $entity->getType() == "blog") {
+    if (!empty($entity->body->value) && $entity->body->format == NULL) {
+      $entity->body->format = "full_html";
+    }
+    if ($entity instanceof \Drupal\node\NodeInterface) {
+      // Checking if the node's author is anonymous user.
+      if ($entity->getOwnerId() == 0) {
+        // Setting the UID to 1 that is "Innoraft".
+        $entity->setOwnerId(1);
+      }
+    }
+  }
+}

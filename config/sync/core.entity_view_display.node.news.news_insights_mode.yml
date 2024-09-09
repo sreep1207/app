@@ -1,0 +1,59 @@
+uuid: 808c7f8e-353d-4279-8c54-6d1ed9df6ac4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.news_insights_mode
+    - field.field.node.news.field_news_body
+    - field.field.node.news.field_news_image
+    - field.field.node.news.field_news_published_date
+    - field.field.node.news.field_read_more
+    - image.style.news_event_image
+    - node.type.news
+  module:
+    - datetime
+    - link
+    - media
+    - user
+id: node.news.news_insights_mode
+targetEntityType: node
+bundle: news
+mode: news_insights_mode
+content:
+  field_news_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: content
+      image_style: news_event_image
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_news_published_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: trimmed_short_date
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_read_more:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  field_news_body: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

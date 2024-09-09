@@ -1,0 +1,22 @@
+uuid: a61cb981-fe27-43de-a335-5eec21000840
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - innoraft
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: innoraft_content
+theme: innoraft
+region: content
+weight: -8
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

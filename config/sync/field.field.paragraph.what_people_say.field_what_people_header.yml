@@ -1,0 +1,22 @@
+uuid: 3e71bb80-69af-4d6f-8a33-3e2931a6fb0a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_what_people_header
+    - paragraphs.paragraphs_type.what_people_say
+  module:
+    - text
+id: paragraph.what_people_say.field_what_people_header
+field_name: field_what_people_header
+entity_type: paragraph
+bundle: what_people_say
+label: 'What People Header'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

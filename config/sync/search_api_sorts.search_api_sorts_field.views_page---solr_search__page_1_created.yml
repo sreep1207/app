@@ -1,0 +1,11 @@
+uuid: eb24e97e-cc1c-4d66-b8e4-b0a21aff25c1
+langcode: en
+status: true
+dependencies: {  }
+id: views_page---solr_search__page_1_created
+label: Date
+weight: 0
+display_id: views_page---solr_search__page_1
+field_identifier: created
+default_sort: false
+default_order: asc

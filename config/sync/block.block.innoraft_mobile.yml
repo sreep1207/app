@@ -1,0 +1,25 @@
+uuid: 6b87ab90-c793-4a8c-b836-488c977a460f
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.mobile
+  module:
+    - system
+  theme:
+    - innoraft
+id: innoraft_mobile
+theme: innoraft
+region: footer_second
+weight: 0
+provider: null
+plugin: 'system_menu_block:mobile'
+settings:
+  id: 'system_menu_block:mobile'
+  label: Mobile
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

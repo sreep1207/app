@@ -1,0 +1,333 @@
+@use "../import" as *;
+.paragraph--type--apply-job {
+  padding-bottom: $indent-80;
+  .apply-job-wrapper {
+    position: relative;
+  }
+  .field--name-field-job-background-image {
+    .contextual-region {
+      position: unset;
+    }
+  }
+  .field--name-field-media-image {
+    img {
+      position: absolute;
+      width: 100vw;
+      margin-left: calc((100% - 100vw) / 2);
+      object-position: center;
+      top: 50%;
+      transform: translateY(-50%);
+      min-height: 85%;
+    }
+  }
+  .apply-job {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    background-color: $white;
+    padding: $indent-40;
+    box-shadow: $box-shadow-60;
+    h2 {
+      padding-bottom: $indent-36;
+    }
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .js-form-item-select-profile,
+      .js-form-item-enter-name,
+      .js-form-item-years-of-experience,
+      .js-form-item-current-company,
+      .js-form-item-current-ctc,
+      .js-form-item-enter-email-address {
+        width: 48%;
+      }
+      .js-form-item-profile-in-brief {
+        width: 100%;
+      }
+      .js-form-item {
+        position: relative;
+        margin-bottom: 46px !important;
+        label {
+          position: absolute;
+          bottom: 9px;
+          transition: transform 0.3s, color 0.3s;
+          transform: translateY(0%);
+          font-size: $font-size-14;
+          color: $mid-grey;
+          z-index: 1;
+        }
+        &:focus-within label:not(.form-check-label, .js-form-item-upload-cv label) {
+          transform: translateY(-150%);
+          font-size: $font-size-12;
+        }
+        input[type=text],
+        input[type=email],
+        input[type=number],
+        textarea {
+          border-bottom: 1px solid $light-grey !important;
+          color: $mid-grey;
+          font-size: $font-size-16 !important;
+          &:focus {
+            outline: none;
+            border-bottom: 2px solid darken($light-grey, 20%);
+          }
+        }
+        textarea {
+          resize: none;
+          background-color: $white;
+        }
+      }
+      .js-form-type-checkbox label,
+      .js-form-item-upload-cv label {
+        position: relative;
+        bottom: 0;
+        transition: none;
+        transform: none;
+        font-weight: 500;
+      }
+      .captcha-type-challenge--image {
+        width: 100%;
+      }
+      .js-form-wrapper {
+        .js-form-item-upload-cv {
+          label {
+            position: relative;
+          }
+        }
+      }
+      .file-upload-js-error {
+        padding: $indent-10 $indent-20;
+        border: 1px solid $light-grey;
+        border-radius: 5px;
+        color: $red;
+        font-size: $font-size-12;
+        font-weight: 700;
+        @media screen and (max-width: $xs) {
+          font-size: $font-size-12;
+        }
+      }
+      .js-form-item-captcha-response {
+        label {
+          position: relative;
+          bottom: 0;
+          transition: none;
+          transform: none;
+        }
+        &:focus-within label {
+          transform: none !important;
+          font-size: $font-size-14 !important;
+        }
+      }
+      .form-item-select-profile,
+      .form-item-years-of-experience {
+        padding-top: 10px;
+        position: relative;
+        label {
+          display: none;
+        }
+        select {
+          border: none;
+          font-size: $font-size-14;
+          border-bottom: 1px solid $light-grey;
+          border-radius: unset;
+          color: $mid-grey;
+          padding-left: 0;
+        }
+        &::before {
+          position: absolute;
+          content: "*";
+          font-size: $font-size-24;
+          color: $red;
+          left: 86px;
+        }
+        &.option-selected::before {
+          display: none;
+        }
+      }
+      .form-item-years-of-experience {
+        &::before {
+          position: absolute;
+          content: "*";
+          font-size: $font-size-24;
+          color: $red;
+          left: 130px;
+        }
+      }
+      .js-webform-type-checkboxes {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        legend {
+          width: 18%;
+          @media (max-width: $lg) {
+            width: 30%;
+          }
+          @media (max-width: $sm) {
+            width: 50%;
+          }
+          span {
+            font-size: 14px;
+          }
+        }
+        .js-webform-checkboxes {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 60px;
+          .js-form-type-checkbox {
+            margin-bottom: 0 !important;
+            input {
+              appearance: checkbox;
+              clip: auto;
+              width: 16px;
+              height: 16px;
+              margin-left: -24px;
+            }
+            label {
+              white-space: nowrap;
+            }
+          }
+        }
+        .alert-danger {
+          left: 0;
+        }
+      }
+      .js-form-type-managed-file {
+        width: 360px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px !important;
+        padding-top: $indent-12;
+        input[type="file"] {
+          width: 128px;
+          height: 46px;
+          position: absolute;
+          top: 0;
+          left: 105px;
+          opacity: 0;
+          cursor: pointer;
+          z-index: 1;
+        }
+        &::before {
+          content: 'Choose file';
+          display: inline-block;
+          background-color: $primary-blue;
+          color: $white;
+          padding: $indent-10 $indent-20;
+          cursor: pointer;
+          position: absolute;
+          top: 0;
+          left: 105px;
+          font-weight: 500;
+        }
+        button {
+          padding: $indent-4 $indent-8;
+        }
+        .js-form-managed-file {
+          padding-top: $indent-20;
+          .webform-managed-file-placeholder,
+          .webform-managed-file-preview {
+            font-size: $font-size-14;
+            ul {
+              padding-left: $indent-24;
+              li {
+                list-style: disc;
+              }
+            }
+          }
+        }
+        .invalid-feedback {
+          position: relative;
+          max-height: none;
+          overflow-y: visible;
+        }
+      }
+      .webform-element-help-container--title {
+        label {
+          position: relative;
+        }
+      }
+      .form-validator-error-message {
+        display: none;
+        flex: 0 0 100%;
+        margin-bottom: $indent-10 !important;
+        p {
+          color: $red;
+          font-size: $font-size-12;
+          font-weight: 700;
+        }
+      }
+    }
+    .webform-actions {
+      width: 100%;
+      .webform-button--submit {
+        color: $white;
+        margin-top: 14px;
+      }
+    }
+  }
+  @media (max-width: $md-1) {
+    .apply-job {
+      form {
+        .js-webform-type-checkboxes {
+          .js-webform-checkboxes {
+            gap: 5px;
+          }
+          .alert-danger {
+            bottom: -34px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: $asm) {
+    .apply-job {
+      padding: $indent-20;
+      form {
+        .js-form-item-select-profile,
+        .js-form-item-enter-name,
+        .js-form-item-years-of-experience,
+        .js-form-item-current-company,
+        .js-form-item-current-ctc,
+        .js-form-item-enter-email-address {
+          width: 100%;
+        }
+        .js-webform-type-checkboxes {
+          .js-webform-checkboxes {
+            gap: 15px;
+          }
+          .alert-danger {
+            bottom: -30px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: $xxs) {
+    .apply-job {
+      form {
+        .js-webform-type-checkboxes {
+          .alert-danger {
+            bottom: -50px;
+          }
+        }
+        .js-form-type-managed-file {
+          width: 194px;
+          padding-top: $indent-8;
+          input[type="file"] {
+            width: 79px;
+            height: 38px;
+          }
+          &::before {
+            padding: $indent-8 $indent-12;
+            font-size: $font-size-12;
+          }
+          button {
+            padding: $indent-4 - 3 $indent-8;
+          }
+        }
+      }
+    }
+  }
+}

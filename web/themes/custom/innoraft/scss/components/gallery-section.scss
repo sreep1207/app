@@ -1,0 +1,239 @@
+@use "../import" as *;
+.gallery-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 50px 0 0 0;
+  gap: 30px;
+  @media only screen and (max-width: 600px) {
+    padding: 0 $indent-10;
+  }
+  p {
+    text-align: center;
+    #loadMoreBtn {
+      @include button($type: primary);
+    }
+  }
+  .gallery-row {
+    display: none;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0;
+    column-gap: 30px;
+    @media only screen and (max-width: $xm) {
+      flex-direction: column;
+      row-gap: 30px;
+    }
+    .gallery-col {
+      width: calc(50% - 35px);
+      @media only screen and (max-width: $xm) {
+        width: 100%;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .gallery-col-2 {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: calc(50% - 35px);
+      gap: 30px;
+      @media only screen and (max-width: $xm) {
+        width: 100%;
+      }
+      @media only screen and (max-width: $sm) {
+        flex-direction: column;
+        row-gap: 30px;
+      }
+      .gallery-col-2-inner-1 {
+        width: calc(50% - 15px);
+        position: relative;
+        @media only screen and (max-width: $sm) {
+          width: 100%;
+        }
+        video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .gallery-col-2-inner-2 {
+        width: calc(50% - 15px);
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 30px;
+        @media only screen and (max-width: $xm) {
+          gap: 0;
+        }
+        @media only screen and (max-width: $sm) {
+          width: 100%;
+          row-gap: 30px;
+        }
+        .gallery-col-2-inner-2-img-1 {
+          background: $midnight-blue;
+          padding: $indent-30;
+          @media only screen and (max-width: $lg) {
+            padding: $indent-20;
+          }
+          @media only screen and (max-width: $xm) {
+            height: 45%;
+          }
+          h4 {
+            font-size: $font-size-25;
+            margin: 0;
+            color: $white;
+            font-weight: $font-weight-bold;
+            text-transform: uppercase;
+            line-height: 1.5;
+            width: 65%;
+            font-family: $font-family-bigshoulders !important;
+            @media only screen and (max-width: $lg) {
+              font-size: $font-size-20;
+            }
+            @media only screen and (max-width: $xm) {
+              font-size: $font-size-35;
+            }
+            @media only screen and (max-width: $md-1) {
+              font-size: $font-size-30;
+            }
+          }
+        }
+        .gallery-col-2-inner-2-img {
+          width: 100%;
+          position: relative;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+        .gallery-image {
+          height: 46%;
+        }
+      }
+    }
+  }
+  .gallery-row-2 {
+    padding: 0;
+    @media only screen and (max-width: $xm) {
+      align-items: center;
+    }
+    .gallery-col {
+      width: calc(25% - 35px);
+      @media only screen and (max-width: $xm) {
+        width: 100%;
+      }
+      img {
+        object-fit: cover;
+      }
+    }
+    .gallery-col-row {
+      width: calc(75% - 35px);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 30px;
+      @media only screen and (max-width: $xm) {
+        width: 100%;
+      }
+      @media only screen and (max-width: $sm) {
+        flex-direction: column;
+      }
+      .inner-img-1 {
+        width: 35%;
+        background: $ir-orange;
+        padding: $indent-30;
+        p {
+          margin: 0;
+          text-transform: uppercase;
+          font-size: $font-size-25;
+          color: $white;
+          font-weight: $font-weight-bold;
+          line-height: 1.5;
+          text-align: left;
+          width: 40%;
+          font-family: $font-family-bigshoulders !important;
+          @media only screen and (max-width: $sm) {
+            font-size: $font-size-30;
+          }
+        }
+      }
+      .inner-img-2 {
+        position: relative;
+        width: calc(65% - 30px);
+      }
+      .inner-img-3 {
+        position: relative;
+        width: calc(65% - 30px);
+      }
+      .inner-img-4 {
+        position: relative;
+        width: 35%;
+      }
+      .gallery-col-inner {
+        @media only screen and (max-width: $sm) {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .image-para {
+    position: absolute;
+    color: $white;
+    left: 30px;
+    bottom: 10px;
+  }
+}
+#inno-video {
+  padding-right: 0 !important;
+  height: 100%;
+  .modal-dialog {
+    max-width: 100%;
+    margin: 0 20px;
+    min-height: 100%;
+    .modal-content {
+      .close {
+        opacity: 1;
+        color: $white;
+        text-shadow: none;
+        font-weight: $font-weight-normal;
+        font-size: $font-size-25;
+        outline: 0;
+        background-color: transparent;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        border: 1px solid $white;
+        border-radius: $border-radius-half;
+        i {
+          padding-right: $indent-4;
+          &::before {
+            content: "\f00d";
+            font-family: "Font Awesome 6 Free", sans-serif !important;
+            font-weight: $font-weight-bold;
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}

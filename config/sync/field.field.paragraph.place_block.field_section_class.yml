@@ -1,0 +1,21 @@
+uuid: 53f61eb8-3e5f-4a22-b533-29064c184832
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_class
+    - paragraphs.paragraphs_type.place_block
+id: paragraph.place_block.field_section_class
+field_name: field_section_class
+entity_type: paragraph
+bundle: place_block
+label: 'Section Class'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: related-services
+default_value_callback: ''
+settings: {  }
+field_type: string

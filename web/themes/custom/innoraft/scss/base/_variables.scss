@@ -1,0 +1,88 @@
+/* colors */
+$white: #fff;
+$black: #000;
+$lightest-grey: #f2f2f2;
+$lighter-grey: #e5e5e5;
+$light-grey: #d3d3d3;
+$grey: #a4a4a4;
+$mid-grey: #6a6a6a;
+$dark-grey: #4e4e4e;
+$light-border-blue: #e1e6f8;
+$light-bg-blue: #e7f0ff;
+$lighter-bg-blue: #eff5ff;
+$primary-blue: #1b3ecd;
+$midnight-blue: #131c32;
+$pale-orange: #ffa689;
+$orange: #ff774c;
+$ir-orange: #ed411b;
+$deep-blue: #081d52;
+$black-0: rgba($black, 0);
+$black-80: rgba($black, 0.8);
+$deep-blue-50: rgba($deep-blue, 0.5);
+$red: #f00;
+
+/* Padding Indents */
+$indent-120: 120px;
+$indent-108: 108px;
+$indent-96: 96px;
+$indent-88: 88px;
+$indent-80: 80px;
+$indent-70: 70px;
+$indent-64: 64px;
+$indent-60: 60px;
+$indent-50: 50px;
+$indent-48: 48px;
+$indent-40: 40px;
+$indent-36: 36px;
+$indent-32: 32px;
+$indent-31: 31px;
+$indent-30: 30px;
+$indent-28: 28px;
+$indent-25: 25px;
+$indent-24: 24px;
+$indent-20: 20px;
+$indent-17: 17px;
+$indent-16: 16px;
+$indent-12: 12px;
+$indent-10: 10px;
+$indent-8: 8px;
+$indent-4: 4px;
+
+/* Responsive screen sizes */
+$xlg: 1400px;
+$lg: 1200px;
+$header-menu: 1064px;
+$xm: 1024px;
+$md: 992px;
+$md-1: 991px;
+$sm: 768px;
+$asm: 640px;
+$axsm: 576px;
+$xs: 480px;
+$xxs: 420px;
+
+/* table spacers */
+$table-cell-padding-x: 0.75rem !default;
+$table-cell-padding-y: 0.75rem !default;
+
+/* border radius */
+$border-radius-4: 4px;
+$border-radius-8: 8px;
+$border-radius-12: 12px;
+$border-radius-16: 16px;
+$border-radius-20: 20px;
+$border-radius-32: 32px;
+$border-radius-half: 50%;
+$border-radius-full: 100%;
+
+/* box shadows */
+$box-shadow-60: 0 0 60px 0 rgba($black, 0.1);
+$box-shadow-80: 0 0 80px 0 rgba($black, 0.15);
+
+/* transitions */
+$transition200ms: all 0.2s linear;
+$transition300ms: all 0.3s linear;
+$transition500ms: all 0.5s linear;
+
+/* container bleed */
+$bleed: calc((100% - 100vw) / 2);

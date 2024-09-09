@@ -1,0 +1,204 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the IR Revamp subtheme.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\paragraphs\ParagraphInterface;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_form_system_theme_settings_alter() for settings form.
+ *
+ * Replace Barrio setting options with subtheme ones.
+ */
+function innoraft_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+  $form['components']['navbar']['bootstrap_barrio_navbar_top_background']['#options'] = [
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  ];
+  $form['components']['navbar']['bootstrap_barrio_navbar_background']['#options'] = [
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  ];
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function innoraft_preprocess_node(&$variables) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  $current_path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+
+  if ($current_path_alias === "/insights") {
+    $variables['#attached']['library'][] = 'innoraft/blogs-and-articles';
+  }
+  elseif ($current_path_alias === "/blogs") {
+    $variables['#attached']['library'][] = 'innoraft/blogs-repository';
+  }
+  elseif ($current_path_alias === "/privacy-policy") {
+    $variables['#attached']['library'][] = 'innoraft/privacy-policy';
+  }
+}
+
+/**
+ * Implements hook_preprocess_node___CONTENT_TYPE().
+ */
+function innoraft_preprocess_node__blog(&$variables) {
+  if (isset($variables['elements']['#node'])) {
+    // Loading the node object.
+    $node = $variables['elements']['#node'];
+    // Loading the user object of the node author.
+    $user = $node->getOwner();
+
+    // Getting the first name and last name fields.
+    $first_name_field = $user->get('field_first_name');
+    $last_name_field = $user->get('field_last_name');
+
+    $variables['blog_author_name'] = '';
+    // Checking if the fields have values.
+    if (!$first_name_field->isEmpty() && !$last_name_field->isEmpty()) {
+      // Getting the values from the fields.
+      $first_name = $first_name_field->getValue()[0]['value'];
+      $last_name = $last_name_field->getValue()[0]['value'];
+
+      // Combining the first name and last name.
+      $author_name = $first_name . ' ' . $last_name;
+
+      // Setting the author name directly.
+      $variables['blog_author_name'] = $author_name;
+    }
+    // Removing the "Authored by" information.
+    $variables['display_submitted'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function innoraft_preprocess_paragraph__html_section(&$variables) {
+  $paragraph = $variables['paragraph'];
+  if ($paragraph instanceof ParagraphInterface && $paragraph->hasField('field_section_class')) {
+    // Check section class name, use as library to attach to paragraph.
+    $section_class = $paragraph->field_section_class->value;
+    if (!empty($section_class) && \Drupal::service('library.discovery')->getLibraryByName('innoraft', $section_class)) {
+      $variables['#attached']['library'][] = "innoraft/$section_class";
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function innoraft_preprocess_paragraph__place_block(&$variables) {
+  $paragraph = $variables['paragraph'];
+  if ($paragraph instanceof ParagraphInterface && $paragraph->hasField('field_section_class')) {
+    // Check section class name, use as library to attach to paragraph.
+    $section_class = $paragraph->field_section_class->value;
+    if (!empty($section_class) && \Drupal::service('library.discovery')->getLibraryByName('innoraft', $section_class)) {
+      $variables['#attached']['library'][] = "innoraft/$section_class";
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function innoraft_preprocess_paragraph__frequently_asked_questions(&$variables) {
+  $variables['#attached']['library'][] = "innoraft/faq-accordion";
+}
+
+/**
+ * Implements hook_theme_suggestion_alter().
+ */
+function innoraft_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if ($hook == 'form' & !empty($variables['element']['#id'])) {
+    $suggestions[] = 'form__' . str_replace('-', '_', $variables['element']['#id']);
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function innoraft_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'user_login_form') {
+    $form['name']['#title'] = t('Username');
+    $form['name']['#attributes']['placeholder'] = t('Enter your Username');
+    $form['pass']['#attributes']['placeholder'] = t('Enter your Password');
+    $form['forgot_password'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'a',
+      '#value' => t('Forgot Password?'),
+      '#attributes' => [
+        'href' => '/user/password',
+        'class' => ['forgot-link'],
+      ],
+    ];
+    $form['actions']['submit']['#attributes']['class'][] = 'button-primary';
+  }
+  if ($form_id == 'user_pass') {
+    $form['name']['#title'] = t('Enter your registered Email');
+    $form['name']['#attributes']['placeholder'] = t('yourusername@innoraft.com');
+    $form['actions']['submit']['#value'] = t('Reset&nbsp;password');
+    $form['actions']['submit']['#attributes']['class'][] = 'button-primary';
+  }
+  if ($form_id == 'user_pass_reset') {
+    $form['actions']['submit']['#attributes']['class'][] = 'button-primary';
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph__latest_news_and_events().
+ */
+function innoraft_preprocess_paragraph__latest_news_and_events(&$variables) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  $current_path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+  if ($current_path_alias === "/home") {
+    $variables['attributes']['class'][] = 'front-page-div';
+  }
+  elseif ($current_path_alias === "/careers") {
+    $variables['attributes']['class'][] = 'career-spotlight';
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function innoraft_views_pre_render(ViewExecutable $view) {
+  $view->element['#attached']['library'][] = 'innoraft/views-pagination';
+  if ($view->id() == 'faq_page') {
+    $view->element['#attached']['library'][] = 'innoraft/faq';
+  }
+  if ($view->id() == 'taxonomy_term') {
+    $view->element['#attached']['library'][] = 'innoraft/tags';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function innoraft_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  $block_id = $variables['elements']['#id'];
+  $block_list = [
+    "innoraft_web",
+    "innoraft_mobile",
+    "innoraft_ecommerce",
+    "innoraft_digitalmarketing",
+    "innoraft_main_menu",
+    "innoraft_contactus",
+    "innoraft_footer",
+  ];
+  if (in_array($block_id, $block_list)) {
+    $suggestions[] = 'block__menu_footer_headings';
+  }
+}

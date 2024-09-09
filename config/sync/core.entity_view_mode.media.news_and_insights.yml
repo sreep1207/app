@@ -1,0 +1,11 @@
+uuid: 66563586-7d74-4373-9352-fd57a66609eb
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.news_and_insights
+label: 'News and Insights'
+description: ''
+targetEntityType: media
+cache: true

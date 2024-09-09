@@ -1,0 +1,22 @@
+uuid: bf6774ce-c83f-4de0-ba21-6557c3a77ed8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_html_content
+    - paragraphs.paragraphs_type.latest_news_and_events
+  module:
+    - text
+id: paragraph.latest_news_and_events.field_html_content
+field_name: field_html_content
+entity_type: paragraph
+bundle: latest_news_and_events
+label: 'HTML Content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

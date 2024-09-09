@@ -1,0 +1,24 @@
+uuid: 2c10d65b-98d2-4d34-892f-dd7a5246e07c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.frequently_asked_questions.body
+    - node.type.frequently_asked_questions
+  module:
+    - text
+    - user
+id: node.frequently_asked_questions.default
+targetEntityType: node
+bundle: frequently_asked_questions
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  links: true

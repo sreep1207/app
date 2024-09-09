@@ -1,0 +1,154 @@
+@use "../import" as *;
+.page-view-faq-page {
+  background: $lightest-grey;
+}
+.view-faq-page {
+  .view-header {
+    display: none;
+  }
+  #views-exposed-form-faq-page-page-1 {
+    margin-top: $indent-32;
+    margin-bottom: $indent-20;
+    > div {
+      gap: $indent-16;
+      .js-form-item-search {
+        flex: 0 0 70%;
+        margin-bottom: 0 !important;
+        position: relative;
+        #edit-search {
+          border: 1px solid $dark-grey;
+          width: 100%;
+          padding: $indent-28;
+          outline: none;
+        }
+        &::after {
+          content: "";
+          background-image: url("../../images/icons/searchicon.svg");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          height: 16px;
+          width: 16px;
+          position: absolute;
+          right: $indent-32;
+          top: 50%;
+          transform: translateY(-50%);
+          @media screen and (max-width: $lg) {
+            right: 30px;
+          }
+        }
+        .clear-button::after {
+          content: "";
+          background-image: url("../../images/icons/close.svg");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          height: 17px;
+          width: 13px;
+          position: absolute;
+          cursor: pointer;
+          right: $indent-10;
+          top: 50%;
+          transform: translateY(-50%);
+          @media screen and (max-width: $lg) {
+            right: 10px;
+          }
+        }
+      }
+      #edit-actions {
+        margin-bottom: 0 !important;
+        #edit-submit-faq-page {
+          @include button(primary);
+
+          color: $white;
+        }
+      }
+    }
+  }
+  .page-item {
+    .page-link {
+      background-color: $lightest-grey;
+    }
+    &:hover {
+      .page-link {
+        background-color: #e9ecef;
+      }
+    }
+  }
+  .page-item.active {
+    .page-link {
+      background-color: $primary-blue;
+    }
+  }
+}
+.banner-wrapper {
+  @include banner-wrapper;
+}
+.faq-title {
+  margin: $indent-40 0;
+  h4 {
+    @extend %h4--heading;
+
+    font-family: $font-family-bigshoulders !important;
+    color: $primary-blue;
+    letter-spacing: 4px;
+    padding-bottom: 5px;
+  }
+  h2 {
+    @extend %h2--heading;
+
+    font-family: $font-family-base;
+    color: $dark-grey;
+  }
+}
+.accordion {
+  margin-bottom: $indent-40;
+}
+.accordion-button {
+  @extend %h4--heading;
+
+  background-color: $lightest-grey;
+  padding: $indent-24 $indent-20;
+  color: $dark-grey;
+  border-bottom: 1px solid $light-grey;
+  border-radius: 0 !important;
+  transition: border 0.3s linear;
+  &:focus {
+    border-bottom: 1px solid $light-grey;
+    outline-color: transparent;
+    box-shadow: none;
+  }
+  &::before {
+    content: "\eab8";
+    font-family: $font-family-lineicons;
+    margin-right: $indent-32;
+    font-size: $indent-20;
+    color: $primary-blue;
+  }
+  &:not(.collapsed) {
+    background-color: $white;
+    border-bottom: 0;
+    color: $primary-blue;
+    box-shadow: none;
+    &::before {
+      content: "\eabc";
+    }
+  }
+  &::after {
+    display: none;
+  }
+}
+.accordion-body {
+  background: $white;
+  position: relative;
+  padding: 0 $indent-32 $indent-32 $indent-64;
+  &::before {
+    content: '';
+    width: 2px;
+    height: calc(100% - $indent-32);
+    position: absolute;
+    top: 0;
+    left: $indent-32 - 2;
+    background: $primary-blue;
+  }
+}

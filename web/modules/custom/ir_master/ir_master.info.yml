@@ -1,0 +1,6 @@
+name: General functionality
+type: module
+description: Innoraft general functionality.
+core_version_requirement: ^10
+package: Innoraft
+configure: ir_master.settings

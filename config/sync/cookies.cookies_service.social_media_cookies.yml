@@ -1,0 +1,19 @@
+uuid: 7f368a1b-ff3d-4812-b215-09e2e78b46e0
+langcode: en
+status: true
+dependencies: {  }
+id: social_media_cookies
+label: 'Social Media Cookies'
+group: social
+info:
+  value: '<p>These cookies are set by a range of social media services that we have added to the site to enable you to share our content with your friends and networks. They are capable of tracking your browser across other sites and building up a profile of your interests. This may impact the content and messages you see on other websites you visit. If you do not allow these cookies you may not be able to use or see these sharing tools.</p>'
+  format: basic_html
+consentRequired: true
+purpose: 'Social Media Cookies'
+placeholderMainText: 'This content is blocked because social media cookies have not been accepted.'
+placeholderAcceptText: 'Only accept social media cookies'
+processor: ''
+processorContact: ''
+processorUrl: ''
+processorPrivacyPolicyUrl: ''
+processorCookiePolicyUrl: ''

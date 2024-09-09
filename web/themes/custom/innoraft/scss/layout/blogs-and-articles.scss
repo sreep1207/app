@@ -1,0 +1,378 @@
+@use "../import" as *;
+#page-wrapper {
+  background: $lightest-grey;
+}
+#content {
+  padding: 0;
+}
+#block-views-block-latest-blogs-latest-blogs-block {
+  padding-top: $indent-80;
+  h2 {
+    @extend %h4--heading-bsd;
+
+    color: $primary-blue;
+  }
+  .view-header {
+    @extend %h2--heading;
+
+    color: $dark-grey;
+  }
+  .view-filters {
+    padding: $indent-60 0;
+    form {
+      div {
+        justify-content: flex-start;
+        align-items: stretch;
+        position: relative;
+        .js-form-item {
+          width: 15%;
+          border-bottom: 1px solid $mid-grey;
+          margin-right: 20px;
+          margin-bottom: 16px !important;
+          select {
+            color: $mid-grey;
+            margin-top: 0;
+            border: none;
+            background: $lightest-grey;
+            background-size: 20px 20px !important;
+          }
+          &::before {
+            content: url(../../images/icons/dropdown.svg);
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+          }
+          &:nth-child(1) {
+            width: 25%;
+            &::before {
+              content: url(../../images/icons/search.svg);
+              position: absolute;
+              right: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+              pointer-events: none;
+            }
+          }
+          &:nth-child(4) {
+            position: absolute;
+            right: 0;
+            padding-right: 0;
+            height: 44px;
+            label {
+              display: none;
+            }
+          }
+          @media (max-width: $xm) {
+            width: 40%;
+            &:nth-child(1) {
+              width: 40%;
+            }
+            &:nth-child(4) {
+              bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  .view-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 32px;
+    padding-bottom: $indent-40;
+    .views-row {
+      width: calc(25% - 30px);
+      padding: 0;
+      background-color: $white;
+      position: relative;
+      .views-field-nothing {
+        .field-content {
+          .blogs-img {
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+          .blogs-content {
+            padding: $indent-20;
+            background-color: $white;
+            .blog-time {
+              padding-bottom: $indent-12;
+              span {
+                font-weight: $font-weight-600;
+                color: $mid-grey;
+                font-size: $font-size-14;
+                font-family: $font-family-bigshoulders !important;
+                text-transform: uppercase;
+                .datetime {
+                  color: $mid-grey;
+                  font-family: $font-family-bigshoulders !important;
+                  text-transform: uppercase;
+                }
+                &:nth-child(1) {
+                  padding-right: $indent-10;
+                  border-right: 1px solid $mid-grey;
+                }
+                &:nth-child(2) {
+                  padding-left: $indent-20;
+                }
+              }
+            }
+            .blog-title {
+              padding-bottom: $indent-12;
+              h4 {
+                a {
+                  text-decoration: none !important;
+                  color: $dark-grey !important;
+                  font-size: $font-size-18;
+                }
+              }
+            }
+            .blog-author {
+              padding-bottom: $indent-60;
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              img {
+                width: 32px;
+                height: auto;
+                border-radius: 50%;
+              }
+              h5 {
+                a {
+                  text-decoration: none !important;
+                  color: $dark-grey !important;
+                  font-size: $font-size-14;
+                }
+              }
+            }
+            .read-more {
+              .read-more-text {
+                display: none;
+                position: absolute;
+                bottom: 24px;
+                right: 60px;
+                a {
+                  color: $dark-grey;
+                  text-decoration: none;
+                }
+              }
+            }
+            .read-more-link {
+              position: absolute;
+              bottom: 20px;
+              right: 20px;
+              display: flex;
+              text-align: right;
+              a {
+                font-size: 0;
+                height: 30px;
+                width: 30px;
+                display: inline-block;
+                background-color: $primary-blue;
+                border-radius: 50%;
+                position: relative;
+                &::before {
+                  content: '';
+                  background-image: url('/themes/custom/innoraft/images/icons/right-angle.png');
+                  width: 8px;
+                  height: 10px;
+                  background-size: cover;
+                  background-position: center;
+                  position: absolute;
+                  top: 50%;
+                  left: 55%;
+                  transform: translate(-50%, -50%);
+                }
+              }
+            }
+          }
+        }
+      }
+      @media (max-width: $xm) {
+        width: calc(50% - 28px);
+      }
+      @media (max-width: $axsm) {
+        width: calc(100% - 24px);
+      }
+      &:hover {
+        background-color: $light-bg-blue;
+        .views-field-nothing {
+          .field-content {
+            .blogs-content {
+              background-color: $light-bg-blue;
+              .read-more {
+                .read-more-text {
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .view-footer {
+    text-align: center;
+    a {
+      @include button($type: primary);
+
+      color: $white;
+      text-decoration: none !important;
+    }
+  }
+}
+#block-views-block-news-insights-news-insights-display {
+  padding: $indent-80 0;
+  h2 {
+    @extend %h4--heading-bsd;
+
+    color: $primary-blue;
+  }
+  .view-header {
+    @extend %h2--heading;
+
+    color: $dark-grey;
+    padding-bottom: $indent-60;
+  }
+  .view-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding-bottom: $indent-40;
+    .news-insights-row {
+      position: relative;
+      width: calc(100% - 24px);
+      background-color: $white;
+      padding: 0 !important;
+      .news-event-image {
+        position: relative;
+        &::before {
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: $black;
+          display: block;
+          opacity: 0.5;
+          z-index: 2;
+          position: absolute;
+          top: 0;
+        }
+        img {
+          width: 100%;
+          height: auto;
+          -o-object-fit: cover;
+          object-fit: cover;
+        }
+        p {
+          margin-bottom: 0;
+          position: absolute;
+          font-family: $font-family-bigshoulders !important;
+          top: 20px;
+          left: 32px;
+          color: $white;
+          text-transform: uppercase;
+          font-size: 1.25rem;
+          font-weight: $font-weight-600;
+          z-index: 10;
+        }
+      }
+      .news-event-content {
+        padding: $indent-32;
+        .news-event-date {
+          .field--type-datetime {
+            .datetime {
+              font-family: $font-family-bigshoulders !important;
+              font-weight: $font-weight-600;
+              color: $dark-grey;
+              font-size: $font-size-20;
+              text-transform: uppercase;
+            }
+          }
+        }
+        .news-event-title {
+          font-size: $font-size-24;
+          font-weight: $font-weight-600;
+          color: $dark-grey;
+          line-height: $line-height-low;
+          padding-top: $indent-20;
+          padding-bottom: $indent-60;
+        }
+        .read-more-link {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 10px;
+          bottom: 32px;
+          right: 32px;
+          .read-more-text {
+            display: block;
+            transform: translateX(50%);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            text-decoration: none;
+            color: $dark-grey;
+          }
+          .read-more-circle {
+            font-size: 0;
+            height: 30px;
+            width: 30px;
+            display: inline-block;
+            background-color: $primary-blue;
+            border-radius: 50%;
+            position: relative;
+            &::before {
+              content: '';
+              background-image: url('/themes/custom/innoraft/images/icons/right-angle.png');
+              width: 8px;
+              height: 10px;
+              background-size: cover;
+              background-position: center;
+              position: absolute;
+              top: 50%;
+              left: 55%;
+              transform: translate(-50%, -50%);
+            }
+          }
+        }
+      }
+      &:hover {
+        background-color: $light-bg-blue;
+        .read-more-link {
+          .read-more-text {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+      }
+    }
+    @media (min-width: $sm) {
+      .news-insights-row {
+        width: calc(50% - 27px);
+      }
+    }
+    @media (min-width: $md) {
+      .news-insights-row {
+        width: calc(33.33% - 28px);
+      }
+    }
+  }
+  .view-footer {
+    text-align: center;
+    a {
+      @include button($type: primary);
+
+      color: $white;
+      text-decoration: none !important;
+    }
+  }
+}

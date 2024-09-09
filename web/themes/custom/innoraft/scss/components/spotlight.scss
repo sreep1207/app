@@ -1,0 +1,194 @@
+@use "../import" as *;
+.spotlight {
+  .slick-list {
+    overflow: clip !important;
+  }
+  .field--name-field-latest-content {
+    display: flex;
+    > .field__item:first-child {
+      width: 66.66%;
+      padding-right: $indent-12;
+      .view-content {
+        display: flex;
+        .views-row {
+          flex-basis: 50%;
+          padding-bottom: $indent-12;
+        }
+      }
+      @media only screen and (max-width: $md) {
+        width: 50%;
+      }
+      @media only screen and (max-width: $axsm) {
+        padding-right: $indent-12;
+        width: 100%;
+      }
+    }
+    > .field__item:last-child {
+      width: 33.33%;
+      padding-left: $indent-12;
+      @media only screen and (max-width: $md) {
+        width: 50%;
+      }
+      @media only screen and (max-width: $axsm) {
+        padding-left: 0;
+        width: 100%;
+      }
+      .view-content {
+        display: flex;
+        flex-direction: column;
+        gap: $indent-24;
+        .views-row {
+          height: auto;
+          flex-grow: 1;
+        }
+      }
+    }
+    > .field__item {
+      &.full-width {
+        width: 100%;
+        .slick-track {
+          display: flex;
+          .latest-events-card,
+          .latest-news-card {
+            height: 100%;
+          }
+        }
+      }
+    }
+    @media only screen and (max-width: $axsm) {
+      flex-wrap: wrap;
+    }
+  }
+  .view-id-news_view_block {
+    .slick-track {
+      display: flex;
+    }
+    .slick-slide {
+      height: inherit !important;
+    }
+    .slick-dots {
+      margin-left: $indent-120 + $indent-12;
+      margin-top: $indent-40;
+      max-width: 220px;
+    }
+    .slick-next {
+      left: $indent-60 + $indent-12;
+    }
+    .slick-prev {
+      left: $indent-12;
+    }
+    @media only screen and (max-width: $axsm) {
+      .view-content {
+        margin: 0;
+      }
+    }
+  }
+  .view-id-events_view_block {
+    .slick-dots {
+      margin-right: $indent-120 + $indent-12;
+      margin-top: 0;
+      max-width: 220px;
+      margin-left: auto;
+    }
+    .slick-next {
+      right: $indent-12;
+    }
+    .slick-prev {
+      right: $indent-60 + $indent-12;
+    }
+    .slick-next,
+    .slick-prev {
+      transform: rotate(90deg);
+      @media only screen and (max-width: $axsm) {
+        transform: rotate(0);
+      }
+    }
+    @media only screen and (max-width: $axsm) {
+      .view-content {
+        margin: 0;
+      }
+    }
+  }
+  .latest-news-card {
+    @extend %news-card;
+
+    box-shadow: none;
+    margin: 0 $indent-12 $indent-20;
+    height: 100%;
+    .card-body {
+      box-shadow: 0 0 30px 0 rgba($black, 0.05);
+    }
+    .card-header {
+      .field--name-field-news-image {
+        &,
+        div {
+          height: 100%;
+        }
+      }
+    }
+    .datetime {
+      @extend %h5--heading-bsd;
+    }
+    .field--name-field-news-body {
+      @extend %h4--heading;
+    }
+    @media only screen and (max-width: $axsm) {
+      margin: 0 0 $indent-20;
+    }
+  }
+  .latest-events-card {
+    * {
+      color: $white;
+    }
+    @extend %events-card;
+
+    margin: 0 $indent-12 $indent-24;
+    .datetime {
+      @extend %h5--heading-bsd;
+      @media only screen and (max-width: $sm) {
+        font-size: $font-size-16;
+      }
+    }
+    .field--name-field-events-body {
+      @extend %h4--heading;
+      @media only screen and (max-width: $sm) {
+        font-size: $font-size-16;
+      }
+    }
+    .field--name-field-events-image {
+      position: absolute;
+      inset: 0;
+      overflow: clip;
+      z-index: -2;
+      > div {
+        &,
+        .field--name-field-media-image,
+        .field__item {
+          height: 100%;
+        }
+      }
+    }
+    @media only screen and (max-width: $axsm) {
+      margin: 0;
+    }
+  }
+  @media only screen and (max-width: $axsm) {
+    .slick-slider {
+      .slick-arrow {
+        background: $primary-blue;
+        color: $white;
+        transform: rotate(0) translateY(-50%);
+        top: 50%;
+        bottom: unset;
+        left: unset;
+        right: -#{$indent-12};
+        isolation: isolate;
+        z-index: 1;
+        &.slick-prev {
+          left: -#{$indent-12};
+          right: unset;
+        }
+      }
+    }
+  }
+}

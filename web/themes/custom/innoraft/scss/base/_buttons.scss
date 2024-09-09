@@ -1,0 +1,19 @@
+@use "../import" as *;
+
+/* Global buttons scss */
+button,
+a {
+  &.button-primary {
+    @include button(primary);
+  }
+  &.button-secondary {
+    @include button(secondary);
+  }
+}
+
+@media (max-width: $md-1) {
+  .button-center {
+    display: flex;
+    justify-content: center;
+  }
+}

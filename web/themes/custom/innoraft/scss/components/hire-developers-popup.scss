@@ -1,0 +1,147 @@
+@use "../import" as *;
+.hire-developers-form {
+  .modal-dialog {
+    max-width: none;
+    width: 51vw;
+  }
+  .modal-content {
+    border-radius: 0;
+    padding: $indent-12;
+    .modal-header {
+      border: none;
+      padding-bottom: 0;
+    }
+    .modal-body {
+      p {
+        color: $mid-grey;
+        font-size: $font-size-12;
+      }
+    }
+  }
+  .webform-submission-hire-developers-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 40px;
+    .webform-button--submit {
+      color: $white;
+    }
+  }
+  .js-form-item-enter-name,
+  .js-form-item-email {
+    width: 48%;
+  }
+  .js-form-item-developers-required,
+  .js-form-item-experience,
+  .js-form-item-project-timeline {
+    width: 31%;
+  }
+  .js-form-item-about-project,
+  .js-form-item-other-specifications {
+    width: 100%;
+  }
+  .field__label {
+    display: none;
+  }
+  .js-form-item {
+    position: relative;
+    margin-bottom: 25px !important;
+    label {
+      position: absolute;
+      bottom: 9px;
+      transition: transform 0.3s, color 0.3s;
+      font-size: $font-size-14;
+      color: $mid-grey;
+    }
+    &:focus-within label {
+      background-color: $white;
+      font-size: $font-size-12 !important;
+    }
+    input[type=text],
+    input[type=email],
+    input[type=number],
+    textarea {
+      border-bottom: 1px solid $light-grey !important;
+      color: $mid-grey;
+      font-size: $font-size-16 !important;
+      padding: 0 !important;
+      height: 28px !important;
+      margin-bottom: 10px !important;
+      &:focus {
+        outline: none;
+        border-bottom: 2px solid darken($light-grey, 20%);
+      }
+    }
+    textarea {
+      height: 28px !important;
+      min-height: auto !important;
+    }
+  }
+  .webform-confirmation {
+    width: 100%;
+    .webform-confirmation__message {
+      text-align: center;
+      color: $mid-grey;
+      font-size: $font-size-36;
+      font-weight: 600;
+      letter-spacing: 0.025rem;
+    }
+    .webform-confirmation__back {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: $lg) {
+  .hire-developers-form {
+    .modal-dialog {
+      width: 70vw !important;
+    }
+  }
+}
+@media (max-width: $md) {
+  .hire-developers-form {
+    .modal-dialog {
+      width: 86vw !important;
+    }
+  }
+}
+@media (max-width: $sm) {
+  .hire-developers-form {
+    .modal-dialog {
+      width: 80vw !important;
+    }
+    .js-form-item-enter-name,
+    .js-form-item-email,
+    .js-form-item-developers-required,
+    .js-form-item-experience,
+    .js-form-item-project-timeline {
+      width: 48%;
+    }
+    .js-form-item {
+      label {
+        font-size: $font-size-12 !important;
+      }
+      input[type=text],
+      input[type=email],
+      input[type=number],
+      textarea {
+        font-size: $font-size-14 !important;
+      }
+    }
+  }
+}
+@media (max-width: $axsm) {
+  .hire-developers-form {
+    .modal-dialog {
+      width: 90vw !important;
+    }
+    .js-form-item-enter-name,
+    .js-form-item-email,
+    .js-form-item-developers-required,
+    .js-form-item-experience,
+    .js-form-item-project-timeline {
+      width: 100%;
+    }
+  }
+}

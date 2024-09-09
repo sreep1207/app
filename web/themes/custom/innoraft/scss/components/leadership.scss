@@ -1,0 +1,16 @@
+@use "../import" as *;
+.leadership {
+  display: none;
+  .leadership-content {
+    margin-top: 30px;
+    @include full-width-backdrop($light-bg-blue);
+
+    align-items: center;
+    .img-col {
+      margin-top: -60px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

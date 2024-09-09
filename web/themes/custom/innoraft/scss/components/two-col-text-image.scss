@@ -1,0 +1,15 @@
+@use "../import" as *;
+.two-col-text-image {
+  position: relative;
+  padding: $indent-80 0;
+  img:not(.ring) {
+    width: 100%;
+    max-width: 420px;
+  }
+  .ring {
+    position: absolute;
+    right: calc((100% - 100vw));
+    top: -30%;
+    z-index: -1;
+  }
+}

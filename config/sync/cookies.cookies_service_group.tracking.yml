@@ -1,0 +1,11 @@
+uuid: ed82c61e-ec75-4bc7-ae98-ff2dcfaeef6e
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: _gYDe3qoEc6L5uYR6zhu5V-3ARLlyis9gl1diq7Tnf4
+id: tracking
+label: Tracking
+weight: 10
+title: 'Tracking cookies'
+details: 'We use tracking cookies to personalise your experience on our website and deliver relevant content and advertisements. These cookies collect information about your browsing habits on our site, such as the pages you visit and the links you click.'

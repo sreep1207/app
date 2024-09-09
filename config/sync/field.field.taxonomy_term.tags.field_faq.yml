@@ -1,0 +1,29 @@
+uuid: d17d5c1d-21bb-415b-b345-7c16edd0e736
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_faq
+    - node.type.frequently_asked_questions
+    - taxonomy.vocabulary.tags
+id: taxonomy_term.tags.field_faq
+field_name: field_faq
+entity_type: taxonomy_term
+bundle: tags
+label: FAQ
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      frequently_asked_questions: frequently_asked_questions
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

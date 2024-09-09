@@ -1,0 +1,8 @@
+services:
+  migration_revamp.image_fetcher:
+    class: Drupal\migration_revamp\Service\ImageFetcher
+    arguments:
+      $http_client: '@http_client'
+      $entity_type_manager: '@entity_type.manager'
+      $file_system: '@file_system'
+      $logger_factory: '@logger.factory'

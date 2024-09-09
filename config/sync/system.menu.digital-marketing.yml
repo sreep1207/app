@@ -1,0 +1,8 @@
+uuid: 915c9895-b835-439d-9bfb-8381168876ca
+langcode: en
+status: true
+dependencies: {  }
+id: digital-marketing
+label: 'Digital Marketing'
+description: 'Add menu link for footer-fourth digital marketing section'
+locked: false

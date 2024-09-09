@@ -1,0 +1,8 @@
+uuid: 7497cc18-1cf9-4451-9e1b-0324e586c4b9
+langcode: en
+status: true
+dependencies: {  }
+id: mobile
+label: Mobile
+description: 'Add menu link for footer-second mobile section'
+locked: false

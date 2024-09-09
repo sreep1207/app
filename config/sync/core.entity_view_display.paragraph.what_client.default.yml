@@ -1,0 +1,69 @@
+uuid: 3210bf80-f331-4dc4-9541-5f7f4c8b5aec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.what_client.field_client_description
+    - field.field.paragraph.what_client.field_client_designation
+    - field.field.paragraph.what_client.field_client_image
+    - field.field.paragraph.what_client.field_client_name
+    - field.field.paragraph.what_client.field_client_title
+    - field.field.paragraph.what_client.field_client_year
+    - paragraphs.paragraphs_type.what_client
+  module:
+    - text
+id: paragraph.what_client.default
+targetEntityType: paragraph
+bundle: what_client
+mode: default
+content:
+  field_client_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_client_designation:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_client_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_client_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_client_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_client_year:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  search_api_excerpt: true

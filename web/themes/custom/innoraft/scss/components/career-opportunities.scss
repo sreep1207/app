@@ -1,0 +1,36 @@
+@use "../import" as *;
+.career-opportunities {
+  .bg-image {
+    padding: $indent-96 $indent-80;
+    background-size: cover;
+    background-image: url("/themes/custom/innoraft/images/career-opportunities.png");
+    @media only screen and (max-width: $md) {
+      padding: 4rem;
+    }
+    @media only screen and (max-width: $sm) {
+      padding: 3rem;
+    }
+    @media only screen and (max-width: $axsm) {
+      padding: 2rem;
+    }
+  }
+  .info-card {
+    padding: $indent-40;
+    background:
+      radial-gradient(
+        50% 50% at 50% 50%,
+        rgba($white, 0.4) 0%,
+        rgba($white, 0.2) 100%
+      );
+    box-shadow: 0 0 80px 0 rgba($black, 0.1);
+    backdrop-filter: blur(20px);
+    @media only screen and (max-width: $sm) {
+      padding: 2rem;
+    }
+    @media only screen and (max-width: $axsm) {
+      h3 {
+        font-size: $font-size-20;
+      }
+    }
+  }
+}

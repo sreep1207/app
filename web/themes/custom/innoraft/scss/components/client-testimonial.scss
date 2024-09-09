@@ -1,0 +1,196 @@
+@use "../import" as *;
+.client-testimonial {
+  @include full-bleed($midnight-blue);
+
+  background: $midnight-blue;
+  position: relative;
+  .ring {
+    position: absolute;
+    bottom: -60%;
+    right: calc((100% - 100vw));
+    opacity: 0.6;
+  }
+  .quote {
+    right: $indent-80;
+    top: $indent-120;
+    position: absolute;
+    z-index: 1;
+    @media only screen and (max-width: $lg) {
+      max-width: 140px;
+      right: 0;
+    }
+    @media only screen and (max-width: $sm) {
+      max-width: 74px;
+      top: 118px;
+    }
+    @media only screen and (max-width: $xs) {
+      max-width: 50px;
+      top: 136px;
+    }
+  }
+  .field--name-field-testimonial-fields {
+    display: flex;
+    @media screen and (max-width: $xs) {
+      width: 80%;
+    }
+  }
+  .testimonial-slider {
+    .testimonial-slider-nav {
+      .slick-dots {
+        margin-left: 0;
+        max-width: 360px;
+        margin-top: $indent-48;
+      }
+      .slick-arrow {
+        &.slick-next {
+          background: $primary-blue;
+          color: $white;
+          border: 0;
+        }
+        &.slick-prev {
+          background: $white;
+          color: $primary-blue;
+          border: 0;
+        }
+      }
+      .slick-list {
+        cursor: initial;
+      }
+      .testimonial-slide-quote,
+      .testimonial-slide-client {
+        p,
+        .testimonial-slide-designation {
+          color: $white;
+          @media only screen and (max-width: $lg) {
+            font-size: $font-size-16;
+          }
+        }
+        p {
+          font-weight: 300;
+        }
+      }
+      .testimonial-slide-quote {
+        * {
+          font-size: $font-size-22;
+          line-height: 1.5;
+        }
+        .read-more-btn {
+          color: $orange;
+          text-decoration: none;
+          width: fit-content;
+          &:hover {
+            color: $orange;
+          }
+        }
+        .popup-content {
+          display: none;
+        }
+      }
+    }
+    .testimonial-slider-for {
+      display: none;
+      margin-top: -130px;
+      .testimonial-slide-image {
+        position: relative;
+        transform: scale(0.4);
+        transition: $transition300ms;
+        transform-origin: left bottom;
+        opacity: 0.5;
+        &::before {
+          content: '';
+          width: 250px;
+          height: 0;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          background: $primary-blue;
+          z-index: -1;
+          transition: $transition500ms;
+        }
+        img {
+          margin: 0 auto;
+          @media only screen and (max-width: $md) {
+            width: 100%;
+          }
+        }
+        &.testimonial-slide-one {
+          transform: scale(1);
+          opacity: 1;
+          overflow: hidden;
+          &::before {
+            height: 510px;
+            right: 189px;
+          }
+        }
+      }
+      .slick-list {
+        overflow: hidden !important;
+        cursor: initial;
+        .slick-track {
+          display: flex;
+          align-items: flex-end;
+        }
+      }
+      .slick-slide {
+        margin-right: $indent-32;
+        &:nth-child(even) {
+          .testimonial-slide-image {
+            &::before {
+              background: $orange;
+            }
+          }
+        }
+        &.slick-current {
+          img {
+            max-width: initial;
+          }
+          .testimonial-slide-image {
+            transform: scale(1);
+            opacity: 1;
+            &::before {
+              height: 510px;
+            }
+          }
+        }
+        @media only screen and (max-width: $sm) {
+          img {
+            width: auto;
+            max-height: 240px;
+          }
+          .testimonial-slide-image {
+            &::before {
+              height: 300px !important;
+              left: 50%;
+              transform: translateX(-50%);
+              right: unset;
+            }
+          }
+        }
+      }
+      @media only screen and (max-width: $md) {
+        margin-top: 0;
+      }
+    }
+  }
+}
+.lity-opened {
+  .lity-container {
+    max-width: 1000px;
+    padding: 30px;
+    .lity-content {
+      .popup-content {
+        max-height: 600px;
+        display: block !important;
+        padding: 40px;
+        overflow: auto;
+        background-color: white;
+        p {
+          color: black;
+        }
+        @media screen and (max-width: $sm) and (orientation: landscape) {
+          max-height: 300px;
+        }
+      }
+    }
+  }
+}

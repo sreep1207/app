@@ -1,0 +1,70 @@
+@use "../import" as *;
+.ui-widget-overlay {
+  z-index: 9998 !important;
+  background: rgba($black, 0.6) !important;
+  opacity: 1 !important;
+}
+.ui-dialog {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  z-index: 9999;
+  .ui-button {
+    &:focus {
+      border: 0 !important;
+      background: none !important;
+    }
+  }
+  .ui-dialog-titlebar-close {
+    border: 0;
+    padding: 0;
+    background: none;
+    right: $indent-16 !important;
+    top: $indent-24 !important;
+    &:hover {
+      background: none;
+      border: 0;
+    }
+    &::before {
+      content: "\eace";
+      font-family: "lineicons", sans-serif;
+      font-size: $font-size-24;
+      color: $dark-grey;
+      text-indent: initial;
+      white-space: normal;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    span {
+      display: none;
+    }
+  }
+  .ui-dialog-titlebar {
+    background: none;
+    border: 0;
+    padding: $indent-16 $indent-32;
+    .ui-dialog-title {
+      @extend %h4--heading-bsd;
+
+      width: 100%;
+      margin: 0;
+      color: $primary-blue;
+    }
+  }
+  .ui-dialog-content {
+    padding: 0 $indent-32 $indent-32 !important;
+  }
+  &.webform-confirmation-modal {
+    width: 400px !important;
+    text-align: center;
+    .ui-dialog-titlebar {
+      padding: $indent-32 !important;
+    }
+    @media only screen and (max-width: $axsm) {
+      width: 95%;
+      margin: 0 auto;
+    }
+  }
+}

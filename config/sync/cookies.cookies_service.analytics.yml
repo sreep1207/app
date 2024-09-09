@@ -1,0 +1,24 @@
+uuid: 927ef9f0-aa69-4fa9-ba3e-3b781a76d46c
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cookies_ga
+_core:
+  default_config_hash: kdI8DLFQN2AVW0p7C2m5w9Fp9Cdt4cdvo4wnJHmcKjA
+id: analytics
+label: 'Google Analytics'
+group: tracking
+info:
+  value: '<p><span>We use tracking cookies to personalise your experience on our website and deliver relevant content and advertisements. These cookies collect information about your browsing habits on our site, such as the pages you visit and the links you click.</span></p>'
+  format: full_html
+consentRequired: false
+purpose: 'Analytics Cookies'
+placeholderMainText: 'This content is blocked because Google Analytics cookies have not been accepted.'
+placeholderAcceptText: 'Only accept Google Analytics cookies'
+processor: ''
+processorContact: ''
+processorUrl: 'https://analytics.google.com/'
+processorPrivacyPolicyUrl: ''
+processorCookiePolicyUrl: 'https://support.google.com/analytics/answer/6004245'

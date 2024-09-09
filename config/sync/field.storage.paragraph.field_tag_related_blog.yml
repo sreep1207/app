@@ -1,0 +1,20 @@
+uuid: 4a947c0b-65d6-4021-b014-ab418cc4829f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - paragraphs
+id: paragraph.field_tag_related_blog
+field_name: field_tag_related_blog
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

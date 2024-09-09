@@ -1,0 +1,68 @@
+name: irrevamp-latest
+recipe: drupal10
+config:
+  via: nginx
+  webroot: web
+  database: mysql:8.0
+  xdebug: true
+
+services:
+  database:
+    type: mysql:8.0
+  appserver:
+    xdebug: true
+    type: php:8.2
+    composer_version: '2'
+    build_as_root:
+      - apt-get update -y
+      - curl -sL https://deb.nodesource.com/setup_18.x | bash -
+      - apt install nodejs -y
+      - npm install -g gulp-cli
+  search:
+    type: solr:8
+    core: drupal10
+    portforward: true
+    config:
+      dir: web/modules/contrib/search_api_solr/jump-start/solr8/config-set    
+  mailhog:
+    scanner: false
+    type: mailhog:v1.0.0
+    portforward: false
+    hogfrom:
+      - appserver
+  adminer:
+    type: compose
+    services:
+      image: dehy/adminer
+      command: /bin/s6-svscan /etc/services.d
+    depends_on:
+      - database
+
+proxy:
+  appserver:
+    - "ir-revamp.lndo.site"
+  mailhog:
+    - "irrevamp-mails.lndo.site"
+  adminer:
+    - "irrevamp-adminer.lndo.site"
+
+tooling:
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for nginx.
+    cmd: docker-php-ext-enable xdebug && pkill -o -USR2 php-fpm && echo "Enabling xdebug"
+    user: root
+  xdebug-off:
+    service: appserver
+    description: CUSTOM Disable xdebug for nginx.
+    cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && pkill -o -USR2 php-fpm && echo "Disabling xdebug"
+    user: root
+  npm:
+    service: appserver
+    cmd: npm
+  node:
+    service: appserver
+    cmd: node
+  gulp:
+    service: appserver
+    cmd: gulp

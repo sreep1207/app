@@ -1,0 +1,28 @@
+id: users_migration
+label: 'Users Migration'
+migration_group: users_migrations
+source:
+  plugin: users_migration_source
+  ids:
+    uid:
+      type: integer
+process:
+  name: name
+  mail: mail
+  pass: password
+  created: created
+  status: status
+  changed: changed
+  access: access
+  timezone: timezone
+  roles:
+  -
+    plugin: sub_process
+    source: roles
+    process:
+      target_id: target_id
+  field_first_name: first_name
+  field_last_name: last_name    
+destination:
+  plugin: entity:user
+migration_dependencies: {}

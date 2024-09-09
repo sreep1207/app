@@ -1,0 +1,26 @@
+uuid: 160015f2-b9e2-469a-86c8-3099546e3e8a
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - innoraft
+_core:
+  default_config_hash: VhBzWb7lMRtIOg9G7VSw_0uopi-7zXeHq4vXqqV1HFE
+id: innoraft_breadcrumbs
+theme: innoraft
+region: breadcrumb
+weight: -12
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "<front>\r\n/user/login\r\n/about-us"

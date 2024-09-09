@@ -1,0 +1,22 @@
+uuid: 52877a78-8818-47d6-bc4d-7f0bc390c089
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_html_dynamic_content
+    - paragraphs.paragraphs_type.dynamic_content_section
+  module:
+    - text
+id: paragraph.dynamic_content_section.field_html_dynamic_content
+field_name: field_html_dynamic_content
+entity_type: paragraph
+bundle: dynamic_content_section
+label: 'HTML Content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

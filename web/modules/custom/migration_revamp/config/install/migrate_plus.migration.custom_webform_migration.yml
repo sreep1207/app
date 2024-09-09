@@ -1,0 +1,27 @@
+id: custom_webform_migration
+label: 'Custom Webform Migration'
+migration_tags:
+  - custom
+migration_group: custom_migrations
+source:
+  plugin: custom_webform_migration_source
+  ids:
+    submission_id:
+      type: string
+destination:
+  plugin: 'entity:webform_submission'
+process:
+  webform_id: webform_id
+  submission_id: submission_id
+  data: data
+  uri: uri
+  created: created
+  changed: changed
+  in_draft: in_draft
+  remote_addr: remote_addr
+  uid:
+    plugin: default_value
+    default_value: 0
+migration_dependencies:
+  required:
+    - custom_webform_migration_source

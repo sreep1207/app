@@ -1,0 +1,10 @@
+uuid: bf4d5b42-9e3b-4810-bf9c-bba64366c614
+langcode: en
+status: true
+dependencies: {  }
+id: apply_job
+label: 'Apply Job'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -1,0 +1,16 @@
+uuid: a6f50e23-424d-46f7-a5c9-9158c8cc8660
+langcode: en
+status: true
+dependencies: {  }
+id: node__blog
+label: 'Content: Blog'
+tags:
+  schema_article_author: 'a:2:{s:5:"@type";s:6:"Person";s:4:"name";s:26:"[node:author:display-name]";}'
+  schema_article_date_modified: '[node:changed:html_datetime]'
+  schema_article_date_published: '[node:created:html_datetime]'
+  schema_article_description: '[node:summary]'
+  schema_article_headline: '[current-page:title]'
+  schema_article_image: 'a:4:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:50:"[node:field_banner_image:entity:field_media_image]";s:5:"width";s:3:"307";s:6:"height";s:3:"180";}'
+  schema_article_main_entity_of_page: '[current-page:url]'
+  schema_article_publisher: 'a:3:{s:5:"@type";s:12:"Organization";s:4:"name";s:8:"Innoraft";s:4:"logo";a:4:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:47:"[site:base-url]/themes/custom/innoraft/logo.svg";s:5:"width";s:3:"167";s:6:"height";s:2:"38";}}'
+  schema_article_type: BlogPosting

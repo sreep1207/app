@@ -1,0 +1,202 @@
+@use "../import" as *;
+
+/* Global footer scss */
+footer {
+  background: $midnight-blue;
+  .container {
+    position: relative;
+  }
+  section {
+    h2,
+    .footer-headings {
+      @extend %h6--heading;
+
+      color: $white;
+      margin-bottom: $indent-30;
+    }
+  }
+  .site-footer__top {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: $indent-60;
+    margin: 0 calc(-0.5 * var(--bs-gutter-x));
+    a {
+      @extend %p--sm-bl;
+
+      color: $light-grey;
+      transition: $transition200ms;
+      &:hover {
+        color: $white;
+      }
+    }
+    .region-footer-first,
+    .region-footer-second,
+    .region-footer-third,
+    .region-footer-fourth,
+    .region-footer-fifth {
+      margin: 0;
+      padding-right: $indent-16;
+      .menu {
+        display: flex;
+        flex-direction: column;
+        gap: $indent-12;
+      }
+    }
+    .region-footer-first {
+      flex: 0 0 18%;
+    }
+    .region-footer-second {
+      flex: 0 0 18%;
+    }
+    .region-footer-third {
+      flex: 0 0 20%;
+    }
+    .region-footer-fourth {
+      flex: 0 0 18%;
+    }
+    .region-footer-fifth {
+      flex: 0 0 25%;
+      padding-right: 0;
+      padding-top: $indent-10;
+      .contact-social-block {
+        gap: $indent-30;
+        padding-top: $indent-40;
+        * {
+          color: $white;
+        }
+        .button-secondary {
+          @include button(secondary);
+        }
+        .contact-block {
+          gap: $indent-30;
+          h6 {
+            @extend %h6--heading;
+
+            margin-bottom: 0;
+            position: relative;
+            &::before {
+              content: '\e907';
+              font-family: 'icomoon', sans-serif;
+              font-size: $font-size-30;
+              color: transparent;
+              -webkit-text-stroke-width: 1px;
+              -webkit-text-stroke-color: $grey;
+              position: absolute;
+              top: -50px;
+              left: 4px;
+              transform: scale(1, -1) rotate(180deg);
+            }
+          }
+          @media screen and (max-width: $md) {
+            flex: 0 0 50% !important;
+            padding-right: $indent-16;
+          }
+        }
+        .follow-block {
+          .social-icon {
+            svg {
+              path {
+                transition: $transition300ms;
+              }
+            }
+            &:hover {
+              svg {
+                path {
+                  fill: $white;
+                }
+              }
+            }
+          }
+          @media screen and (max-width: $md) {
+            flex: 0 0 50%;
+          }
+        }
+        @media screen and (max-width: $md) {
+          flex-direction: row !important;
+        }
+        @media screen and (max-width: $xs) {
+          flex-direction: column !important;
+        }
+      }
+      @media screen and (max-width: $md) {
+        flex: 0 0 100%;
+      }
+    }
+    .view-content {
+      .views-row {
+        margin-bottom: $indent-12;
+      }
+    }
+    @media only screen and (max-width: $md) {
+      row-gap: $indent-32;
+      .region-footer-first,
+      .region-footer-second,
+      .region-footer-third,
+      .region-footer-fourth {
+        flex: 0 0 50%;
+      }
+    }
+    @media only screen and (max-width: $xs) {
+      .region-footer-first,
+      .region-footer-second,
+      .region-footer-third,
+      .region-footer-fourth {
+        flex: 0 0 100%;
+      }
+    }
+  }
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: $indent-60;
+    padding: $indent-32 0;
+    border-top: 1px solid rgba($white, 0.2);
+    .copyright_block {
+      @extend %p--sm-bl;
+
+      color: $white;
+    }
+    #block-innoraft-footer {
+      .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        .nav-item {
+          .nav-link {
+            @extend %p--sm-bl;
+
+            color: $white;
+            padding: 0 $indent-16;
+            border-right: 1px solid $white;
+            line-height: 0.8;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+          &:first-child {
+            .nav-link {
+              padding-left: 0;
+            }
+          }
+          &:last-child {
+            .nav-link {
+              border: 0;
+              padding-right: 0;
+            }
+          }
+        }
+        @media only screen and (max-width: $md) {
+          justify-content: center;
+          row-gap: $indent-16;
+        }
+      }
+    }
+    @media only screen and (max-width: $md) {
+      flex-direction: column-reverse;
+      .copyright_block {
+        margin-top: $indent-16;
+        text-align: center;
+      }
+    }
+  }
+}

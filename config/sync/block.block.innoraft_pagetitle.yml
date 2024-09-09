@@ -1,0 +1,18 @@
+uuid: f271a7c3-82fd-4d48-9da6-7ec716124b93
+langcode: en
+status: false
+dependencies:
+  theme:
+    - innoraft
+id: innoraft_pagetitle
+theme: innoraft
+region: content
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

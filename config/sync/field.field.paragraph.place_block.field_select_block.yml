@@ -1,0 +1,25 @@
+uuid: 113e25ee-1300-40ed-be0b-9ed1b020f6f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_select_block
+    - paragraphs.paragraphs_type.place_block
+  module:
+    - block_field
+id: paragraph.place_block.field_select_block
+field_name: field_select_block
+entity_type: paragraph
+bundle: place_block
+label: 'Select Block'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  selection: blocks
+  selection_settings:
+    plugin_ids:
+      ir_master_other_related_services: ir_master_other_related_services
+field_type: block_field

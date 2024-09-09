@@ -1,0 +1,106 @@
+@use "../import" as *;
+.paragraph--type--what-people-say {
+  display: none;
+  position: relative;
+  padding: $indent-80 0;
+  .ring {
+    position: absolute;
+    right: calc(115% - 100vw);
+    bottom: -10%;
+    z-index: -1;
+  }
+  .quote {
+    position: absolute;
+    top: 435px;
+    left: 430px;
+  }
+  .field--name-field-what-people-image {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .field--name-field-client {
+    padding-top: $indent-20;
+    overflow-x: clip;
+    .slick-prev {
+      left: 0;
+    }
+    .slick-next {
+      left: 60px;
+    }
+    .slick-dots {
+      width: 38%;
+      margin-left: 122px;
+    }
+  }
+  .paragraph--type--what-client {
+    .field--name-field-client-title {
+      font-size: $font-size-24;
+      font-weight: 600;
+      letter-spacing: 0.025rem;
+      line-height: 1.2;
+      padding-bottom: $indent-20;
+    }
+    .client {
+      align-items: center;
+      padding-top: $indent-50;
+      .client-image {
+        width: 13%;
+        @media (max-width: $xs) {
+          width: 21%;
+        }
+      }
+      .client-information {
+        width: 70%;
+        .field--name-field-client-name {
+          font-weight: 800;
+        }
+        .field--name-field-client-designation {
+          color: #1b3ecd;
+          font-weight: 500;
+          font-size: $font-size-12;
+        }
+        .field--name-field-client-year {
+          font-size: $font-size-12;
+        }
+      }
+    }
+  }
+  .field--name-field-rating-number {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    .star-rating {
+      gap: 5px;
+      align-items: center;
+      .field-stars {
+        width: 60%;
+      }
+      .field-rating-points {
+        width: 30%;
+        font-size: $font-size-14;
+      }
+    }
+    .field--name-field-stars {
+      display: flex;
+      gap: 2px;
+    }
+  }
+  @media (min-width: $md) and (max-width: $xlg) {
+    .field--name-field-client {
+      padding-top: 0;
+    }
+    .ring {
+      right: calc(115% - 120vw);
+    }
+    .quote {
+      top: 489px;
+      left: 294px;
+    }
+    .field--name-field-rating-number {
+      margin-top: 20px;
+    }
+  }
+}

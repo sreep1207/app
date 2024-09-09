@@ -1,0 +1,21 @@
+uuid: 32de9679-5f4b-44e0-b3c2-fd45f6d5d257
+langcode: en
+status: false
+dependencies: {  }
+id: local
+label: Local
+description: ''
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/split/local
+module:
+  dblog: 0
+  devel: 0
+  field_ui: 0
+  views_ui: 0
+  webform_ui: 0
+theme: {  }
+complete_list: {  }
+partial_list: {  }

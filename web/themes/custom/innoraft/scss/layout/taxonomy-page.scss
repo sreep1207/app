@@ -1,0 +1,43 @@
+@use "../import" as *;
+.banner-wrapper {
+  @include banner-wrapper;
+
+  background: url("../../images/taxonomybanner.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+.view-taxonomy-term {
+  .view-header {
+    padding: $indent-60 0;
+    padding-bottom: $indent-40;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    h2 {
+      @extend %h2--heading;
+    }
+    h4 {
+      @extend %h4--heading-bsd;
+
+      color: $primary-blue;
+    }
+  }
+  @include blogs-repo;
+  .view-content {
+    .row {
+      .views-row {
+        .node--type-blog {
+          .breadcrumb,
+          .blog-banner,
+          .block-better-social-sharing-buttons {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .feed-icons {
+    display: none;
+  }
+}

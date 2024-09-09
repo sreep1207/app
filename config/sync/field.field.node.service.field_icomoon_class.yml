@@ -1,0 +1,19 @@
+uuid: d3c30432-5e4c-4b3e-85c8-1d9787357eb9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_icomoon_class
+    - node.type.service
+id: node.service.field_icomoon_class
+field_name: field_icomoon_class
+entity_type: node
+bundle: service
+label: 'icomoon class'
+description: "icomoon class for rendering icon on the other related services block. <br>\r\nex - icon-drupal-logo, icon-mobile1, icon-ecommerce, icon-digital-marketing, icon-compliance-2 etc."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

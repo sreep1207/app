@@ -1,0 +1,34 @@
+uuid: b75f571a-6162-4483-afb7-7e094c81f714
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.testimonial_data.field_testimonial_fields
+    - field.field.paragraph.testimonial_data.field_testimonial_header
+    - paragraphs.paragraphs_type.testimonial_data
+  module:
+    - media_library
+    - text
+id: paragraph.testimonial_data.default
+targetEntityType: paragraph
+bundle: testimonial_data
+mode: default
+content:
+  field_testimonial_fields:
+    type: media_library_widget
+    weight: 1
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_testimonial_header:
+    type: text_textarea
+    weight: 0
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,19 @@
+uuid: f4127106-d92d-46a8-8606-7f2911ecf16a
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_what_people_header
+field_name: field_what_people_header
+entity_type: paragraph
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

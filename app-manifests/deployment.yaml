@@ -1,0 +1,50 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app15
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app15
+  template:
+    metadata:
+      labels:
+        app: my-app15
+    spec:
+      initContainers:
+      - name: init-sync
+        image: sree1207/rsync-alpine:latest
+        command: ["/usr/local/bin/init-script.sh"]
+        volumeMounts:
+        - name: efs-drupal-pv
+          mountPath: /var/www/html/test-drupal
+      containers:
+      - name: my-app15
+        image: sree1207/my-app15:latest
+        ports:
+        - containerPort: 80 
+        volumeMounts:
+        - name: efs-drupal-pv
+          mountPath: /var/www/html/test-drupal
+      volumes:
+        - name: efs-drupal-pv
+          persistentVolumeClaim:
+            claimName: efs-drupal-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp15-service
+  namespace: default
+  labels:
+    app: my-app15
+spec:
+  selector:
+    app: my-app15
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

@@ -1,0 +1,19 @@
+uuid: 0e5d425c-0184-4624-a9a4-96d4e6b02659
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_modal_id
+    - paragraphs.paragraphs_type.modal_webform
+id: paragraph.modal_webform.field_modal_id
+field_name: field_modal_id
+entity_type: paragraph
+bundle: modal_webform
+label: 'Modal ID'
+description: 'No space between words, for ex: mymodalid'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
