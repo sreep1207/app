@@ -1,5 +1,5 @@
 pipeline {
- agent { label 'my-docker-agent' }
+ agent any
 
   stages {
     stage('Checkout') {
@@ -19,14 +19,18 @@ pipeline {
           // Check the contents of the workspace for debugging
           sh 'ls -la'
           
-         // Use Docker Pipeline plugin to build the Docker image
-          docker.build("${DOCKER_IMAGE}")
-          
-          // Use Docker Pipeline plugin to push the Docker image
-          docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-pwd') {
-            docker.image("${DOCKER_IMAGE}").push('latest')
-            docker.image("${DOCKER_IMAGE}").push("${BUILD_NUMBER}")
-          }
+         
+                    // Use the specified Docker image to execute Docker commands
+                    docker.image('sreep1207/docker:latest').inside {
+                        // Build the Docker image
+                        sh "docker build -t ${DOCKER_IMAGE} ."
+                        
+                        // Log in to Docker Hub and push the Docker image
+                        sh "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin"
+                        
+                        // Push the Docker image to Docker Hub
+                        sh "docker push ${DOCKER_IMAGE}"
+         }
         }
       }
     }
