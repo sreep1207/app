@@ -1,4 +1,4 @@
-pipeline {
+0pipeline {
   agent 
   
   stages {
@@ -46,7 +46,7 @@ pipeline {
     }
     stage('Update Deployment File') {
         environment {
-            GIT_REPO_NAME = "app"
+            GIT_REPO_NAME = "sreep1207/app"
             GIT_USER_NAME = "sreep1207"
         }
         steps {
