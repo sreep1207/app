@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 pipeline {
   agent any
+=======
+0pipeline {
+  agent 
+>>>>>>> 22f417f6de3ace7768d673d96cb940e236d1a9a3
   
   stages {
     stage('Checkout') {
