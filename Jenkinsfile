@@ -1,16 +1,14 @@
-<<<<<<< HEAD
 pipeline {
   agent any
-=======
-0pipeline {
-  agent 
->>>>>>> 22f417f6de3ace7768d673d96cb940e236d1a9a3
-  
+
   stages {
     stage('Checkout') {
       steps {
-        sh 'echo passed'
-        // git branch: 'main', url: 'https://github.com/sreep1207/app.git'
+        // Checkout the code from the repository
+        checkout([$class: 'GitSCM', 
+          branches: [[name: 'main']], 
+          userRemoteConfigs: [[url: 'https://github.com/sreep1207/app.git']]
+        ])
       }
     }
 
@@ -21,7 +19,12 @@ pipeline {
       }
       steps {
         script {
-          sh 'cd /app && docker build -t ${DOCKER_IMAGE} .'
+          // Check the contents of the workspace for debugging
+          sh 'ls -la'
+          
+          // Build the Docker image using the Dockerfile in the workspace
+          sh 'docker build -t ${DOCKER_IMAGE} .'
+          
           def dockerImage = docker.image("${DOCKER_IMAGE}")
           docker.withRegistry('https://index.docker.io/v1/', "dockerhub-pwd") {
             dockerImage.push()
