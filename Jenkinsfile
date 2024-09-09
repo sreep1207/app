@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sh 'echo passed'
                 // Uncomment the following line if you need to checkout from git
-                git branch: 'main', url: 'https://github.com/sreep1207/app.git'
+                //git branch: 'main', url: 'https://github.com/sreep1207/app.git'
             }
         }
         
