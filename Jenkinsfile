@@ -24,7 +24,7 @@ pipeline {
           // Check the contents of the workspace for debugging
           sh 'ls -la'
           
-                    docker.withServer('tcp://127.0.0.1:2375') {        
+                    docker.withServer('tcp://127.0.0.1:2222') {        
                     // Use the specified Docker image to execute Docker commands
                     docker.image('sreep1207/docker:latest').inside {
                         // Build the Docker image
