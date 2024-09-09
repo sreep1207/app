@@ -4,14 +4,11 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        // Checkout the code from the repository
-        checkout([$class: 'GitSCM', 
-          branches: [[name: 'main']], 
-          userRemoteConfigs: [[url: 'https://github.com/sreep1207/app.git']]
-        ])
+        sh 'echo passed'
+        // Uncomment the following line if you need to checkout from git
+        // git branch: 'main', url: 'https://github.com/sreep1207/app.git'
       }
     }
-
     stage('Build and Push Docker Image') {
       environment {
         DOCKER_IMAGE = "sreep1207/my-app15:${BUILD_NUMBER}"
