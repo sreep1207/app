@@ -28,7 +28,7 @@ pipeline {
                     sh 'ls -la'
                     
                     // Use the specified Docker image to execute Docker commands
-                   // docker.image('sreep1207/docker:latest').inside {
+                    docker.image('sreep1207/docker:latest').inside {
                         // Build the Docker image
                         sh "docker -H tcp://localhost:2222 build -t ${DOCKER_IMAGE} ."
                         
