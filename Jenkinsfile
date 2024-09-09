@@ -2,7 +2,7 @@ pipeline {
  agent  {
         docker {
             image 'sreep1207/docker:latest' // Your Docker-enabled image
-            args '--privileged' // Mount Docker socket
+            //args '--privileged' // Mount Docker socket
         }
     }
 
