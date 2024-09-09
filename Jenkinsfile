@@ -39,11 +39,11 @@ pipeline {
                         
                         // Push the Docker image to Docker Hub
                         sh "docker -H tcp://localhost:2222 push ${DOCKER_IMAGE}"
-                    }
+                   // }
                 }
             }
         }
-}
+
   
     stage('Run Composer, Drush, and Gulp') {
       steps {
