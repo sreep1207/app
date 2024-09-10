@@ -48,8 +48,8 @@ pipeline {
                         ls -la .git
 
                         echo "Configuring Git..."
-                        git config user.email "sridhar.innoraft@gmail.com"
-                        git config user.name "sreep1207"
+                        //git config user.email "sridhar.innoraft@gmail.com"
+                        //git config user.name "sreep1207"
                         
                         BUILD_NUMBER=${BUILD_NUMBER}
                         # Ensure the file exists before trying to update it
