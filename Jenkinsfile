@@ -14,7 +14,24 @@ pipeline {
                 //git branch: 'main', url: 'https://github.com/sreep1207/app.git', credentialsId: 'git'
             }
         }
-        
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Ensure the Jenkins workspace is up-to-date
+                    sh '''
+                        # Navigate to the repository directory
+                        cd /var/lib/jenkins/workspace/Drupal
+
+                        # Fetch the latest changes
+                        git fetch origin
+
+                        # Checkout the main branch
+                        git checkout main
+                    '''
+                }
+            }
+        }  
      stage('Build and Push Docker Image') {
       environment {
         DOCKER_IMAGE = "sree1207/my-app15:${BUILD_NUMBER}"
