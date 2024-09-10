@@ -64,7 +64,7 @@ pipeline {
                             sed -i "s/latest/${BUILD_NUMBER}/g" app-manifests/deployment.yaml
                             git add app-manifests/deployment.yaml
                             git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                            git push origin main 
+                            git push origin main || exit 1
                         else
                             echo "Deployment file not found."
                             exit 1
