@@ -2,7 +2,7 @@ pipeline {
  agent  {
         docker {
             image 'sree1207/docker:latest' // Your Docker-enabled image
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+            args '--user jenkins -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
 
@@ -41,26 +41,26 @@ pipeline {
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
              sh '''
                         echo "Adding Jenkins workspace to safe directories..."
-                        sudo -u jenkins git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal
+                        git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal
                         echo "Git Version"
                         git --version
                         echo "Checking Git remote..."
                         git remote -v
                         echo "Switching to SSH if necessary..."
-                        sudo -u jenkins git remote set-url origin git@github.com:sreep1207/app.git || exit 1
+                        git remote set-url origin git@github.com:sreep1207/app.git || exit 1
                         echo "Configuring Git..."
-                        sudo -u jenkins git config user.email 'sridhar.innoraft@gmail.com'
-                        sudo -u jenkins git config user.name 'sreep1207'
+                        git config user.email 'sridhar.innoraft@gmail.com'
+                        git config user.name 'sreep1207'
                         # Ensure we are on the correct branch
-                        sudo -u jenkins git fetch origin
-                        sudo -u jenkins git checkout main || git checkout -b main
+                        git fetch origin
+                        git checkout main || git checkout -b main
                         BUILD_NUMBER=${BUILD_NUMBER}
                         # Ensure the file exists before trying to update it
                         if [ -f app-manifests/deployment.yaml ]; then
-                           sudo -u jenkins sed -i "s/latest/${BUILD_NUMBER}/g" app-manifests/deployment.yaml
-                           sudo -u jenkins git add app-manifests/deployment.yaml
-                           sudo -u jenkins git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                           sudo -u jenkins  git push origin main || exit 1
+                            sed -i "s/latest/${BUILD_NUMBER}/g" app-manifests/deployment.yaml
+                            git add app-manifests/deployment.yaml
+                            git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                            git push origin main || exit 1
                         else
                             echo "Deployment file not found."
                             exit 1
