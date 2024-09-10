@@ -1,10 +1,5 @@
 pipeline {
- agent  {
-        docker {
-            image 'sree1207/docker:latest' // Your Docker-enabled image
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+ agent  any
 
     stages {
         stage('Checkout') {
