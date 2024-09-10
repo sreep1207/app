@@ -56,6 +56,8 @@ pipeline {
                         # Ensure we are on the correct branch
                         git fetch origin
                         git checkout main || git checkout -b main
+                        # Pull the latest changes from the remote branch
+                        git pull origin main
                         BUILD_NUMBER=${BUILD_NUMBER}
                         # Ensure the file exists before trying to update it
                         if [ -f app-manifests/deployment.yaml ]; then
