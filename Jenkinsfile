@@ -1,7 +1,7 @@
 pipeline {
  agent  {
         docker {
-            image 'sreep1207/docker:latest' // Your Docker-enabled image
+            image 'sree1207/docker:latest' // Your Docker-enabled image
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
