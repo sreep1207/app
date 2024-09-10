@@ -51,14 +51,16 @@ pipeline {
                         echo "Configuring Git..."
                         git config user.email "sridhar.innoraft@gmail.com"
                         git config user.name "sreep1207"
-                        
+                        # Ensure we are on the correct branch
+                        git fetch origin
+                        git checkout main || git checkout -b main
                         BUILD_NUMBER=${BUILD_NUMBER}
                         # Ensure the file exists before trying to update it
                         if [ -f app-manifests/deployment.yaml ]; then
                             sed -i "s/latest/${BUILD_NUMBER}/g" app-manifests/deployment.yaml
                             git add app-manifests/deployment.yaml
                             git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                            git push origin HEAD:main 
+                            git push origin main 
                         else
                             echo "Deployment file not found."
                             exit 1
