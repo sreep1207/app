@@ -47,7 +47,7 @@ pipeline {
                         echo "Git Directory Check:"
                         ls -la .git
                         echo "Git Version"
-                        git --version'
+                        git --version
                         echo "Configuring Git..."
                         git config user.email "sridhar.innoraft@gmail.com"
                         git config user.name "sreep1207"
