@@ -48,6 +48,10 @@ pipeline {
                         ls -la .git
                         echo "Git Version"
                         git --version
+                        echo "Checking Git remote..."
+                        git remote -v
+                        echo "Switching to SSH if necessary..."
+                        git remote set-url origin git@github.com:sreep1207/app.git || exit 1
                         echo "Configuring Git..."
                         git config user.email "sridhar.innoraft@gmail.com"
                         git config user.name "sreep1207"
