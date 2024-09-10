@@ -32,26 +32,6 @@ pipeline {
       }
     }
   
-    stage('Run Composer, Drush, and Gulp') {
-      steps {
-        script {
-          // Run Composer install
-          sh 'composer install'
-          
-          // Run Drush CIM with automatic confirmation
-          dir('vendor/drush/drush') {
-            sh 'yes | drush cim'
-            sh 'drush cr'
-          }
-
-          // Navigate to the specific path and run Gulp
-          dir('web/themes/custom/innoraft') {
-            sh 'gulp'
-          }
-        }
-      }
-    }
-
     stage('Update Deployment File') {
       environment {
         GIT_REPO_NAME = "sreep1207/app"
