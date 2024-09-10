@@ -38,7 +38,7 @@ pipeline {
         GIT_USER_NAME = "sreep1207"
       }
       steps {
-        withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+         withCredentials([sshUserPrivateKey(credentialsId: 'jenkins', keyFileVariable: 'SSH_KEY')]) { {
              sh '''
                        # Navigate to the repository directory
                         cd /var/lib/jenkins/workspace/Drupal
