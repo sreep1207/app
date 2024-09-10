@@ -2,14 +2,8 @@ pipeline {
  agent  {
         docker {
             image 'sreep1207/docker:latest' // Your Docker-enabled image
-            //args '--privileged' // Mount Docker socket
+            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
-    }
-
-    environment {
-        DOCKER_HOST = 'tcp://localhost:2375'
-        DOCKER_IMAGE = "sreep1207/my-app15:${BUILD_NUMBER}"
-        REGISTRY_CREDENTIALS = credentials('dockerhub-pwd')
     }
 
     stages {
@@ -21,29 +15,22 @@ pipeline {
             }
         }
         
-        stage('Build and Push Docker Image') {
-            steps {
-                script {
-                    // Check the contents of the workspace for debugging
-                    sh 'ls -la'
-                    
-                    // Use the specified Docker image to execute Docker commands
-                   // docker.image('sreep1207/docker:latest').inside {
-                        // Build the Docker image
-                        sh "docker -H tcp://localhost:2375 build -t ${DOCKER_IMAGE} ."
-                        
-                        // Log in to Docker Hub and push the Docker image
-                        withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-                            sh "echo ${DOCKER_HUB_PASSWORD} | docker -H tcp://localhost:2375 login -u ${DOCKER_HUB_USERNAME} --password-stdin"
-                        }
-                        
-                        // Push the Docker image to Docker Hub
-                        sh "docker -H tcp://localhost:2375 push ${DOCKER_IMAGE}"
-                   // }
-                }
+     stage('Build and Push Docker Image') {
+      environment {
+        DOCKER_IMAGE = "sree1207/my-app15:${BUILD_NUMBER}"
+        // DOCKERFILE_LOCATION = "Dockerfile"
+        REGISTRY_CREDENTIALS = credentials('docker-cred')
+      }
+      steps {
+        script {
+            sh 'docker build -t ${DOCKER_IMAGE} .'
+            def dockerImage = docker.image("${DOCKER_IMAGE}")
+            docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
+                dockerImage.push()
             }
         }
-
+      }
+    }
   
     stage('Run Composer, Drush, and Gulp') {
       steps {
@@ -67,7 +54,7 @@ pipeline {
 
     stage('Update Deployment File') {
       environment {
-        GIT_REPO_NAME = "app"
+        GIT_REPO_NAME = "sreep1207/app"
         GIT_USER_NAME = "sreep1207"
       }
       steps {
@@ -76,7 +63,7 @@ pipeline {
             git config user.email "sridhar.innoraft@gmail.com"
             git config user.name "sreep1207"
             BUILD_NUMBER=${BUILD_NUMBER}
-            sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" app-manifests/deployment.yml
+            sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" app-manifests/deployment.yaml
             git add app-manifests/deployment.yml
             git commit -m "Update deployment image to version ${BUILD_NUMBER}"
             git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
