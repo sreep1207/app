@@ -40,8 +40,12 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
           sh '''
+            echo "Current Directory:"
+            pwd
             echo "Directory Contents:"
             ls -la
+            echo "Git Directory Check:"
+            ls -la .git
             echo "Configuring Git..."
             git config user.email "sridhar.innoraft@gmail.com"
             git config user.name "sreep1207"
