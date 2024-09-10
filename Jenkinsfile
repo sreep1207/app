@@ -49,7 +49,6 @@ pipeline {
                         echo "Git Version"
                         git --version'
                         echo "Configuring Git..."
-                        export PATH=/usr/local/bin/git:$PATH
                         git config user.email "sridhar.innoraft@gmail.com"
                         git config user.name "sreep1207"
                         
@@ -59,7 +58,7 @@ pipeline {
                             sed -i "s/latest/${BUILD_NUMBER}/g" app-manifests/deployment.yaml
                             git add app-manifests/deployment.yaml
                             git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                            git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                            git push origin HEAD:main 
                         else
                             echo "Deployment file not found."
                             exit 1
