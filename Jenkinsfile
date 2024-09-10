@@ -40,7 +40,6 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
              sh '''
-                         sh '''
                         echo "Adding Jenkins workspace to safe directories..."
                         git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal
                         echo "Git Version"
