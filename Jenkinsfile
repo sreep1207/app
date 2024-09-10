@@ -46,10 +46,12 @@ pipeline {
                         ls -la
                         echo "Git Directory Check:"
                         ls -la .git
-
+                        echo "Git Version"
+                        git --version'
                         echo "Configuring Git..."
-                        //git config user.email "sridhar.innoraft@gmail.com"
-                        //git config user.name "sreep1207"
+                        export PATH=/usr/local/bin/git:$PATH
+                        git config user.email "sridhar.innoraft@gmail.com"
+                        git config user.name "sreep1207"
                         
                         BUILD_NUMBER=${BUILD_NUMBER}
                         # Ensure the file exists before trying to update it
