@@ -53,6 +53,8 @@ pipeline {
                         echo "Configuring Git..."
                         git config user.email 'sridhar.innoraft@gmail.com'
                         git config user.name 'sreep1207'
+                        # Set Git pull behavior to rebase
+                        git config pull.rebase true
                         # Ensure we are on the correct branch
                         git fetch origin
                         git checkout main || git checkout -b main
