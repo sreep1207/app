@@ -40,27 +40,28 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
              sh '''
+                         sh '''
                         echo "Adding Jenkins workspace to safe directories..."
-                        su - jenkins -c "cd /var/lib/jenkins/workspace/Drupal && git config --global user.email 'sridhar.innoraft@gmail.com'"
+                        git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal
                         echo "Git Version"
                         git --version
                         echo "Checking Git remote..."
                         git remote -v
                         echo "Switching to SSH if necessary..."
-                        su - jenkins -c "cd /var/lib/jenkins/workspace/Drupal &&  git remote set-url origin git@github.com:sreep1207/app.git || exit 1"
+                        git remote set-url origin git@github.com:sreep1207/app.git || exit 1
                         echo "Configuring Git..."
-                        su - jenkins -c "cd /var/lib/jenkins/workspace/Drupal &&  git config user.email 'sridhar.innoraft@gmail.com'"
-                        su - jenkins -c "cd /var/lib/jenkins/workspace/Drupal && git config user.name 'sreep1207'"
+                        git config user.email 'sridhar.innoraft@gmail.com'
+                        git config user.name 'sreep1207'
                         # Ensure we are on the correct branch
-                        su - jenkins -c "cd /var/lib/jenkins/workspace/Drupal &&  git fetch origin"
-                        su - jenkins -c "cd /var/lib/jenkins/workspace/Drupal && git checkout main || git checkout -b main"
+                        git fetch origin
+                        git checkout main || git checkout -b main
                         BUILD_NUMBER=${BUILD_NUMBER}
                         # Ensure the file exists before trying to update it
                         if [ -f app-manifests/deployment.yaml ]; then
-                            su - jenkins -c "cd /var/lib/jenkins/workspace/Drupal && sed -i "s/latest/${BUILD_NUMBER}/g" app-manifests/deployment.yaml"
-                            su - jenkins -c "cd /var/lib/jenkins/workspace/Drupal &&  git add app-manifests/deployment.yaml"
-                            su - jenkins -c "cd /var/lib/jenkins/workspace/Drupal &&  git commit -m 'Update deployment image to version ${BUILD_NUMBER}'"
-                            su - jenkins -c "cd /var/lib/jenkins/workspace/Drupal && git push origin main || exit 1"
+                            sed -i "s/latest/${BUILD_NUMBER}/g" app-manifests/deployment.yaml
+                            git add app-manifests/deployment.yaml
+                            git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                            git push origin main || exit 1
                         else
                             echo "Deployment file not found."
                             exit 1
