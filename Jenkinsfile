@@ -49,13 +49,15 @@ pipeline {
         echo "Configuring Git..."
         git config user.email 'sridhar.innoraft@gmail.com'
         git config user.name 'sreep1207'
+       # Use HTTPS with the GitHub token for authentication
+        echo "Fetching the latest changes from origin..."
+        git fetch https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git || exit 1
 
         # Ensure we are on the correct branch
-        git fetch origin
         git checkout main || git checkout -b main
 
         # Pull the latest changes from the remote branch to avoid conflicts
-        git pull origin main
+        git pull https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git main || exit 1
 
         # Update the deployment file with the new build number
         BUILD_NUMBER=${BUILD_NUMBER}
