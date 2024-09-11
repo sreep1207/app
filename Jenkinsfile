@@ -59,18 +59,13 @@ pipeline {
         # Pull the latest changes from the remote branch to avoid conflicts
         git pull https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git main || exit 1
 
-        # Debug: Check if the deployment file exists and contains 'latest'
+        # Debug: Check if the deployment file exists
         echo "Before updating:"
         cat app-manifests/deployment.yaml
 
-        # Update the deployment file
-        if grep -q "latest" app-manifests/deployment.yaml; then
-          sed -i "s/latest/${BUILD_NUMBER}/g" app-manifests/deployment.yaml
-          echo "Deployment file updated."
-        else
-          echo "No 'latest' tag found in the deployment file, skipping update."
-          exit 1
-        fi
+        # Update the deployment file (replace the current tag with the BUILD_NUMBER)
+        sed -i "s/[0-9]\\+/\\${BUILD_NUMBER}/g" app-manifests/deployment.yaml
+        echo "Deployment file updated."
 
         # Debug: Verify changes
         echo "After updating:"
