@@ -1,24 +1,24 @@
 # deployment.yaml
-apiVersion: apps/v1
+apiVersion: apps/v${BUILD_NUMBER}
 kind: Deployment
 metadata:
-  name: my-app15
+  name: my-app${BUILD_NUMBER}
   namespace: default
 spec:
-  replicas: 1
+  replicas: ${BUILD_NUMBER}
   selector:
     matchLabels:
-      app: my-app15
+      app: my-app${BUILD_NUMBER}
   template:
     metadata:
       labels:
-        app: my-app15
+        app: my-app${BUILD_NUMBER}
     spec:
       containers:
-      - name: my-app15
-        image: sree1207/my-app15:67
+      - name: my-app${BUILD_NUMBER}
+        image: sree${BUILD_NUMBER}/my-app${BUILD_NUMBER}:${BUILD_NUMBER}
         ports:
-        - containerPort: 80 
+        - containerPort: ${BUILD_NUMBER} 
         volumeMounts:
         - name: efs-drupal-pv
           mountPath: /var/www/html/test-drupal
@@ -27,17 +27,17 @@ spec:
           persistentVolumeClaim:
             claimName: efs-drupal-pvc
 ---
-apiVersion: v1
+apiVersion: v${BUILD_NUMBER}
 kind: Service
 metadata:
-  name: myapp15-service
+  name: myapp${BUILD_NUMBER}-service
   namespace: default
   labels:
-    app: my-app15
+    app: my-app${BUILD_NUMBER}
 spec:
   selector:
-    app: my-app15
+    app: my-app${BUILD_NUMBER}
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: ${BUILD_NUMBER}
+      targetPort: ${BUILD_NUMBER}
