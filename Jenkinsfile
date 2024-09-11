@@ -59,20 +59,29 @@ pipeline {
         # Pull the latest changes from the remote branch to avoid conflicts
         git pull https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git main || exit 1
 
-        # Update the deployment file with the new build number
-        BUILD_NUMBER=${BUILD_NUMBER}
-        if [ -f app-manifests/deployment.yaml ]; then
+        # Debug: Check if the deployment file exists and contains 'latest'
+        echo "Before updating:"
+        cat app-manifests/deployment.yaml
+
+        # Update the deployment file
+        if grep -q "latest" app-manifests/deployment.yaml; then
           sed -i "s/latest/${BUILD_NUMBER}/g" app-manifests/deployment.yaml
-
-          git add app-manifests/deployment.yaml
-          git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-
-          # Use HTTPS with GITHUB_TOKEN for authentication
-          git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main || exit 1
+          echo "Deployment file updated."
         else
-          echo "Deployment file not found."
+          echo "No 'latest' tag found in the deployment file, skipping update."
           exit 1
         fi
+
+        # Debug: Verify changes
+        echo "After updating:"
+        cat app-manifests/deployment.yaml
+
+        # Add and commit the changes
+        git add app-manifests/deployment.yaml
+        git commit -m "Update deployment image to version ${BUILD_NUMBER}" || exit 1
+
+        # Push the changes to the repository
+        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main || exit 1
       '''
         }
       }
