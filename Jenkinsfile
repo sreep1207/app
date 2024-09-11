@@ -41,36 +41,15 @@ pipeline {
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
              sh '''
                        # Navigate to the repository directory
-                        cd /var/lib/jenkins/workspace/Drupal
-                        echo "Adding Jenkins workspace to safe directories..."
-                        git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal
-                        echo "Git Version"
-                        git --version
-                        echo "Checking Git remote..."
-                        git remote -v
-                        echo "Switching to SSH if necessary..."
-                        git remote set-url origin git@github.com:sreep1207/app.git || exit 1
                         echo "Configuring Git..."
                         git config user.email 'sridhar.innoraft@gmail.com'
                         git config user.name 'sreep1207'
-                        # Set Git pull behavior to rebase
-                        git config pull.rebase true
-                        # Ensure we are on the correct branch
-                        git fetch origin
-                        git checkout main || git checkout -b main
-                        # Pull the latest changes from the remote branch
-                        git pull origin main
                         BUILD_NUMBER=${BUILD_NUMBER}
                         # Ensure the file exists before trying to update it
-                        if [ -f app-manifests/deployment.yaml ]; then
-                            sed -i "s/latest/${BUILD_NUMBER}/g" app-manifests/deployment.yaml
-                            git add app-manifests/deployment.yaml
-                            git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                            git push origin main || exit 1
-                        else
-                            echo "Deployment file not found."
-                            exit 1
-                        fi
+                        sed -i "s/latest/${BUILD_NUMBER}/g" app-manifests/deployment.yaml
+                        git add app-manifests/deployment.yaml
+                        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                     '''
         }
       }
