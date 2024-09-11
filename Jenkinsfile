@@ -59,25 +59,22 @@ pipeline {
         # Pull the latest changes from the remote branch to avoid conflicts
         git pull https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git main || exit 1
 
-        # Debug: Check if the deployment file exists
-        echo "Before updating:"
+         echo "Before updating:"
         cat app-manifests/deployment.yaml
-
-        # Update the deployment file (replace the current tag with the BUILD_NUMBER)
-        sed -i "s/[0-9]\\+/\\${BUILD_NUMBER}/g" app-manifests/deployment.yaml
+                            
+        # Update only the image version in the deployment.yaml file
+        BUILD_NUMBER=${BUILD_NUMBER}
+        sed -i "s|image: sree1207/my-app15:[0-9]*|image: sree1207/my-app15:${BUILD_NUMBER}|g" app-manifests/deployment.yaml
+                            
         echo "Deployment file updated."
-
-        # Debug: Verify changes
         echo "After updating:"
         cat app-manifests/deployment.yaml
-
-        # Add and commit the changes
+                            
+        # Commit and push changes
         git add app-manifests/deployment.yaml
-        git commit -m "Update deployment image to version ${BUILD_NUMBER}" || exit 1
-
-        # Push the changes to the repository
-        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main || exit 1
-      '''
+        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+        git push https://$GITHUB_TOKEN@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
+        '''
         }
       }
     }
