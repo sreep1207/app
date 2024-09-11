@@ -64,7 +64,9 @@ pipeline {
                             
         # Update only the image version in the deployment.yaml file
         BUILD_NUMBER=${BUILD_NUMBER}
-          sed -i 's|image: sree1207/my-app15:[0-9]\+|image: sree1207/my-app15:'"${BUILD_NUMBER}"'|g' app-manifests/deployment.yaml
+         # Update the deployment.yaml file with the new build number
+         sed -i 's|image: sree1207/my-app15:[0-9]*|image: sree1207/my-app15:'"${BUILD_NUMBER}"'|g' app-manifests/deployment.yaml
+                
                             
         echo "Deployment file updated."
         echo "After updating:"
