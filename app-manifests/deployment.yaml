@@ -17,9 +17,9 @@ spec:
       containers:
       - name: my-app15
 <<<<<<< HEAD
-        image: sree1207/my-app15:91
+        image: sree1207/my-app15:92
 =======
-        image: sree1207/my-app15:91
+        image: sree1207/my-app15:92
 >>>>>>> b5e015b8ef8918cecfc323f7180fac72d2b14655
         ports:
         - containerPort: 80 
