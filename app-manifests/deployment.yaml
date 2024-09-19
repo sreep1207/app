@@ -20,7 +20,7 @@ spec:
           command: ["/usr/local/bin/init-script.sh"]
       containers:
       - name: my-app15
-        image: sree1207/my-app15:103
+        image: sree1207/my-app15:104
         ports:
         - containerPort: 80 
         volumeMounts:
