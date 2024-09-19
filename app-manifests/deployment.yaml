@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-app15
-        image: sree1207/my-app15:107
+        image: sree1207/my-app15:108
         ports:
         - containerPort: 80 
         volumeMounts:
