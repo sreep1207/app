@@ -14,6 +14,13 @@ spec:
       labels:
         app: my-app15
     spec:
+      initContainers:
+      - name: init-sync
+        image: sree1207/rsync-alpine:latest
+        command: ["/usr/local/bin/init-script.sh"]
+        volumeMounts:
+        - name: efs-drupal-pv
+          mountPath: /var/www/html/test-drupal
       containers:
       - name: my-app15
         image: sree1207/my-app15:112
@@ -22,6 +29,10 @@ spec:
         volumeMounts:
         - name: efs-drupal-pv
           mountPath: /var/www/html/test-drupal
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "/var/www/html/test-drupal/permissions.sh"]
       volumes:
         - name: efs-drupal-pv
           persistentVolumeClaim:
