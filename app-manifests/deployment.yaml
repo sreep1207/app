@@ -19,8 +19,7 @@ spec:
         image: sree1207/rsync-alpine:latest
         command: ["/usr/local/bin/init-script.sh"]
         securityContext:
-          runAsUser: appuser
-          runAsGroup: www-data
+          runAsUser: 0
         volumeMounts:
         - name: efs-drupal-pv
           mountPath: /var/www/html/test-drupal
