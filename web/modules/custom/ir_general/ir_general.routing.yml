@@ -1,5 +1,5 @@
 ir_general.example:
-  path: '/test3-path'
+  path: '/test4-path'
   defaults:
     _title: 'IR General Controller'
     _controller: '\Drupal\ir_general\Controller\IrGeneralController'
