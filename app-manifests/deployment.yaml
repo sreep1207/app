@@ -31,6 +31,10 @@ spec:
         volumeMounts:
         - name: efs-drupal-pv
           mountPath: /var/www/html/test-drupal
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "/var/www/html/test-drupal/permissions.sh"]
       volumes:
         - name: efs-drupal-pv
           persistentVolumeClaim:
