@@ -13,7 +13,7 @@ pipeline {
         stage('Build and Push Docker Image') {
             agent {
                 docker {
-                    image 'sree1207/docker:latest' // Use your Docker-enabled image
+                    image 'sree1207/jenkins-inboundagent:latest' // Use your Docker-enabled image
                     reuseNode true // This ensures the workspace is reused inside the container
                     args '-u root --privileged' // Add necessary arguments, e.g., to run as root
                 }
