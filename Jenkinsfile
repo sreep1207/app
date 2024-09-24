@@ -12,7 +12,7 @@ pipeline {
                 steps {
                     script {
                     // Set the safe directory for git
-                    sh 'git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal'
+                    sh 'git config --global --add safe.directory /var/jenkins_home/workspace/app'
 
                     // Get the commit ID
                     def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
@@ -37,12 +37,12 @@ pipeline {
       steps {
           script {
             // Add the directory to safe directories
-            sh 'git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal'
+            sh 'git config --global --add safe.directory /var/jenkins_home/workspace/app'
         }
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
         sh '''
         # Navigate to the repository directory
-        cd /var/lib/jenkins/workspace/Drupal
+        cd /var/jenkins_home/workspace/app
 
         echo "Adding Jenkins workspace to safe directories..."
         #git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal
