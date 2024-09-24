@@ -17,7 +17,6 @@ pipeline {
                     args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
                 }
             }
-        stage('Build and Push Docker Image') {
             steps {
                 script {
                     // Set the safe directory for git
