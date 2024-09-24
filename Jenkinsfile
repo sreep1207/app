@@ -17,7 +17,7 @@ pipeline {
     
      stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "sree1207/my-app15:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "sree1207/my-app15:${COMMIT_ID}"
         // DOCKERFILE_LOCATION = "Dockerfile"
         REGISTRY_CREDENTIALS = credentials('dockerhub-pwd')
       }
@@ -49,6 +49,14 @@ pipeline {
         echo "Configuring Git..."
         git config user.email 'sridhar.innoraft@gmail.com'
         git config user.name 'sreep1207'
+
+         # Check for local changes
+         if ! git diff-index --quiet HEAD --; then
+             echo "Local changes detected. Stashing..."
+             git stash  # UPDATED: Stash any local changes to avoid merge conflicts
+         fi
+
+
        # Use HTTPS with the GitHub token for authentication
         echo "Fetching the latest changes from origin..."
         git fetch https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git || exit 1
