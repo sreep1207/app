@@ -38,13 +38,17 @@ pipeline {
         GIT_USER_NAME = "sreep1207"
       }
       steps {
+          script {
+            // Add the directory to safe directories
+            sh 'git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal'
+        }
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
         sh '''
         # Navigate to the repository directory
         cd /var/lib/jenkins/workspace/Drupal
 
         echo "Adding Jenkins workspace to safe directories..."
-        git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal
+        #git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal
 
         echo "Configuring Git..."
         git config user.email 'sridhar.innoraft@gmail.com'
