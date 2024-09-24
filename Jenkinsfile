@@ -15,18 +15,26 @@ pipeline {
             }
         }
     
-     stage('Build and Push Docker Image') {
-      environment {
-        COMMIT_ID = sh(script: 'git rev-parse HEAD', returnStdout: true).trim() // Get the commit ID
-        DOCKER_IMAGE = "sree1207/my-app15:${COMMIT_ID}"
-        REGISTRY_CREDENTIALS = credentials('dockerhub-pwd')
-      }
-      steps {
-        script {
-            sh 'docker build -t ${DOCKER_IMAGE} .'
-            def dockerImage = docker.image("${DOCKER_IMAGE}")
-            docker.withRegistry('https://index.docker.io/v1/', "dockerhub-pwd") {
-                dockerImage.push()
+        stage('Build and Push Docker Image') {
+            steps {
+                script {
+                    // Set the safe directory for git
+                    sh 'git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal'
+
+                    // Get the commit ID
+                    def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                    def dockerImage = "sree1207/my-app15:${commitId}"
+
+                    // Build the Docker image
+                    sh "docker build -t ${dockerImage} ."
+
+                    // Push the Docker image to Docker Hub
+                    docker.withRegistry('https://index.docker.io/v1/', "dockerhub-pwd") {
+                        sh "docker push ${dockerImage}"
+                    }
+                }
+            }
+        }
             }
         }
       }
