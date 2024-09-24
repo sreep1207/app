@@ -13,8 +13,9 @@ pipeline {
         stage('Build and Push Docker Image') {
             agent {
                 docker {
-                    image 'sree1207/docker:latest' // Your Docker-enabled image
-                    args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+                    image 'sree1207/docker:latest' // Use your Docker-enabled image
+                    reuseNode true // This ensures the workspace is reused inside the container
+                    args '-u root --privileged' // Add necessary arguments, e.g., to run as root
                 }
             }
             steps {
