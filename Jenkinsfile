@@ -17,8 +17,8 @@ pipeline {
     
      stage('Build and Push Docker Image') {
       environment {
+        COMMIT_ID = sh(script: 'git rev-parse HEAD', returnStdout: true).trim() // Get the commit ID
         DOCKER_IMAGE = "sree1207/my-app15:${COMMIT_ID}"
-        // DOCKERFILE_LOCATION = "Dockerfile"
         REGISTRY_CREDENTIALS = credentials('dockerhub-pwd')
       }
       steps {
