@@ -8,8 +8,9 @@ pipeline {
             }
         }
 
-            steps('Build and Push Docker Image') {
-                script {
+            stage ('Build and Push Docker Image') {
+                steps {
+                    script {
                     // Set the safe directory for git
                     sh 'git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal'
 
