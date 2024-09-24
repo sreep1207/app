@@ -61,11 +61,13 @@ pipeline {
 
          echo "Before updating:"
         cat app-manifests/deployment.yaml
-                            
+        # Get the latest commit ID
+        COMMIT_ID=$(git rev-parse HEAD)
+                   
         # Update only the image version in the deployment.yaml file
-        BUILD_NUMBER=${BUILD_NUMBER}
+        #BUILD_NUMBER=${BUILD_NUMBER}
          # Update the deployment.yaml file with the new build number
-         sed -i 's|image: sree1207/my-app15:[^ ]*|image: sree1207/my-app15:'"${BUILD_NUMBER}"'|g' app-manifests/deployment.yaml
+         sed -i 's|image: sree1207/my-app15:[^ ]*|image: sree1207/my-app15:'"${COMMIT_ID}"'|g' app-manifests/deployment.yaml
 
         echo "Deployment file updated."
         echo "After updating:"
@@ -73,7 +75,7 @@ pipeline {
                             
         # Commit and push changes
         git add app-manifests/deployment.yaml
-        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+        git commit -m "Update deployment image to version ${COMMIT_ID}"
         git push https://$GITHUB_TOKEN@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
         '''
         }
