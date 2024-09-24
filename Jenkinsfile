@@ -1,24 +1,14 @@
 pipeline {
-    agent any
-    
+    agent { label 'jenkinsagent' } // Replace with your agent label
+
     stages {
         stage('Checkout') {
             steps {
                 sh 'echo passed'
-                // Uncomment the following line if you need to checkout from git
-                //git branch: 'main', url: 'https://github.com/sreep1207/app.git', credentialsId: 'git'
             }
         }
-    
-        stage('Build and Push Docker Image') {
-            agent {
-                docker {
-                    image 'sree1207/jenkins-inboundagent:latest' // Use your Docker-enabled image
-                    reuseNode true // This ensures the workspace is reused inside the container
-                    args '-u root --privileged' // Add necessary arguments, e.g., to run as root
-                }
-            }
-            steps {
+
+            steps('Build and Push Docker Image') {
                 script {
                     // Set the safe directory for git
                     sh 'git config --global --add safe.directory /var/lib/jenkins/workspace/Drupal'
