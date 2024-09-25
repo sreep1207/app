@@ -54,7 +54,8 @@ spec:
                       --context=dir:///var/jenkins_home/workspace/app  \\
                       --dockerfile Dockerfile \\
                       --destination ${dockerImage} \\
-                      --cleanup
+                      --cleanup \\
+                      --verbosity debug
                     """
                 }
             }
