@@ -37,7 +37,15 @@ spec:
                 git url: "https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git", branch: 'main', credentialsId: 'github'
             }
         }
-
+         stage('Verify Context Directory') {
+            steps {
+                script {
+                    // Check the contents of the workspace directory
+                    echo "Listing contents of the workspace directory:"
+                    sh 'ls -la /var/jenkins_home/workspace/app' // Adjust this path if necessary
+                }
+            }
+        }
         stage('Build and Push Docker Image') {
             steps {
                 script {
