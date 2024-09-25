@@ -1,6 +1,28 @@
 pipeline {
-    agent { label 'jenkinsagent' } // Replace with your agent label
-
+    agent {
+        kubernetes {
+            label 'kaniko-agent' // Label for Kaniko agent
+            defaultContainer 'kaniko'
+            yaml """
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: kaniko
+      image: gcr.io/kaniko-project/executor:latest
+      command:
+        - cat
+      tty: true
+      volumeMounts:
+        - name: kaniko-secret
+          mountPath: /kaniko/.docker
+  volumes:
+    - name: kaniko-secret
+      secret:
+        secretName: regcred # Name of the Docker registry secret
+"""
+        }
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -18,16 +40,18 @@ pipeline {
                     def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
                     def dockerImage = "sree1207/my-app15:${commitId}"
 
-                    // Build the Docker image
-                    sh "docker build -t ${dockerImage} ."
-
-                    // Push the Docker image to Docker Hub
-                    docker.withRegistry('https://index.docker.io/v1/', "dockerhub-pwd") {
-                        sh "docker push ${dockerImage}"
+                     // Use Kaniko to build and push the Docker image
+                    sh """
+                    /kaniko/executor \\
+                      --context . \\
+                      --dockerfile Dockerfile \\
+                      --destination ${dockerImage} \\
+                      --cleanup
+                    """
                     }
                 }
             }
-        }
+        
         
      stage('Update Deployment File') {
       environment {
