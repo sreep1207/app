@@ -34,6 +34,7 @@ spec:
         
     environment {
         GITHUB_CREDENTIALS_ID = 'github' // Using Jenkins credentials
+        DOCKER_IMAGE_NAME = "sree1207/my-app15"
     }
      stages {
         stage('Cleanup') {
