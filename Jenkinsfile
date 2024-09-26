@@ -39,7 +39,7 @@ spec:
         GIT_USER_NAME = "sreep1207"
         GITHUB_TOKEN = credentials('github') // Using Jenkins credentials
     }
-
+   stages {
     stage('Checkout') {
     steps {
         script {
@@ -137,5 +137,5 @@ spec:
             }
         }
     }
-  
+  } 
 
