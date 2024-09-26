@@ -68,8 +68,9 @@ spec:
                     // Use Kaniko to build and push the Docker image
                     sh """
                     /kaniko/executor \\
-                      --context=git@github.com:sreep1207/app.git \\
-                      --destination=${dockerImage} \\
+                      --context=git@github.com:${GIT_USER_NAME}/${GIT_REPO_NAME}.git \\
+                      --destination=sree1207/test:latest \\
+                      --dockerfile=/app/Dockerfile \\
                       --cleanup \\
                       --verbosity debug
                     """
