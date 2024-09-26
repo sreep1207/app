@@ -38,6 +38,11 @@ spec:
         GITHUB_CREDENTIALS_ID = 'github' // Using Jenkins credentials
     }
      stages {
+        stage('Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
         stage('Checkout') {
             steps {
                 // Checkout the code from GitHub using the specified credentials
