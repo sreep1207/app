@@ -12,6 +12,8 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
+    command: ["cat"]
+    tty: true
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
@@ -31,8 +33,7 @@ spec:
 """
         }
     }
-    
-    
+        
     environment {
         GIT_REPO_NAME = "app"
         GIT_USER_NAME = "sreep1207"
