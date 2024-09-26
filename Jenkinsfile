@@ -43,6 +43,10 @@ spec:
     stages {
         stage('Checkout') {
             steps {
+                 // Initialize the Git repository
+                script {
+                    sh 'git init'
+                }
                 // Checkout the SCM repository
                 git url: "https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git", branch: 'main', credentialsId: 'github'
             }
