@@ -2,7 +2,7 @@ kind: Pod
 spec:
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
+    image: gcr.io/kaniko-project/executor:latest
     imagePullPolicy: Always
     command:
     - sleep
@@ -11,6 +11,8 @@ spec:
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
+      - name: efs-kaniko-pv
+        mountPath: /workspace
   volumes:
   - name: kaniko-secret
     projected:
@@ -20,3 +22,6 @@ spec:
           items:
             - key: .dockerconfigjson
               path: config.json
+  - name: efs-kaniko-pv
+      persistentVolumeClaim:
+        claimName: efs-kaniko-pvc     
