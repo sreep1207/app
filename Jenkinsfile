@@ -35,9 +35,7 @@ spec:
 
         
     environment {
-        GIT_REPO_NAME = "app"
-        GIT_USER_NAME = "sreep1207"
-        GITHUB_TOKEN = credentials('github') // Using Jenkins credentials
+        GITHUB_CREDENTIALS_ID = 'github' // Using Jenkins credentials
     }
    stages {
  stage('Checkout') {
@@ -46,7 +44,7 @@ spec:
       // Use credentials ID for accessing the Git repository
       credentialsId 'github'
       // Specify the Git repository URL and branch
-      git url: 'https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git', branch: 'main'
+      git branch: 'main', url: 'https://github.com/sreep1207/app.git', credentialsId: "${GITHUB_CREDENTIALS_ID}"
     }
   }
 }
@@ -74,7 +72,7 @@ spec:
                     // Use Kaniko to build and push the Docker image
                     sh """
                     /kaniko/executor \\
-                      --context=/var/jenkins_home/workspace/${GIT_REPO_NAME} \\
+                      --context=/var/jenkins_home/workspace/app \\
                       --destination=${dockerImage} \\
                       --verbosity debug
                     """
@@ -94,7 +92,7 @@ spec:
                     echo "Configuring Git..."
                     sh """
                     git config user.email 'sridhar.innoraft@gmail.com'
-                    git config user.name '${GIT_USER_NAME}'
+                    git config user.name 'sree1207'
 
                     # Check for local changes
                     if ! git diff-index --quiet HEAD --; then
@@ -104,7 +102,7 @@ spec:
 
                     # Pull the latest changes from the remote branch to avoid conflicts
                     echo "Fetching the latest changes from origin..."
-                    git pull https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git main || exit 1
+                    git pull https://${ GITHUB_CREDENTIALS_ID}@github.com/sree1207/app.git main || exit 1
 
                     echo "Before updating:"
                     cat app-manifests/deployment.yaml
@@ -122,7 +120,7 @@ spec:
                     # Commit and push changes
                     git add app-manifests/deployment.yaml
                     git commit -m "Update deployment image to version ${COMMIT_ID}"
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
+                    git push https://${ GITHUB_CREDENTIALS_ID}@github.com/sree1207/app.git HEAD:main
                     """
                 }
             }
