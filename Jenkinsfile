@@ -1,11 +1,36 @@
 pipeline {
-
-  agent {
-    kubernetes {
-      yamlFile 'kaniko-builder.yaml'
+    agent {
+        kubernetes {
+            inheritFrom 'kaniko-agent' // Label for Kaniko agent
+            defaultContainer 'kaniko'
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kaniko
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:latest
+    volumeMounts:
+      - name: kaniko-secret
+        mountPath: /kaniko/.docker
+      - name: efs-kaniko-pv
+        mountPath: /workspace
+  restartPolicy: Never
+  volumes:
+    - name: kaniko-secret
+      secret:
+        secretName: docker-hub-secret
+        items:
+          - key: .dockerconfigjson
+            path: config.json
+    - name: efs-kaniko-pv
+      persistentVolumeClaim:
+        claimName: efs-kaniko-pvc
+"""
+        }
     }
-  }       
-
         
     environment {
         GITHUB_CREDENTIALS_ID = 'github' // Using Jenkins credentials
