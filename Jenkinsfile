@@ -32,7 +32,6 @@ pipeline {
             steps {
                 script {
                     // Set the safe directory for git
-                    sh 'git config --global --add safe.directory /var/jenkins_home/workspace/app'
                      // Add SSH known hosts
                     sh 'ssh-keyscan github.com >> ~/.ssh/known_hosts'
                     // Get the commit ID
@@ -42,9 +41,9 @@ pipeline {
                     // Use Kaniko to build and push the Docker image
                     sh """
                     /kaniko/executor \\
-                      --context=git@github.com:${GIT_USER_NAME}/${GIT_REPO_NAME}.git \\
-                      --destination=sree1207/my-app15:${commitId}  \\
-                      --cleanup \\
+                      --context=/workspace \\
+                      --dockerfile=/workspace/Dockerfile \\
+                      --destination=sree1207/my-app15:${commitId} \\
                       --verbosity debug
                     """
                 }
