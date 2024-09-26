@@ -37,17 +37,20 @@ spec:
     environment {
         GITHUB_CREDENTIALS_ID = 'github' // Using Jenkins credentials
     }
-   stages {
- stage('Checkout') {
-  steps {
-    scm {
-      // Use credentials ID for accessing the Git repository
-      credentialsId 'github'
-      // Specify the Git repository URL and branch
-      git branch: 'main', url: 'https://github.com/sreep1207/app.git', credentialsId: "${GITHUB_CREDENTIALS_ID}"
-    }
-  }
-}
+     stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from GitHub using the specified credentials
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']], // Specify the branch
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/sreep1207/app.git',
+                        credentialsId: "${GITHUB_CREDENTIALS_ID}" // Use the defined credentials
+                    ]]
+                ])
+            }
+        }
          stage('Verify Context Directory') {
             steps {
                 script {
