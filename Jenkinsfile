@@ -61,7 +61,8 @@ spec:
                 script {
                     // Set the safe directory for git
                     sh 'git config --global --add safe.directory /var/jenkins_home/workspace/app'
-
+                     // Add SSH known hosts
+                    sh 'ssh-keyscan github.com >> ~/.ssh/known_hosts'
                     // Get the commit ID
                     def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
                     def dockerImage = "sree1207/my-app15:${commitId}"
