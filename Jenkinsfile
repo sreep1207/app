@@ -6,16 +6,18 @@ pipeline {
             yaml """
 apiVersion: v1
 kind: Pod
+metadata:
+  name: kaniko
 spec:
   containers:
-    - name: kaniko
-      image: gcr.io/kaniko-project/executor:latest
-      command:
-        - cat
-      tty: true
-      volumeMounts:
-        - name: kaniko-secret
-          mountPath: /kaniko/.docker
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:latest
+    volumeMounts:
+      - name: kaniko-secret
+        mountPath: /kaniko/.docker
+      - name: efs-kaniko-pv
+        mountPath: /workspace
+  restartPolicy: Never
   volumes:
     - name: kaniko-secret
       secret:
@@ -23,9 +25,13 @@ spec:
         items:
           - key: .dockerconfigjson
             path: config.json
+    - name: efs-kaniko-pv
+      persistentVolumeClaim:
+        claimName: efs-kaniko-pvc
 """
         }
     }
+    
     
     environment {
         GIT_REPO_NAME = "app"
@@ -62,9 +68,9 @@ spec:
                     // Use Kaniko to build and push the Docker image
                     sh """
                     /kaniko/executor \\
-                      --context=git@github.com:sreep1207/app.git  \\
-                      --dockerfile Dockerfile \\
-                      --destination ${dockerImage} \\
+                      --context=git@github.com:${GIT_USER_NAME}/${GIT_REPO_NAME}.git \\
+                      --destination=${dockerImage} \\
+                      --dockerfile=/workspace/Dockerfile \\
                       --cleanup \\
                       --verbosity debug
                     """
