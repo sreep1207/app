@@ -40,27 +40,25 @@ spec:
         GITHUB_TOKEN = credentials('github') // Using Jenkins credentials
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                 // Initialize the Git repository
-               script {
-                    // Initialize the Git repository if it doesn't exist
-                    def repoDir = "/var/jenkins_home/workspace/${GIT_REPO_NAME}"
-                    sh "mkdir -p ${repoDir}"
-                    dir(repoDir) {
-                        // Check if Git repo exists, otherwise initialize and fetch
-                        def isGitRepo = sh(script: '[ -d .git ] && echo "true" || echo "false"', returnStdout: true).trim()
-                        if (isGitRepo == 'false') {
-                            sh 'git init'
-                            sh 'git remote add origin https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git'
-                        }
-                // Checkout the SCM repository
-                git url: "https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git", branch: 'main', credentialsId: 'github'
+    stage('Checkout') {
+    steps {
+        script {
+            // Initialize the Git repository if it doesn't exist
+            def repoDir = "/var/jenkins_home/workspace/${GIT_REPO_NAME}"
+            sh "mkdir -p ${repoDir}"
+            dir(repoDir) {
+                // Check if Git repo exists, otherwise initialize and fetch
+                def isGitRepo = sh(script: '[ -d .git ] && echo "true" || echo "false"', returnStdout: true).trim()
+                if (isGitRepo == 'false') {
+                    sh 'git init'
+                    sh 'git remote add origin https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git'
+                }
+                // Checkout the main branch
+                git branch: 'main', url: "https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git", credentialsId: 'github'
             }
         }
-     }
-   }
+    }
+}
          stage('Verify Context Directory') {
             steps {
                 script {
