@@ -62,7 +62,7 @@ spec:
                     // Use Kaniko to build and push the Docker image
                     sh """
                     /kaniko/executor \\
-                      --context=dir:/var/jenkins_home/workspace/app  \\
+                      --context=git@github.com:sreep1207/app.git  \\
                       --dockerfile Dockerfile \\
                       --destination ${dockerImage} \\
                       --cleanup \\
