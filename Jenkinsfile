@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            inheritFrom 'kaniko-agent' // Label for Kaniko agent
+            label 'kaniko-agent' // Label for Kaniko agent
             defaultContainer 'kaniko'
             yaml """
 apiVersion: v1
@@ -11,7 +11,7 @@ metadata:
 spec:
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
+    image: gcr.io/kaniko-project/executor:latest
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
