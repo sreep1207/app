@@ -45,6 +45,11 @@ spec:
             steps {
                  // Initialize the Git repository
                 script {
+                   // Verify workspace directory (optional)
+                    sh 'ls -la /var/jenkins_home/workspace/app'
+
+                    // Check Git binary location (optional)
+                    sh 'which git'
                     sh 'git init'
                 }
                 // Checkout the SCM repository
