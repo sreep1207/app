@@ -12,8 +12,6 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
-    command: ["cat"]
-    tty: true
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
@@ -70,9 +68,8 @@ spec:
                     // Use Kaniko to build and push the Docker image
                     sh """
                     /kaniko/executor \\
-                      --context=git@github.com:${GIT_USER_NAME}/${GIT_REPO_NAME}.git \\
+                      --context=git@github.com:sreep1207/app.git \\
                       --destination=${dockerImage} \\
-                      --dockerfile=/workspace/Dockerfile \\
                       --cleanup \\
                       --verbosity debug
                     """
