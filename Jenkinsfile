@@ -60,6 +60,8 @@ spec:
             steps {
                 script {
                     // Set the safe directory for git
+                    sh 'git config --global --add safe.directory /var/jenkins_home/workspace/app'
+
                      // Add SSH known hosts
                     sh 'ssh-keyscan github.com >> ~/.ssh/known_hosts'
                     // Get the commit ID
