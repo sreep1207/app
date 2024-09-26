@@ -56,9 +56,9 @@ spec:
                 // Checkout the main branch
                 git branch: 'main', url: "https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git", credentialsId: 'github'
             }
-        }
-    }
-}
+         }
+      }
+   }
          stage('Verify Context Directory') {
             steps {
                 script {
