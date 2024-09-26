@@ -69,8 +69,8 @@ spec:
                     sh """
                     /kaniko/executor \\
                       --context=git@github.com:${GIT_USER_NAME}/${GIT_REPO_NAME}.git \\
-                      --destination=sree1207/test:latest \\
-                      --dockerfile=${dockerImage} \\
+                      --destination=${dockerimage} \\
+                      --dockerfile=/app/Dockerfile \\
                       --cleanup \\
                       --verbosity debug
                     """
