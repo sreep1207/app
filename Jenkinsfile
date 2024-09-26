@@ -19,7 +19,10 @@ spec:
   volumes:
     - name: kaniko-secret
       secret:
-        secretName: regcred # Name of the Docker registry secret
+        secretName: docker-hub-secret
+        items:
+          - key: .dockerconfigjson
+            path: config.json
 """
         }
     }
