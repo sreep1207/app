@@ -70,7 +70,6 @@ spec:
                     /kaniko/executor \\
                       --context=git@github.com:${GIT_USER_NAME}/${GIT_REPO_NAME}.git \\
                       --destination=${dockerimage} \\
-                      --dockerfile=/app/Dockerfile \\
                       --cleanup \\
                       --verbosity debug
                     """
