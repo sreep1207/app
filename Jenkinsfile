@@ -59,6 +59,8 @@ spec:
                 git url: "https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git", branch: 'main', credentialsId: 'github'
             }
         }
+     }
+   }
          stage('Verify Context Directory') {
             steps {
                 script {
