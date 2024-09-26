@@ -44,14 +44,17 @@ spec:
         stage('Checkout') {
             steps {
                  // Initialize the Git repository
-                script {
-                   // Verify workspace directory (optional)
-                    sh 'ls -la /var/jenkins_home/workspace/app'
-
-                    // Check Git binary location (optional)
-                    sh 'which git'
-                    sh 'git init'
-                }
+               script {
+                    // Initialize the Git repository if it doesn't exist
+                    def repoDir = "/var/jenkins_home/workspace/${GIT_REPO_NAME}"
+                    sh "mkdir -p ${repoDir}"
+                    dir(repoDir) {
+                        // Check if Git repo exists, otherwise initialize and fetch
+                        def isGitRepo = sh(script: '[ -d .git ] && echo "true" || echo "false"', returnStdout: true).trim()
+                        if (isGitRepo == 'false') {
+                            sh 'git init'
+                            sh 'git remote add origin https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git'
+                        }
                 // Checkout the SCM repository
                 git url: "https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git", branch: 'main', credentialsId: 'github'
             }
@@ -80,8 +83,8 @@ spec:
                     // Use Kaniko to build and push the Docker image
                     sh """
                     /kaniko/executor \\
-                      --context=git@github.com:${GIT_USER_NAME}/${GIT_REPO_NAME}.git \\
-                      --destination=sree1207/my-app15:${commitId}  \\
+                      -context=/var/jenkins_home/workspace/${GIT_REPO_NAME} \\
+                      --destination=${dockerImage} \\
                       --verbosity debug
                     """
                 }
