@@ -60,7 +60,7 @@ spec:
                 script {
                     // Check the contents of the workspace directory
                     echo "Listing contents of the workspace directory:"
-                    sh 'ls -la /var/jenkins_home/workspace/app' // Adjust this path if necessary
+                    sh 'ls -la ${WORKSPACE}' // Adjust this path if necessary
                 }
             }
         }
@@ -79,7 +79,7 @@ spec:
                     // Use Kaniko to build and push the Docker image
                     sh """
                     /kaniko/executor \\
-                      --context=/workspace \\
+                      --context=${WORKSPACE} \\
                       --destination=${dockerImage} \\
                       --verbosity debug
                     """
