@@ -14,6 +14,9 @@ spec:
     command:
       - cat
     tty: true
+    env:
+      - name: JENKINS_URL
+        value: "http://127.0.0.1:8080/"
 """
         }
     }
