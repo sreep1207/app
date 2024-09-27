@@ -15,8 +15,6 @@ spec:
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
-      - name: efs-kaniko-pv
-        mountPath: /workspace
   restartPolicy: Never
   volumes:
     - name: kaniko-secret
@@ -25,9 +23,6 @@ spec:
         items:
           - key: .dockerconfigjson
             path: config.json
-    - name: efs-kaniko-pv
-      persistentVolumeClaim:
-        claimName: efs-kaniko-pvc
 """
         }
     }
