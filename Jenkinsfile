@@ -79,7 +79,7 @@ spec:
                     // Use Kaniko to build and push the Docker image
                     sh """
                     /kaniko/executor \\
-                      --context=/var/jenkins_home/workspace/app \\
+                      --context=/workspace \\
                       --destination=${dockerImage} \\
                       --verbosity debug
                     """
