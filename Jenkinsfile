@@ -16,7 +16,7 @@ spec:
     tty: true
     env:
       - name: JENKINS_URL
-        value: 'http://10.100.23.220:8080'
+        value: "http://10.100.23.220:8080"
 """
         }
     }
