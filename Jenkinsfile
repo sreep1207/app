@@ -56,6 +56,21 @@ spec:
                 }
             }
         }
+
+        stage('Test Jenkins Connection') {
+            steps {
+                script {
+                    // Test the connection to the Jenkins server
+                    echo "Testing connection to Jenkins at ${JENKINS_URL}..."
+                    def response = sh(script: "curl -s -o /dev/null -w '%{http_code}' ${JENKINS_URL}", returnStdout: true).trim()
+                    if (response == '200') {
+                        echo "Connection to Jenkins is successful!"
+                    } else {
+                        error "Failed to connect to Jenkins, HTTP response code: ${response}"
+                    }
+                }
+            }
+        }
         
         stage('Build and Push Docker Image') {
             steps {
