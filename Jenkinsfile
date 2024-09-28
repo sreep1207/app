@@ -68,7 +68,7 @@ spec:
                 script {
                     // Check the contents of the workspace directory
                     echo "Listing contents of the workspace directory:"
-                    sh 'ls -la "${WORKSPACE}"' // Verify if files are present
+                    sh "ls -la ${WORKSPACE}" // Verify if files are present
                 }
             }
         }
