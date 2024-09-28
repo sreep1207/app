@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            label'kaniko' 
+            inheritFrom 'kaniko' 
             defaultContainer 'jnlp'
             yaml """
 apiVersion: v1
