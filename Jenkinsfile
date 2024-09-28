@@ -15,11 +15,6 @@ spec:
       - sleep
       - infinity
     tty: true
-   - name: jnlp
-     image: jenkins/inbound-agent
-     args:
-      - \${computer.jnlpmac}
-      - \${computer.name}
     env:
       - name: JENKINS_URL
         value: "http://10.100.23.220:8080"
