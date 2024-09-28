@@ -62,8 +62,12 @@ agent {
 
         stage('Build and Push Docker Image') {
             steps {
-                container(name: 'kaniko', shell: '/bin/sh') {
-                     sh '''#!/bin/sh
+                container(name: 'kaniko', shell: '/busybox/sh') {
+                     sh '''#!/busybox/sh
+                          echo "Current Directory: `pwd`"
+                          echo "Image Name: ${IMAGE_NAME}"
+                          echo "Image Tag: ${IMAGE_TAG}"
+                          echo "Starting Kaniko build..."
                         /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=${IMAGE_NAME}:${IMAGE_TAG}
                     '''
         
