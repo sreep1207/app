@@ -1,38 +1,28 @@
 pipeline {
     agent {
         kubernetes {
+            label 'kaniko-agent'
+            defaultContainer 'jnlp'
             yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    kaniko: kaniko
-spec:
-  containers:
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
-    command:
-      - sleep
-      - infinity
-    tty: true
-  - name: jnlp
-    image: jenkins/inbound-agent
-    args:
-      - -url
-      - \${JENKINS_URL}
-      - -workDir
-      - /home/jenkins/agent
-    env:
-      - name: JENKINS_URL
-        value: "http://10.100.23.220:8080"
-      - name: JENKINS_AGENT_NAME
-        value: "app_122-2q0fc-xlp3k" #Give it a name
-      - name: JENKINS_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: secret #Ensure this secret is created with the correct credentials
-            key: secret-file
-"""
+            apiVersion: v1
+            kind: Pod
+            metadata:
+              labels:
+                kaniko: kaniko
+            spec:
+              containers:
+              - name: kaniko
+                image: gcr.io/kaniko-project/executor:latest
+                args: ["--verbosity=debug"]
+                command: ["sleep", "infinity"]
+              - name: jnlp
+                image: jenkins/inbound-agent
+                args:
+                  - -url
+                  - ${JENKINS_URL}
+                  - -workDir
+                  - /home/jenkins/agent
+            """
         }
     }
 
