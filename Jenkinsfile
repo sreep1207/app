@@ -26,7 +26,7 @@ spec:
       - name: JENKINS_URL
         value: "http://10.100.23.220:8080"
       - name: JENKINS_AGENT_NAME
-        value: "kaniko-agent" #Give it a name
+        value: "app_122-2q0fc-xlp3k" #Give it a name
       - name: JENKINS_SECRET
         valueFrom:
           secretKeyRef:
