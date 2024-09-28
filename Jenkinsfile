@@ -64,6 +64,20 @@ agent {
             steps {
                 container(name: 'kaniko', shell: '/busybox/sh') {
                     sh '''#!/busybox/sh
+             # Print the current working directory
+            echo "Current working directory:"
+            pwd
+            # Print environment variables for debugging
+            echo "Environment variables:"
+            printenv
+            
+            # List contents of the working directory
+            echo "Listing contents of the working directory:"
+            ls -la `pwd`
+            
+            # List the Dockerfile to ensure it's accessible
+            echo "Listing Dockerfile:"
+            ls -la `pwd`/Dockerfile
                    /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=${IMAGE_NAME}:${IMAGE_TAG}
                     '''
                     }
