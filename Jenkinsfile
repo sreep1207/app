@@ -72,7 +72,7 @@ spec:
 
                     // Update the deployment.yaml with the new image tag
                     def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    sh "sed -i 's|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:${IMAGE_TAG}|g' app-manifests/deployment.yaml"
+                    sh "sed -i 's|image:sree1207/myapp15 :.*|image: sree1207/myapp15:${IMAGE_TAG}|g' app-manifests/deployment.yaml"
 
                     // Commit and push the changes
                     sh """
