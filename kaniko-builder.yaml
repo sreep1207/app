@@ -17,11 +17,11 @@ spec:
     image: jenkins/inbound-agent:latest
     args:
     - -url
-    - ${JENKINS_URL}          # Jenkins URL
+    - http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/          # Jenkins URL
     - -workDir
     - /home/jenkins/agent
     - -secret
-    - ${JENKINS_SECRET}       # JNLP secret
+    - 6c415231f727ece9a9fab366895706e25948fccdaf81d31c669524e74d177e4a       # JNLP secret
     env:
     - name: JENKINS_URL
       value: "http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/"  # Replace with your Jenkins URL
