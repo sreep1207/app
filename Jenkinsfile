@@ -29,6 +29,7 @@ pipeline {
     environment {
         GITHUB_CREDENTIALS_ID = 'github' // Using Jenkins credentials
         DOCKER_IMAGE_NAME = "sree1207/my-app15"
+        JENKINS_TOKEN= '11fbc521a3d5f40fe5c7c05a04032677a3'
     }
 
     stages {
