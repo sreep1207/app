@@ -18,8 +18,10 @@ spec:
   - name: jnlp
     image: jenkins/inbound-agent
     args:
+      - -url
       - \${JENKINS_URL}
-      - \${JOB_NAME}
+      - -workDir
+      - /home/jenkins/agent
     env:
       - name: JENKINS_URL
         value: "http://10.100.23.220:8080"
