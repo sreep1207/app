@@ -1,9 +1,30 @@
 pipeline {
-agent {
-    kubernetes {
-      yamlFile 'kaniko-builder.yaml'
-    }
-  }
+    agent {
+        kubernetes {
+            label 'kaniko' // Label for Kaniko agent
+            defaultContainer 'kaniko'
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kaniko
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    volumeMounts:
+      - name: kaniko-secret
+        mountPath: /kaniko/.docker
+  restartPolicy: Never
+  volumes:
+    - name: kaniko-secret
+      secret:
+        secretName: docker-hub-secret
+        items:
+          - key: .dockerconfigjson
+            path: config.json
+"""
+
     environment {
         APP_NAME = "app"
         DOCKER_USER = "sree1207"
