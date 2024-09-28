@@ -7,7 +7,7 @@ agent {
     environment {
         APP_NAME = "app"
         DOCKER_USER = "sree1207"
-        DOCKER_PASS = 'Aeg\$12345'
+        DOCKER_PASS = credentials('dockerhub-pwd')
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         GITHUB_CREDENTIALS_ID = 'github'
@@ -62,8 +62,8 @@ agent {
 
         stage('Build and Push Docker Image') {
             steps {
-                container(name: 'kaniko', shell: '/busybox/sh') {
-                     sh '''#!/busybox/sh
+                container(name: 'kaniko') {
+                     sh '''
                           echo "Current Directory: `pwd`"
                           echo "Image Name: ${IMAGE_NAME}"
                           echo "Image Tag: ${IMAGE_TAG}"
