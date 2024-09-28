@@ -8,8 +8,12 @@ spec:
     image: gcr.io/kaniko-project/executor:debug
     args:
     - "--context=$(pwd)"
-    - "--destination=sree1207/test:{IMAGE_TAG}"
+    - "--dockerfile=/workspace/Dockerfile"
+    - "--no-push"
     imagePullPolicy: Always
+    env:
+    - name: IMAGE_TAG
+      value: "v1.0.0"
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
