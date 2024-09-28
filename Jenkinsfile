@@ -21,7 +21,6 @@ spec:
         memory: "1Gi"
         cpu: "500m"
 """
-"""
         }
     }
     environment {
