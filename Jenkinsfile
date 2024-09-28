@@ -12,7 +12,7 @@ pipeline {
             spec:
               containers:
               - name: kaniko
-                image: gcr.io/kaniko-project/executor:latest
+                image: gcr.io/kaniko-project/executor:debug
                 args: ["--verbosity=debug"]
                 command: ["sleep", "infinity"]
               - name: jnlp
