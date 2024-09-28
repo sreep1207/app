@@ -101,7 +101,7 @@ pipeline {
                         // Use Kaniko to build and push the Docker image
                         sh """
                         /kaniko/executor \\
-                          --context=${WORKSPACE} \\
+                          --context=git@github.com:sreep1207/app.git \\
                           --dockerfile=${WORKSPACE}/Dockerfile \\
                           --destination=${dockerImage} \\
                           --docker-config=/kaniko/.docker/ \\
