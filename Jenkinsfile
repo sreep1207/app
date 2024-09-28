@@ -1,8 +1,6 @@
 pipeline {
     agent {
         kubernetes {
-            inheritFrom 'kaniko-agent'
-            defaultContainer 'jnlp'
             yaml """
             apiVersion: v1
             kind: Pod
@@ -13,25 +11,22 @@ pipeline {
               containers:
               - name: kaniko
                 image: gcr.io/kaniko-project/executor:debug
-                args: ["--verbosity=debug"]
                 command: ["/kaniko/executor"]
+                args: [
+                  "--context=/workspace",
+                  "--dockerfile=/workspace/Dockerfile",
+                  "--destination=${DOCKER_IMAGE_NAME}:${GIT_COMMIT}",
+                  "--verbosity=debug"
+                ]
                 volumeMounts:
                   - name: kaniko-secret
                     mountPath: /kaniko/.docker
               - name: jnlp
                 image: jenkins/inbound-agent
-                args:
-                  - -url
-                  - ${JENKINS_URL}
-                  - -workDir
-                  - /home/jenkins/agent
-              volumes:
+            volumes:
               - name: kaniko-secret
                 secret:
                   secretName: docker-hub-secret
-                  items:
-                    - key: .dockerconfigjson
-                      path: config.json
             """
         }
     }
