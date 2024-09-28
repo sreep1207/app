@@ -9,7 +9,7 @@ spec:
     args:
     - "--context=$(pwd)"
     - "--dockerfile=/workspace/Dockerfile"
-    - "--no-push"
+    - "--debug"
     imagePullPolicy: Always
     env:
     - name: IMAGE_TAG
