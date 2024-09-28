@@ -1,7 +1,8 @@
 pipeline {
     agent {
         kubernetes {
-            yamlFile 'kaniko-builder.yaml' 
+            label'kaniko' 
+            defaultContainer 'jnlp'
   }
 }
     environment {
