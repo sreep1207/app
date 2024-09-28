@@ -7,11 +7,11 @@ agent {
     environment {
         APP_NAME = "app"
         DOCKER_USER = "sree1207"
-        DOCKER_PASS = credentials('dockerhub-pwd')
+        DOCKER_PASS = 'Aeg\$12345'
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         GITHUB_CREDENTIALS_ID = 'github'
-        JENKINS_URL = credentials('jenkins')
+        JENKINS_URL = 'http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/'
     }
 
     stages {
