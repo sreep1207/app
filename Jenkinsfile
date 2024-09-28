@@ -15,6 +15,9 @@ pipeline {
                 image: gcr.io/kaniko-project/executor:debug
                 args: ["--verbosity=debug"]
                 command: ["sleep", "infinity"]
+                volumeMounts:
+                  - name: kaniko-secret
+                    mountPath: /kaniko/.docker
               - name: jnlp
                 image: jenkins/inbound-agent
                 args:
@@ -22,6 +25,13 @@ pipeline {
                   - ${JENKINS_URL}
                   - -workDir
                   - /home/jenkins/agent
+              volumes:
+              - name: kaniko-secret
+                secret:
+                  secretName: docker-hub-secret
+                  items:
+                    - key: .dockerconfigjson
+                      path: config.json
             """
         }
     }
