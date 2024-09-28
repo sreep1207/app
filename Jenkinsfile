@@ -77,10 +77,6 @@ spec:
             steps {
                 container(name: 'kaniko',shell: '/busybox/sh') {
                      sh '''#!/busybox/sh
-                          echo "Current Directory: `pwd`"
-                          echo "Image Name: ${IMAGE_NAME}"
-                          echo "Image Tag: ${IMAGE_TAG}"
-                          echo "Starting Kaniko build..."
                         /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp15:${IMAGE_TAG}
                     '''
         
