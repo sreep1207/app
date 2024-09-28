@@ -17,6 +17,11 @@ spec:
     env:
       - name: JENKINS_URL
         value: "http://10.100.23.220:8080"
+      - name: AGENT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: jenkins-agent-secret
+            key: secret-file
 """
         }
     }
