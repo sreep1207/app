@@ -32,23 +32,7 @@ spec:
         IMAGE_TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         GITHUB_CREDENTIALS_ID = 'github'
         JENKINS_URL = 'http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/'
-    }
-
-    stages {
-        stage('Test Jenkins Connection') {
-            steps {
-                script {
-                    // Test the connection to the Jenkins server
-                    echo "Testing connection to Jenkins at ${JENKINS_URL}..."
-                    def response = sh(script: "curl -s -o /dev/null -w '%{http_code}' ${JENKINS_URL}", returnStdout: true).trim()
-                    if (response == '200') {
-                        echo "Connection to Jenkins is successful!"
-                    } else {
-                        error "Failed to connect to Jenkins, HTTP response code: ${response}"
-                    }
-                }
-            }
-        }
+   }
 
         stage('Cleanup') {
             steps {
