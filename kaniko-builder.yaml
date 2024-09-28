@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: kaniko-builder
+  name: kaniko
 spec:
   containers:
   - name: kaniko
@@ -27,7 +27,7 @@ spec:
     - kanikoagent 
     env:
     - name: JENKINS_URL
-      value: "http://10.100.23.220:8080/"  # Replace with your Jenkins URL
+      value: "http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/"  # Replace with your Jenkins URL
     - name: JENKINS_SECRET
       valueFrom:
         secretKeyRef:
