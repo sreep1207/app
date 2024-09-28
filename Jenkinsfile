@@ -14,8 +14,12 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
     command:
-    - cat
-    tty: true
+    - /kaniko/executor
+    args: ["--dockerfile=$(pwd)/Dockerfile", "--context=$(pwd)", "--destination=sreep1207/app:latest"]
+    resources:
+      limits:
+        memory: "1Gi"
+        cpu: "500m"
 """
         }
     }
