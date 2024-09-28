@@ -5,8 +5,12 @@ agent {
     }
   }
     environment {
-        GITHUB_CREDENTIALS_ID = 'github' // Using Jenkins credentials
-        DOCKER_IMAGE_NAME = "sree1207/my-app15"
+        APP_NAME = "myapp15"
+        DOCKER_USER = "sree1207"
+        DOCKER_PASS = credentials('dockerhub-pwd')
+        IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
+        IMAGE_TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+        GITHUB_CREDENTIALS_ID = 'github'
         JENKINS_URL = 'http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/'
     }
 
@@ -58,25 +62,13 @@ agent {
 
         stage('Build and Push Docker Image') {
             steps {
-                container('kaniko') {
-                    script {
-                           // Get the commit ID for tagging the Docker image
-                        def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                        def dockerImage = "${DOCKER_IMAGE_NAME}:${commitId}"        
-                
-                        // Use Kaniko to build and push the Docker image
-                        sh """
-                        /kaniko/executor \\
-                          --context=dir://${WORKSPACE} \\ \\
-                          --dockerfile=${WORKSPACE}/Dockerfile \\
-                          --destination=${dockerImage} \\
-                          --docker-config=/kaniko/.docker/ \\
-                          --verbosity debug
-                        """
+                container(name: 'kaniko', shell: '/busybox/sh') {
+                    sh '''#!/busybox/sh
+                   /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=${IMAGE_NAME}:${IMAGE_TAG}
+                    '''
                     }
                 }
             }
-        }
 
         stage('Update Deployment File') {
             steps {
@@ -93,12 +85,12 @@ agent {
 
                     // Update the deployment.yaml with the new image tag
                     def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    sh "sed -i 's|image: ${DOCKER_IMAGE_NAME}:.*|image: ${DOCKER_IMAGE_NAME}:${commitId}|g' app-manifests/deployment.yaml"
+                    sh "sed -i 's|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:${IMAGE_TAG}|g' app-manifests/deployment.yaml"
 
                     // Commit and push the changes
                     sh """
                     git add app-manifests/deployment.yaml
-                    git commit -m "Update deployment image to version ${commitId}"
+                    git commit -m "Update deployment image to version ${IMAGE_TAG}"
                     git push https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
                     """
                 }
