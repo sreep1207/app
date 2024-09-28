@@ -78,8 +78,9 @@ agent {
             # List the Dockerfile to ensure it's accessible
             echo "Listing Dockerfile:"
             ls -la `pwd`/Dockerfile
-                   /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=${IMAGE_NAME}:${IMAGE_TAG}
-                    '''
+                   # Build the Docker image using Kaniko
+                /kaniko/executor --dockerfile ${WORKSPACE}/Dockerfile --context ${WORKSPACE} --destination=${IMAGE_NAME}:${IMAGE_TAG}
+                 '''
                     }
                 }
             }
