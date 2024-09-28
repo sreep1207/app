@@ -24,7 +24,8 @@ spec:
           - key: .dockerconfigjson
             path: config.json
 """
-
+  }
+}
     environment {
         APP_NAME = "app"
         DOCKER_USER = "sree1207"
