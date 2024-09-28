@@ -68,7 +68,10 @@ agent {
                           echo "Image Name: ${IMAGE_NAME}"
                           echo "Image Tag: ${IMAGE_TAG}"
                           echo "Starting Kaniko build..."
-                        /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=${IMAGE_NAME}:${IMAGE_TAG}
+                        /kaniko/executor \\
+                              --dockerfile "${WORKSPACE}/Dockerfile" \\
+                              --context "${WORKSPACE}" \\
+                              --destination="${IMAGE_NAME}:${IMAGE_TAG}" 
                     '''
         
                     }
