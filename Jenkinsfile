@@ -83,4 +83,5 @@ spec:
                 }
             }
         }
-    }
+    } //close the stage block
+}
