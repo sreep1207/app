@@ -102,6 +102,7 @@ pipeline {
                           --context=${WORKSPACE} \\
                           --dockerfile=${WORKSPACE}/Dockerfile \\
                           --destination=${dockerImage} \\
+                          --docker-config=/kaniko/.docker/ \\
                           --verbosity debug
                         """
                     }
