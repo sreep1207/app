@@ -15,6 +15,8 @@ pipeline {
                 image: gcr.io/kaniko-project/executor:debug
                 args: ["--verbosity=debug"]
                 command: ["/kaniko/executor"] #Change this to the actual command you want to run
+                securityContext:
+                  runAsUser: 1000 
                 volumeMounts:
                   - name: kaniko-secret
                     mountPath: /kaniko/.docker
