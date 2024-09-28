@@ -23,6 +23,6 @@ spec:
             - key: .dockerconfigjson
               path: config.json
   - name: efs-kaniko-pv
-      persistentVolumeClaim:
-        claimName: efs-kaniko-pvc
+    persistentVolumeClaim:
+      claimName: efs-kaniko-pvc
 
