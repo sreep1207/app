@@ -60,9 +60,6 @@ agent {
             steps {
                 container('kaniko') {
                     script {
-                        // Get the commit ID for tagging the Docker image
-                        def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                        def dockerImage = "${DOCKER_IMAGE_NAME}:${commitId}"
                         
                 // Debugging information
                 echo "Building Docker image ${dockerImage} from context ${WORKSPACE}"
