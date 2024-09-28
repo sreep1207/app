@@ -59,14 +59,7 @@ spec:
         stage('Checkout') {
             steps {
                 // Checkout the code from GitHub using the specified credentials
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/main']], // Specify the branch
-                    userRemoteConfigs: [[
-                        url: 'https://github.com/sreep1207/app.git',
-                        credentialsId: "${GITHUB_CREDENTIALS_ID}" // Use the defined credentials
-                    ]]
-                ])
+                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/sreep1207/app.git'
             }
         }
 
