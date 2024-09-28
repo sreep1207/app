@@ -16,53 +16,23 @@ spec:
       - infinity
     tty: true
   - name: jnlp
-      image: jenkins/inbound-agent
-      args:
-        - ${computer.jnlpmac}
-        - ${computer.name}
+    image: jenkins/inbound-agent
+    args:
+      - ${computer.jnlpmac}
+      - ${computer.name}
     env:
       - name: JENKINS_URL
         value: "http://10.100.23.220:8080"
 """
         }
     }
-    
+
     environment {
         GITHUB_CREDENTIALS_ID = 'github' // Using Jenkins credentials
         DOCKER_IMAGE_NAME = "sree1207/my-app15"
     }
-    
-    stages {
-        stage('Cleanup') {
-            steps {
-                cleanWs()
-            }
-        }
-        
-        stage('Checkout') {
-            steps {
-                // Checkout the code from GitHub using the specified credentials
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/main']], // Specify the branch
-                    userRemoteConfigs: [[
-                        url: 'https://github.com/sreep1207/app.git',
-                        credentialsId: "${GITHUB_CREDENTIALS_ID}" // Use the defined credentials
-                    ]]
-                ])
-            }
-        }
-        
-        stage('Verify Context Directory') {
-            steps {
-                script {
-                    // Check the contents of the workspace directory
-                    echo "Listing contents of the workspace directory:"
-                    sh 'ls -la "${WORKSPACE}"' // Verify if files are present
-                }
-            }
-        }
 
+    stages {
         stage('Test Jenkins Connection') {
             steps {
                 script {
@@ -77,7 +47,37 @@ spec:
                 }
             }
         }
-        
+
+        stage('Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
+
+        stage('Checkout') {
+            steps {
+                // Checkout the code from GitHub using the specified credentials
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']], // Specify the branch
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/sreep1207/app.git',
+                        credentialsId: "${GITHUB_CREDENTIALS_ID}" // Use the defined credentials
+                    ]]
+                ])
+            }
+        }
+
+        stage('Verify Context Directory') {
+            steps {
+                script {
+                    // Check the contents of the workspace directory
+                    echo "Listing contents of the workspace directory:"
+                    sh 'ls -la "${WORKSPACE}"' // Verify if files are present
+                }
+            }
+        }
+
         stage('Build and Push Docker Image') {
             steps {
                 container('kaniko') {
@@ -85,7 +85,7 @@ spec:
                         // Get the commit ID for tagging the Docker image
                         def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
                         def dockerImage = "${DOCKER_IMAGE_NAME}:${commitId}"
-                        
+
                         // Use Kaniko to build and push the Docker image
                         sh """
                         /kaniko/executor \\
