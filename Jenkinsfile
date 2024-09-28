@@ -5,7 +5,7 @@ agent {
     }
   }
     environment {
-        APP_NAME = "myapp15"
+        APP_NAME = "app"
         DOCKER_USER = "sree1207"
         DOCKER_PASS = credentials('dockerhub-pwd')
         IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
