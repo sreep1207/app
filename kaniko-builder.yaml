@@ -6,14 +6,11 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    args:
-    - "--context=$(pwd)"
-    - "--dockerfile=/workspace/Dockerfile"
-    - "--debug"
     imagePullPolicy: Always
-    env:
-    - name: IMAGE_TAG
-      value: "v1.0.0"
+    command:
+    - sleep
+    args:
+    - "9999999"  # Keeps the container running for a long time
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
@@ -26,11 +23,11 @@ spec:
     - $(JENKINS_URL)            # Jenkins URL
     - -workDir
     - /home/jenkins/agent
-    - -secret
-    -  $(JENKINS_SECRET)         # JNLP secret
+    - -name
+    - kanikoagent 
     env:
     - name: JENKINS_URL
-      value: "http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/"  # Replace with your Jenkins URL
+      value: "http://10.100.23.220:8080/"  # Replace with your Jenkins URL
     - name: JENKINS_SECRET
       valueFrom:
         secretKeyRef:
