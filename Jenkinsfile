@@ -12,14 +12,15 @@ metadata:
 spec:
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:latest
+    image: gcr.io/kaniko-project/executor:debug
     command:
-    - /kaniko/executor
-    args: ["--dockerfile=/workspace/Dockerfile", "--context=/workspace", "--destination=sreep1207/app:latest"]
+    - /busybox/sh
+    tty: true
     resources:
       limits:
         memory: "1Gi"
         cpu: "500m"
+"""
 """
         }
     }
