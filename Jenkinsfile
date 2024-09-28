@@ -15,7 +15,7 @@ spec:
     image: gcr.io/kaniko-project/executor:latest
     command:
     - /kaniko/executor
-    args: ["--dockerfile=\$(pwd)/Dockerfile", "--context=\$(pwd)", "--destination=sreep1207/app:latest"]
+    args: ["--dockerfile=Dockerfile", "--context=dir", "--destination=sreep1207/app:latest"]
     resources:
       limits:
         memory: "1Gi"
