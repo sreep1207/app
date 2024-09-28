@@ -63,7 +63,7 @@ agent {
         stage('Build and Push Docker Image') {
             steps {
                 container(name: 'kaniko', shell: '/busybox/sh') {
-                    sh '''#!/busybox/sh
+                    sh '''
              # Print the current working directory
             echo "Current working directory:"
             pwd
