@@ -11,7 +11,7 @@ agent {
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         GITHUB_CREDENTIALS_ID = 'github'
-        JENKINS_URL = credentials('jenkisn')
+        JENKINS_URL = credentials('jenkins')
     }
 
     stages {
