@@ -67,7 +67,7 @@ agent {
                         // Use Kaniko to build and push the Docker image
                         sh """
                         /kaniko/executor \\
-                          --context=git@github.com:sreep1207/app.git \\
+                          --context=dir://${WORKSPACE} \\ \\
                           --dockerfile=${WORKSPACE}/Dockerfile \\
                           --destination=${dockerImage} \\
                           --docker-config=/kaniko/.docker/ \\
