@@ -14,7 +14,7 @@ pipeline {
               - name: kaniko
                 image: gcr.io/kaniko-project/executor:debug
                 args: ["--verbosity=debug"]
-                command: ["sleep", "infinity"]
+                command: ["/kaniko/executor"]
                 volumeMounts:
                   - name: kaniko-secret
                     mountPath: /kaniko/.docker
