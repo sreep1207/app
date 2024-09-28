@@ -63,15 +63,6 @@ spec:
             }
         }
 
-        stage('Verify Context Directory') {
-            steps {
-                script {
-                    // Check the contents of the workspace directory
-                    echo "Listing contents of the workspace directory:"
-                    sh "ls -la ${WORKSPACE}" // Verify if files are present
-                }
-            }
-        }
 
         stage('Build and Push Docker Image') {
             steps {
