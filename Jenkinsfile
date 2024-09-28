@@ -18,8 +18,8 @@ spec:
   - name: jnlp
     image: jenkins/inbound-agent
     args:
-      - ${computer.jnlpmac}
-      - ${computer.name}
+      - \${JENKINS_URL}
+      - \${JOB_NAME}
     env:
       - name: JENKINS_URL
         value: "http://10.100.23.220:8080"
