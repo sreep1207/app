@@ -25,6 +25,13 @@ spec:
     env:
       - name: JENKINS_URL
         value: "http://10.100.23.220:8080"
+      - name: JENKINS_AGENT_NAME
+        value: "kaniko-agent" // Give it a name
+      - name: JENKINS_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: secret // Ensure this secret is created with the correct credentials
+            key: secret-file
 """
         }
     }
