@@ -14,7 +14,7 @@ pipeline {
               - name: kaniko
                 image: gcr.io/kaniko-project/executor:debug
                 args: ["--verbosity=debug"]
-                command: ["/kaniko/executor"] #Change this to the actual command you want to run
+                command: ["/kaniko/executor"]
                 securityContext:
                   runAsUser: 1000 
                 volumeMounts:
