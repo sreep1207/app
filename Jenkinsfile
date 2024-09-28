@@ -1,6 +1,8 @@
 pipeline {
     agent {
         kubernetes {
+            inheritFrom 'kaniko-agent'
+            defaultContainer 'jnlp'
             yaml """
             apiVersion: v1
             kind: Pod
@@ -11,22 +13,25 @@ pipeline {
               containers:
               - name: kaniko
                 image: gcr.io/kaniko-project/executor:debug
-                command: ["/kaniko/executor"]
-                args: [
-                  "--context=/workspace",
-                  "--dockerfile=/workspace/Dockerfile",
-                  "--destination=${DOCKER_IMAGE_NAME}:${GIT_COMMIT}",
-                  "--verbosity=debug"
-                ]
+                args: ["--verbosity=debug"]
+                command: ["/kaniko/executor"] // Change this to the actual command you want to run
                 volumeMounts:
                   - name: kaniko-secret
                     mountPath: /kaniko/.docker
               - name: jnlp
                 image: jenkins/inbound-agent
-            volumes:
+                args:
+                  - -url
+                  - ${JENKINS_URL}
+                  - -workDir
+                  - /home/jenkins/agent
+              volumes:
               - name: kaniko-secret
                 secret:
                   secretName: docker-hub-secret
+                  items:
+                    - key: .dockerconfigjson
+                      path: config.json
             """
         }
     }
