@@ -13,6 +13,23 @@ spec:
         mountPath: /kaniko/.docker
       - name: efs-kaniko-pv
         mountPath: /workspace
+  - name: jnlp
+    image: jenkins/inbound-agent:latest
+    args:
+    - -url
+    - ${JENKINS_URL}          # Jenkins URL
+    - -workDir
+    - /home/jenkins/agent
+    - -secret
+    - ${JENKINS_SECRET}       # JNLP secret
+    env:
+    - name: JENKINS_URL
+      value: "http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/"  # Replace with your Jenkins URL
+    - name: JENKINS_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: jenkins-agent-secret  # Replace with the name of the secret containing the JNLP secret
+          key: jnlp-secret  # Replace with the key containing the JNLP secret
   volumes:
   - name: kaniko-secret
     projected:
@@ -24,11 +41,4 @@ spec:
               path: config.json
   - name: efs-kaniko-pv
     persistentVolumeClaim:
-      claimName: efs-kaniko-pvc
-  - name: jnlp
-    image: jenkins/inbound-agent:latest
-    args:
-    - -url
-    - ${JENKINS_URL}
-    - -workDir
-    - /home/jenkins/agent
+      claimName: efs-kaniko-pvc 
