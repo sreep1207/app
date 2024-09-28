@@ -62,17 +62,10 @@ agent {
 
         stage('Build and Push Docker Image') {
             steps {
-                container(name: 'kaniko', shell: '/busybox/sh') {
-                    sh '''
-            # Ensure the Dockerfile path is correct
-            dockerfile_path="${WORKSPACE}/Dockerfile"
-            if [[ ! -f "$dockerfile_path" ]]; then
-                error "Dockerfile not found at $dockerfile_path"
-            fi
-
-            # Build and push the Docker image
-            /kaniko/executor --dockerfile "$dockerfile_path" --context "$WORKSPACE" --destination="${IMAGE_NAME}:${IMAGE_TAG}"     
-                       '''
+                container(name: 'kaniko', shell: '/bin/sh') {
+                     sh '''#!/bin/sh
+                        /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=${IMAGE_NAME}:${IMAGE_TAG}
+                    '''
         
                     }
                 }
