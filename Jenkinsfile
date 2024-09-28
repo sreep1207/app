@@ -3,8 +3,22 @@ pipeline {
         kubernetes {
             label'kaniko' 
             defaultContainer 'jnlp'
-  }
-}
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    kaniko: "true"
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:latest
+    command:
+    - cat
+    tty: true
+"""
+        }
+    }
     environment {
         APP_NAME = "app"
         DOCKER_USER = "sree1207"
