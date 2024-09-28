@@ -25,4 +25,10 @@ spec:
   - name: efs-kaniko-pv
     persistentVolumeClaim:
       claimName: efs-kaniko-pvc
-
+  - name: jnlp
+    image: jenkins/inbound-agent:latest
+    args:
+    - -url
+    - ${JENKINS_URL}
+    - -workDir
+    - /home/jenkins/agent
