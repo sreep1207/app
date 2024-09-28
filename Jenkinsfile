@@ -1,43 +1,9 @@
 pipeline {
-    agent {
-        kubernetes {
-            label 'kaniko-agent'
-            defaultContainer 'jnlp'
-            yaml """
-            apiVersion: v1
-            kind: Pod
-            metadata:
-              labels:
-                kaniko: kaniko
-            spec:
-              containers:
-              - name: kaniko
-                image: gcr.io/kaniko-project/executor:debug
-                args: ["--verbosity=debug"]
-                command: ["/kaniko/executor"]
-                securityContext:
-                  runAsUser: 1000 
-                volumeMounts:
-                  - name: kaniko-secret
-                    mountPath: /kaniko/.docker
-              - name: jnlp
-                image: jenkins/inbound-agent
-                args:
-                  - -url
-                  - ${JENKINS_URL}
-                  - -workDir
-                  - /home/jenkins/agent
-              volumes:
-              - name: kaniko-secret
-                secret:
-                  secretName: docker-hub-secret
-                  items:
-                    - key: .dockerconfigjson
-                      path: config.json
-            """
-        }
+agent {
+    kubernetes {
+      yamlFile 'kaniko-builder.yaml'
     }
-
+  }
     environment {
         GITHUB_CREDENTIALS_ID = 'github' // Using Jenkins credentials
         DOCKER_IMAGE_NAME = "sree1207/my-app15"
