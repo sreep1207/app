@@ -1,13 +1,15 @@
+apiVersion: v1
 kind: Pod
+metadata:
+  name: kaniko-builder
 spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    imagePullPolicy: Always
-    command:
-    - sleep
     args:
-    - 9999999
+    - "--context=$(pwd)"
+    - "--destination=sree1207/test:{IMAGE_TAG}"
+    imagePullPolicy: Always
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
