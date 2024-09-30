@@ -10,6 +10,8 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
+    command: ["/kaniko/executor"]
+    args: ["--context=dir://workspace/", "--dockerfile=Dockerfile", "--destination=test:latest"]
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
