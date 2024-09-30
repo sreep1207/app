@@ -11,10 +11,11 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
-    command:
-    - sleep
-    args:
-    - 9999999
+    args:  # Kaniko runs directly with its args
+    - "--dockerfile=/workspace/Dockerfile" 
+    - "--context=/workspace" 
+    - "--destination=sree1207/myapp15:${IMAGE_TAG}" 
+    - "--verbosity=debug"
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
@@ -43,7 +44,7 @@ spec:
     stages {
         stage('Cleanup') {
             steps {
-                cleanWs()
+                cleanWs()  // Clean workspace before starting
             }
         }
 
@@ -65,11 +66,10 @@ spec:
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         // List files in the workspace for debugging
                         sh 'ls -l /workspace'
-                        sh 'df -h'
-
+                        
                         // Build and push the image
                         sh """
-                        /kaniko/executor --dockerfile=\$(pwd)/Dockerfile --context=\$(pwd) --destination=sree1207/myapp15:${IMAGE_TAG} --verbosity=debug
+                        /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp15:${IMAGE_TAG} --verbosity=debug
                         """
                     }
                 }
