@@ -1,26 +1,9 @@
 pipeline {
     agent {
         kubernetes {
-            inheritFrom 'kaniko' 
-            defaultContainer 'jnlp'
-            yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    kaniko: "true"
-spec:
-  containers:
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
-    command:
-    - /busybox/sh
-    tty: true
-    resources:
-      limits:
-        memory: "1Gi"
-        cpu: "500m"
-"""
+            label 'kaniko'
+            inheritFrom 'kaniko'
+            defaultContainer 'kaniko'
         }
     }
     environment {
