@@ -61,7 +61,7 @@ spec:
                 container(name: 'kaniko',shell: '/busybox/sh') {
                    withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         sh """
-                         /kaniko/executor --dockerfile=\$(pwd)/Dockerfile --context=\$(pwd) --destination=sree1207/myapp15:${IMAGE_TAG}
+                         /kaniko/executor --dockerfile=\$(pwd)/Dockerfile --context=\$(pwd) --destination=sree1207/myapp15:${IMAGE_TAG}  --verbosity=debug
                         """
                     }
                 }
