@@ -13,7 +13,7 @@ pipeline {
         DOCKER_PASS = 'Aeg\$12345'
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-        /* JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN") */
+        JENKINS_URL = 'http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/'
 
     }
 
