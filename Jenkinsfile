@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            label 'kaniko' // This should match the label on your existing Kaniko pod
+            label 'app=kaniko' // This should match the label on your existing Kaniko pod
             defaultContainer 'kaniko'
         }
     }
