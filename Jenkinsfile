@@ -3,24 +3,6 @@ pipeline {
         kubernetes {
             label 'kaniko' // This should match the label on your existing Kaniko pod
             defaultContainer 'kaniko'
-            yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    kaniko: "true"  // Ensure this label matches the existing pod
-spec:
-  containers:
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
-    command:
-    - /busybox/sh
-    tty: true
-    resources:
-      limits:
-        memory: "1Gi"
-        cpu: "500m"
-"""
         }
     }
     environment {
