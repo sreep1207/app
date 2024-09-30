@@ -62,26 +62,26 @@ spec:
         }
 
         stage('Build and Push Docker Image') {
-            steps {
-                container(name: 'kaniko') {
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        // Create Docker config.json for Kaniko
-                        sh '''
-                        mkdir -p /kaniko/.docker
-                        echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"username\":\"$DOCKER_USER\",\"password\":\"$DOCKER_PASS\"}}}" > /kaniko/.docker/config.json
-                        '''
+    steps {
+        container(name: 'kaniko') {
+            withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                // Create Docker config.json for Kaniko
+                sh '''
+                mkdir -p /kaniko/.docker
+                echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"username\":\"$DOCKER_USER\",\"password\":\"$DOCKER_PASS\"}}}" > /kaniko/.docker/config.json
+                '''
 
-                        // List files in the workspace for debugging
-                        sh 'ls -l /workspace'
+                // List files in the workspace for debugging
+                sh 'ls -l /workspace'
 
-                        // Build and push the image
-                        sh """
-                        /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp15:${env.IMAGE_TAG} --verbosity=debug --docker-config=/kaniko/.docker/
-                        """
-                    }
-                }
+                // Build and push the image
+                sh """
+                /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp15:${env.IMAGE_TAG} --verbosity=debug --docker-config=/kaniko/.docker/
+                """
             }
         }
+    }
+}
 
         stage('Update Deployment File') {
             steps {
