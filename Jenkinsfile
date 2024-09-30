@@ -1,9 +1,9 @@
 pipeline {
     agent {
         kubernetes {
-            label 'kaniko' // Label for Kaniko agent
+            inheritFrom 'app=kaniko' // This should match the label on your existing Kaniko pod
             defaultContainer 'kaniko'
-            yaml """
+             yaml """
 apiVersion: v1
 kind: Pod
 metadata:
@@ -24,63 +24,46 @@ spec:
           - key: .dockerconfigjson
             path: config.json
 """
+
         }
     }
-        
     environment {
-        GITHUB_CREDENTIALS_ID = 'github' // Using Jenkins credentials
-        DOCKER_IMAGE_NAME = "sree1207/my-app15"
-    }
-    
-    stages {
-        stage('Cleanup') {
+        APP_NAME = "app"
+        RELEASE = "1.0.0"
+        DOCKER_USER = "sree1207"
+        DOCKER_PASS = "Aeg\$12345"
+        IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
+        GITHUB_CREDENTIALS_ID = 'github'
+        JENKINS_URL = 'http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/'
+   }
+        stages {
+         stage('Cleanup') {
             steps {
                 cleanWs()
             }
         }
-        
+
         stage('Checkout') {
             steps {
                 // Checkout the code from GitHub using the specified credentials
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/main']], // Specify the branch
-                    userRemoteConfigs: [[
-                        url: 'https://github.com/sreep1207/app.git',
-                        credentialsId: "${GITHUB_CREDENTIALS_ID}" // Use the defined credentials
-                    ]]
-                ])
+                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/sreep1207/app.git'
             }
         }
-        
-        stage('Verify Context Directory') {
+        stage('Verify Git Checkout') {
             steps {
-                script {
-                    // Check the contents of the workspace directory
-                    echo "Listing contents of the workspace directory:"
-                    sh 'ls -la ${WORKSPACE}' // Verify if files are present
-                }
-            }
+             sh 'ls -l /home/jenkins/agent/workspace/app'
+           }
         }
-        
         stage('Build and Push Docker Image') {
             steps {
-                script {
-                    // Get the commit ID for tagging the Docker image
-                    def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    def dockerImage = "${DOCKER_IMAGE_NAME}:${commitId}"
-                    
-                    // Use Kaniko to build and push the Docker image
-                    sh """
-                    /kaniko/executor \\
-                      --context=${WORKSPACE} \\
-                      --dockerfile=${WORKSPACE}/Dockerfile \\
-                      --destination=${dockerImage} \\
-                      --verbosity debug
-                    """
+                container(name: 'kaniko',shell: '/busybox/sh') {
+                     sh '''
+                        /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp15:${IMAGE_TAG}
+                    '''
+        
+                    }
                 }
             }
-        }
 
         stage('Update Deployment File') {
             steps {
@@ -97,16 +80,16 @@ spec:
 
                     // Update the deployment.yaml with the new image tag
                     def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    sh "sed -i 's|image: ${DOCKER_IMAGE_NAME}:.*|image: ${DOCKER_IMAGE_NAME}:${commitId}|g' app-manifests/deployment.yaml"
+                    sh "sed -i 's|image:sree1207/myapp15 :.*|image: sree1207/myapp15:${IMAGE_TAG}|g' app-manifests/deployment.yaml"
 
                     // Commit and push the changes
                     sh """
                     git add app-manifests/deployment.yaml
-                    git commit -m "Update deployment image to version ${commitId}"
+                    git commit -m "Update deployment image to version ${IMAGE_TAG}"
                     git push https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
                     """
                 }
             }
         }
-    }
+    } 
 }
