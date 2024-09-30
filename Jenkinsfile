@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            inheritFrom 'app=kaniko' // This should match the label on your existing Kaniko pod
+            inheritFrom 'kaniko' // This should match the label on your existing Kaniko pod
             defaultContainer 'kaniko'
              yaml """
 apiVersion: v1
