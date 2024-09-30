@@ -22,7 +22,8 @@ spec:
     image: jenkins/inbound-agent:latest
     args:
     - -url
-    - ws://jenkins.default.svc.cluster.local:8080/           # Jenkins URL
+    - ws://jenkins.default.svc.cluster.local:8080/
+    - -websocket           # Jenkins URL
     - -workDir
     - /home/jenkins/agent
     - -name
