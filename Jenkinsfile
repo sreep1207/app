@@ -34,6 +34,7 @@ spec:
 """
         }
     }
+    
     environment {
         APP_NAME = "app"
         RELEASE = "1.0.0"
@@ -41,6 +42,7 @@ spec:
         GITHUB_CREDENTIALS_ID = 'github'
         JENKINS_URL = 'http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@127.0.0.1:8080/'
     }
+    
     stages {
         stage('Cleanup') {
             steps {
@@ -50,7 +52,7 @@ spec:
 
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/sreep1207/app.git'
+                git branch: 'main', credentialsId: GITHUB_CREDENTIALS_ID, url: 'https://github.com/sreep1207/app.git'
             }
         }
 
