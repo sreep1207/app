@@ -60,6 +60,12 @@ spec:
             steps {
                 container(name: 'kaniko',shell: '/busybox/sh') {
                    withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        // List files in the workspace for debugging
+                sh 'ls -l /workspace'
+
+                // Check mounted file systems
+                sh 'df -h'
+
                         sh """
                          /kaniko/executor --dockerfile=\$(pwd)/Dockerfile --context=\$(pwd) --destination=sree1207/myapp15:${IMAGE_TAG}  --verbosity=debug
                         """
