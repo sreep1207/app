@@ -30,6 +30,8 @@ spec:
     environment {
         APP_NAME = "app"
         RELEASE = "1.0.0"
+        DOCKER_USER = "sree1207"
+        DOCKER_PASS = 'Aeg\$12345'
         DOCKERHUB_CREDENTIALS_ID = 'dockerhub-pwd'
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         GITHUB_CREDENTIALS_ID = 'github'
@@ -56,10 +58,14 @@ spec:
         stage('Build and Push Docker Image') {
             steps {
                 container(name: 'kaniko',shell: '/busybox/sh') {
-                     sh '''
-                        /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp15:${IMAGE_TAG}
-                    '''
-        
+                   withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh """
+                        /kaniko/executor \
+                          --dockerfile=${WORKSPACE}/Dockerfile \
+                          --context=${WORKSPACE} \
+                          --destination=docker.io/${DOCKER_USER}/myapp15:${IMAGE_TAG} \
+                          --verbosity=debug
+                        """
                     }
                 }
             }
