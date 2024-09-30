@@ -31,8 +31,8 @@ spec:
         GITHUB_CREDENTIALS_ID = 'github'
         JENKINS_URL = 'http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/'
    }
-
-        stage('Cleanup') {
+        stages {
+         stage('Cleanup') {
             steps {
                 cleanWs()
             }
@@ -83,5 +83,5 @@ spec:
                 }
             }
         }
-    } //close the stage block
+    } 
 }
