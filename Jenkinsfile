@@ -17,6 +17,10 @@ spec:
         mountPath: /kaniko/.docker
       - name: efs-kaniko-pv
         mountPath: /workspace
+  - name: sleep-container
+    image: alpine
+    command: ["sleep"]
+    args: ["9999999"]
   restartPolicy: Never
   volumes:
     - name: kaniko-secret
