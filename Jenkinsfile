@@ -11,7 +11,7 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
-    args:  # Kaniko runs directly with its args
+    args:
     - "--dockerfile=/workspace/Dockerfile" 
     - "--context=/workspace" 
     - "--destination=sree1207/myapp15:${env.IMAGE_TAG}" 
@@ -62,11 +62,11 @@ spec:
 
         stage('Build and Push Docker Image') {
             steps {
-                container(name: 'kaniko', shell: '/busybox/sh') {
+                container(name: 'kaniko') {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         // List files in the workspace for debugging
                         sh 'ls -l /workspace'
-                        
+
                         // Build and push the image
                         sh """
                         /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp15:${env.IMAGE_TAG} --verbosity=debug
@@ -78,31 +78,33 @@ spec:
 
         stage('Update Deployment File') {
             steps {
-                script {
-                    try {
-                        // Set Git config
-                        sh 'git config user.email "sridhar.innoraft@gmail.com"'
-                        sh 'git config user.name "sree1207"'
+                container(name: 'kaniko') { // Use the kaniko container for Git commands
+                    script {
+                        try {
+                            // Set Git config
+                            sh 'git config user.email "sridhar.innoraft@gmail.com"'
+                            sh 'git config user.name "sree1207"'
 
-                        // Fetch the latest changes
-                        sh """
-                        git stash || true
-                        git pull https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main
-                        """
+                            // Fetch the latest changes
+                            sh """
+                            git stash || true
+                            git pull https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main
+                            """
 
-                        // Update the deployment.yaml with the new image tag
-                        def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                        sh "sed -i 's|image:sree1207/myapp15 :.*|image: sree1207/myapp15:${env.IMAGE_TAG}|g' app-manifests/deployment.yaml"
+                            // Update the deployment.yaml with the new image tag
+                            def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                            sh "sed -i 's|image:sree1207/myapp15:.*|image: sree1207/myapp15:${env.IMAGE_TAG}|g' app-manifests/deployment.yaml"
 
-                        // Commit and push the changes
-                        sh """
-                        git add app-manifests/deployment.yaml
-                        git commit -m "Update deployment image to version ${env.IMAGE_TAG} with commit ID ${commitId}"
-                        git push https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
-                        """
-                    } catch (e) {
-                        echo "Error occurred: ${e}"
-                        error("Stage failed due to error: ${e}")
+                            // Commit and push the changes
+                            sh """
+                            git add app-manifests/deployment.yaml
+                            git commit -m "Update deployment image to version ${env.IMAGE_TAG} with commit ID ${commitId}"
+                            git push https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
+                            """
+                        } catch (e) {
+                            echo "Error occurred: ${e}"
+                            error("Stage failed due to error: ${e}")
+                        }
                     }
                 }
             }
