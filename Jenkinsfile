@@ -61,7 +61,6 @@ spec:
 
         stage('Build and Push Docker Image') {
             steps {
-                timeout(time: 10, unit: 'MINUTES')
                 container(name: 'kaniko', shell: '/busybox/sh') {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         // List files in the workspace for debugging
