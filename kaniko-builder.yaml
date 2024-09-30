@@ -29,7 +29,7 @@ spec:
     - kanikoagent 
     env:
     - name: JENKINS_URL
-      value: "http://127.0.0.1:8080/"  # Replace with your Jenkins URL
+      value: "http://jenkins.default.svc.cluster.local:8080/"  # Replace with your Jenkins URL
     - name: JENKINS_SECRET
       valueFrom:
         secretKeyRef:
