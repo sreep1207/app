@@ -1,8 +1,6 @@
 pipeline {
     agent {
         kubernetes {
-            inheritFrom 'kaniko' // This should match the label on your existing Kaniko pod
-            defaultContainer 'kaniko'
              yaml """
 apiVersion: v1
 kind: Pod
@@ -15,6 +13,8 @@ spec:
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
+      - name: efs-kaniko-pv
+        mountPath: /workspace
   restartPolicy: Never
   volumes:
     - name: kaniko-secret
@@ -23,6 +23,10 @@ spec:
         items:
           - key: .dockerconfigjson
             path: config.json
+    - name: efs-kaniko-pv
+      persistentVolumeClaim:
+        claimName: efs-kaniko-pvc 
+ 
 """
 
         }
