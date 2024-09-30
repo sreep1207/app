@@ -30,9 +30,6 @@ spec:
     environment {
         APP_NAME = "app"
         RELEASE = "1.0.0"
-        DOCKER_USER = "sree1207"
-        DOCKER_PASS = 'Aeg\$12345'
-        DOCKERHUB_CREDENTIALS_ID = 'dockerhub-pwd'
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         GITHUB_CREDENTIALS_ID = 'github'
         JENKINS_URL = 'http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@127.0.0.1:8080/'
