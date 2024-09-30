@@ -1,73 +1,46 @@
 pipeline {
-    agent {
-        kubernetes {
-            inheritFrom 'app=kaniko' // This should match the label on your existing Kaniko pod
-            defaultContainer 'kaniko'
-        }
+
+  agent {
+    kubernetes {
+      yamlFile 'kaniko-builder.yaml'
     }
-    environment {
-        APP_NAME = "app"
+  }
+
+  environment {
+        APP_NAME = "complete-prodcution-e2e-pipeline"
         RELEASE = "1.0.0"
-        DOCKER_USER = "sree1207"
-        DOCKER_PASS = "Aeg\$12345"
+        DOCKER_USER = "sreep1207"
+        DOCKER_PASS = 'Aeg\$12345'
+        IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-        GITHUB_CREDENTIALS_ID = 'github'
-        JENKINS_URL = 'http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/'
-   }
-        stages {
-         stage('Cleanup') {
-            steps {
-                cleanWs()
-            }
-        }
+        /* JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN") */
 
-        stage('Checkout') {
+    }
+
+  stages {
+
+    stage("Cleanup Workspace") {
+      steps {
+        cleanWs()
+      }
+    }
+
+    stage("Checkout from SCM"){
             steps {
-                // Checkout the code from GitHub using the specified credentials
-                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/sreep1207/app.git'
-            }
-        }
-        stage('Verify Git Checkout') {
-            steps {
-             sh 'ls -l /home/jenkins/agent/workspace/app'
-           }
-        }
-        stage('Build and Push Docker Image') {
-            steps {
-                container(name: 'kaniko',shell: '/busybox/sh') {
-                     sh '''
-                        /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp15:${IMAGE_TAG}
-                    '''
-        
-                    }
-                }
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/sreep1207/app.git'
             }
 
-        stage('Update Deployment File') {
-            steps {
-                script {
-                    // Set Git config
-                    sh 'git config user.email "sridhar.innoraft@gmail.com"'
-                    sh 'git config user.name "sree1207"'
-
-                    // Fetch the latest changes
-                    sh """
-                    git stash || true
-                    git pull https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main
-                    """
-
-                    // Update the deployment.yaml with the new image tag
-                    def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    sh "sed -i 's|image:sree1207/myapp15 :.*|image: sree1207/myapp15:${IMAGE_TAG}|g' app-manifests/deployment.yaml"
-
-                    // Commit and push the changes
-                    sh """
-                    git add app-manifests/deployment.yaml
-                    git commit -m "Update deployment image to version ${IMAGE_TAG}"
-                    git push https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
-                    """
-                }
-            }
         }
-    } 
+
+    stage('Build & Push with Kaniko') {
+      steps {
+        container(name: 'kaniko', shell: '/busybox/sh') {
+          sh '''
+
+            /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=${IMAGE_NAME}:${IMAGE_TAG} --destination=${IMAGE_NAME}:latest
+          '''
+        }
+      }
+    }
+  }
 }
