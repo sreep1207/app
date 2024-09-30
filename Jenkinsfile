@@ -10,18 +10,16 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    command: ["/kaniko/executor"]
-    args: ["--context=dir://workspace/", "--dockerfile=Dockerfile", "--destination=sree1207/test:latest"]
+    imagePullPolicy: Always
+    command:
+    - sleep
+    args:
+    - 9999999
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
       - name: efs-kaniko-pv
         mountPath: /workspace
-  - name: sleep-container
-    image: alpine
-    command: ["sleep"]
-    args: ["9999999"]
-  restartPolicy: Never
   volumes:
     - name: kaniko-secret
       secret:
