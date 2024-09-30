@@ -22,14 +22,14 @@ spec:
     image: jenkins/inbound-agent:latest
     args:
     - -url
-    - $(JENKINS_URL)            # Jenkins URL
+    - ws://jenkins.default.svc.cluster.local:8080/           # Jenkins URL
     - -workDir
     - /home/jenkins/agent
     - -name
-    - kanikoagent 
+    - kaniko
     env:
     - name: JENKINS_URL
-      value: "http://jenkins.default.svc.cluster.local:8080/"  # Replace with your Jenkins URL
+      value: ws://jenkins.default.svc.cluster.local:8080/  # Replace with your Jenkins URL
     - name: JENKINS_SECRET
       valueFrom:
         secretKeyRef:
