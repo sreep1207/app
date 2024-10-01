@@ -23,6 +23,9 @@ metadata:
   name: kaniko
 spec:
   containers:
+  - name: jnlp
+    image: jenkins/jnlp-slave:latest
+    args: ['${computer.jnlpmac}', '${computer.name}']
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     command: ["sleep"]
