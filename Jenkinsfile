@@ -12,9 +12,9 @@ spec:
     image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
     args:
-    - "--dockerfile=/workspace/Dockerfile" 
-    - "--context=/workspace" 
-    - "--destination=sree1207/myapp15:${env.IMAGE_TAG}" 
+    - "--dockerfile=/workspace/Dockerfile"
+    - "--context=/workspace"
+    - "--destination=sree1207/myapp15:${env.IMAGE_TAG}"
     - "--verbosity=debug"
     - "--docker-config=/kaniko/.docker/"
     volumeMounts:
@@ -31,78 +31,79 @@ spec:
             path: config.json
     - name: efs-kaniko-pv
       persistentVolumeClaim:
-        claimName: efs-kaniko-pvc 
+        claimName: efs-kaniko-pvc
 """
         }
     }
+
     environment {
         APP_NAME = "app"
         RELEASE = "1.0.0"
-        IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}" // Define IMAGE_TAG here
+        IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         GITHUB_CREDENTIALS_ID = 'github'
-        JENKINS_URL = 'http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@127.0.0.1:8080/'
+        DOCKERHUB_CREDENTIALS_ID = 'dockerhub-pwd'
+        GIT_REPO_URL = 'https://github.com/sreep1207/app.git'
     }
+
     stages {
-        stage('Cleanup') {
+        stage('Cleanup Workspace') {
             steps {
                 cleanWs()  // Clean workspace before starting
             }
         }
 
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/sreep1207/app.git'
+                git branch: 'main', credentialsId: "${GITHUB_CREDENTIALS_ID}", url: "${GIT_REPO_URL}"
             }
         }
 
-        stage('Verify Git Checkout') {
+        stage('Verify Checkout') {
             steps {
                 sh 'ls -l /home/jenkins/agent/workspace/app'
             }
         }
 
-        stage('Build and Push Docker Image') {
-    steps {
-        container(name: 'kaniko') {
-            withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                // Create Docker config.json for Kaniko
-                sh """
-/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp15:${env.IMAGE_TAG} --verbosity=debug --docker-config=/kaniko/.docker/ || true
-"""
-
+        stage('Build and Push Docker Image with Kaniko') {
+            steps {
+                container('kaniko') {
+                    withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh """
+                        /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp15:${IMAGE_TAG} --verbosity=debug --docker-config=/kaniko/.docker/ || true
+                        """
+                    }
+                }
             }
         }
-    }
-}
 
-        stage('Update Deployment File') {
+        stage('Update Deployment File and Push Changes') {
             steps {
-                container(name: 'kaniko') { // Use the kaniko container for Git commands
+                container('kaniko') {
                     script {
                         try {
-                            // Set Git config
+                            // Git configuration for committing
                             sh 'git config user.email "sridhar.innoraft@gmail.com"'
                             sh 'git config user.name "sree1207"'
 
-                            // Fetch the latest changes
+                            // Pull latest changes and stash any local changes
                             sh """
                             git stash || true
                             git pull https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main
                             """
 
-                            // Update the deployment.yaml with the new image tag
+                            // Update deployment.yaml file with the new image tag
                             def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                            sh "sed -i 's|image:sree1207/myapp15:.*|image: sree1207/myapp15:${env.IMAGE_TAG}|g' app-manifests/deployment.yaml"
+                            sh "sed -i 's|image:sree1207/myapp15:.*|image: sree1207/myapp15:${IMAGE_TAG}|g' app-manifests/deployment.yaml"
 
-                            // Commit and push the changes
+                            // Commit the updated file and push changes to the Git repo
                             sh """
                             git add app-manifests/deployment.yaml
-                            git commit -m "Update deployment image to version ${env.IMAGE_TAG} with commit ID ${commitId}"
+                            git commit -m "Update deployment image to version ${IMAGE_TAG} with commit ID ${commitId}"
                             git push https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
                             """
                         } catch (e) {
-                            echo "Error occurred: ${e}"
-                            error("Stage failed due to error: ${e}")
+                            echo "Error during update: ${e}"
+                            error("Failed due to error: ${e}")
                         }
                     }
                 }
