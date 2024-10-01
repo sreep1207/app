@@ -3,8 +3,7 @@ pipeline {
         kubernetes {
             label 'kaniko'
             defaultContainer 'kaniko'
-            containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug') {
-                command 'cat' // Keeps the container running, or you can define specific commands here
+            containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: '["/kaniko/executor"]') {
                 args '--dockerfile=/workspace/Dockerfile --context=/workspace'
             }
         }
@@ -13,7 +12,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the codebase
                 checkout scm
             }
         }
@@ -21,71 +19,42 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    // Set the safe directory for git
-                    sh 'git config --global --add safe.directory /workspace/app'
-
-                    // Get the commit ID
                     def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
                     def dockerImage = "sree1207/my-app15:${commitId}"
-
-                    // Build the Docker image using Kaniko
+                    
                     sh "/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=${dockerImage}"
                 }
             }
         }
 
         stage('Update Deployment File') {
-            environment {
-                GIT_REPO_NAME = "app"
-                GIT_USER_NAME = "sreep1207"
-            }
             steps {
                 script {
                     withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                         sh '''
-                        # Navigate to the repository directory
                         cd /workspace/app
-
-                        echo "Configuring Git..."
                         git config user.email 'sridhar.innoraft@gmail.com'
                         git config user.name 'sreep1207'
+                        
+                        git fetch https://${GITHUB_TOKEN}@github.com/sreep1207/app.git
+                        git checkout main
+                        git pull https://${GITHUB_TOKEN}@github.com/sreep1207/app.git main
 
-                        # Check for local changes
-                        if ! git diff-index --quiet HEAD --; then
-                            echo "Local changes detected. Stashing..."
-                            git stash  # Stash any local changes to avoid merge conflicts
-                        fi
-
-                        # Use HTTPS with the GitHub token for authentication
-                        echo "Fetching the latest changes from origin..."
-                        git fetch https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git || exit 1
-
-                        # Ensure we are on the correct branch
-                        git checkout main || git checkout -b main
-
-                        # Pull the latest changes from the remote branch to avoid conflicts
-                        git pull https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git main || exit 1
-
-                        # Get the latest commit ID
                         COMMIT_ID=$(git rev-parse HEAD)
-
-                        # Update only the image version in the deployment.yaml file
                         sed -i 's|image: sree1207/my-app15:[^ ]*|image: sree1207/my-app15:'"${COMMIT_ID}"'|g' app-manifests/deployment.yaml
-
-                        # Commit and push changes
                         git add app-manifests/deployment.yaml
                         git commit -m "Update deployment image to version ${COMMIT_ID}"
-                        git push https://$GITHUB_TOKEN@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
+                        git push https://$GITHUB_TOKEN@github.com/sreep1207/app.git HEAD:main
                         '''
                     }
                 }
             }
         }
     }
+
     post {
         always {
             echo 'Cleaning up after build...'
-            // Additional cleanup actions can be added here
         }
     }
 }
