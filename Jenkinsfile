@@ -27,7 +27,7 @@ spec:
   containers:
   - name: jnlp
     image: jenkins/jnlp-slave:latest
-    args: ['${env.NODE_NAME}'] // Using built-in environment variable
+    args: ['built-in'] // Using built-in environment variable
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     command: ["sleep", "infinity"] // Simplified command
