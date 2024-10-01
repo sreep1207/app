@@ -1,9 +1,4 @@
-apiVersion: v1
 kind: Pod
-metadata:
-  name: kaniko
-  labels:  # Add labels section here
-    app: kaniko 
 spec:
   containers:
   - name: kaniko
@@ -12,32 +7,12 @@ spec:
     command:
     - sleep
     args:
-    - "9999999"  # Keeps the container running for a long time
+    - 9999999
     volumeMounts:
-      - name: kaniko-secret
+      - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
-      - name: efs-kaniko-pv
-        mountPath: /workspace
-  - name: jnlp
-    image: jenkins/inbound-agent:latest
-    args:
-    - -url
-    - ws://jenkins.default.svc.cluster.local:8080/
-    - -websocket           # Jenkins URL
-    - -workDir
-    - /home/jenkins/agent
-    - -name
-    - kaniko
-    env:
-    - name: JENKINS_URL
-      value: ws://jenkins.default.svc.cluster.local:8080/  # Replace with your Jenkins URL
-    - name: JENKINS_SECRET
-      valueFrom:
-        secretKeyRef:
-          name: jenkins-agent-secret  # Replace with the name of the secret containing the JNLP secret
-          key: jnlp-secret  # Replace with the key containing the JNLP secret
   volumes:
-  - name: kaniko-secret
+  - name: jenkins-docker-cfg
     projected:
       sources:
       - secret:
@@ -45,6 +20,3 @@ spec:
           items:
             - key: .dockerconfigjson
               path: config.json
-  - name: efs-kaniko-pv
-    persistentVolumeClaim:
-      claimName: efs-kaniko-pvc 

@@ -1,62 +1,46 @@
 pipeline {
-    agent {
-        kubernetes {
-            label 'kaniko'
-            defaultContainer 'kaniko'
-            containerTemplate(name: 'kaniko', 
-                              image: 'gcr.io/kaniko-project/executor:debug', 
-                              command: '/kaniko/executor',  // Ensure this is a string
-                              alwaysPullImage: true) { // Optionally specify this
-            }
-        }
+
+  agent {
+    kubernetes {
+      yamlFile 'kaniko-builder.yaml'
+    }
+  }
+
+  environment {
+        APP_NAME = "complete-prodcution-e2e-pipeline"
+        RELEASE = "1.0.0"
+        DOCKER_USER = "sree1207"
+        DOCKER_PASS = 'Aeg$12345'
+        IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
+        IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
+        /* JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN") */
+
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+  stages {
 
-        stage('Build and Push Docker Image') {
-            steps {
-                script {
-                    def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    def dockerImage = "sree1207/my-app15:${commitId}"
-                    
-                    sh "/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=${dockerImage}"
-                }
-            }
-        }
-
-        stage('Update Deployment File') {
-            steps {
-                script {
-                    withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                        sh '''
-                        cd /workspace/app
-                        git config user.email 'sridhar.innoraft@gmail.com'
-                        git config user.name 'sreep1207'
-                        
-                        git fetch https://${GITHUB_TOKEN}@github.com/sreep1207/app.git
-                        git checkout main
-                        git pull https://${GITHUB_TOKEN}@github.com/sreep1207/app.git main
-
-                        COMMIT_ID=$(git rev-parse HEAD)
-                        sed -i 's|image: sree1207/my-app15:[^ ]*|image: sree1207/my-app15:'"${COMMIT_ID}"'|g' app-manifests/deployment.yaml
-                        git add app-manifests/deployment.yaml
-                        git commit -m "Update deployment image to version ${COMMIT_ID}"
-                        git push https://$GITHUB_TOKEN@github.com/sreep1207/app.git HEAD:main
-                        '''
-                    }
-                }
-            }
-        }
+    stage("Cleanup Workspace") {
+      steps {
+        cleanWs()
+      }
     }
 
-    post {
-        always {
-            echo 'Cleaning up after build...'
+    stage("Checkout from SCM"){
+            steps {
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/sreep1207/app.git'
+            }
+
         }
+
+    stage('Build & Push with Kaniko') {
+      steps {
+        container(name: 'kaniko', shell: '/busybox/sh') {
+          sh '''#!/busybox/sh
+
+            /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=${IMAGE_NAME}:${IMAGE_TAG} --destination=${IMAGE_NAME}:latest
+          '''
+        }
+      }
     }
+  }
 }
