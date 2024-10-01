@@ -57,7 +57,7 @@ spec:
                     
                     #Run the Kaniko executor to build and push the image
                     
-                    /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG} --verbosity=debug
+                    /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp16:${IMAGE_TAG} --verbosity=debug
                     '''
                 }
             }
