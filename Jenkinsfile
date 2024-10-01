@@ -49,7 +49,7 @@ spec:
                 }
             }
             steps {
-                container(name: 'kaniko') {
+                container(name: 'kaniko',shell: '/busybox/sh') {
                     script {
                         IMAGE_TAG="${RELEASE}-${env.GIT_COMMIT}"
                         echo "Image Tag: ${IMAGE_TAG}"
