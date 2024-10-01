@@ -25,8 +25,6 @@ metadata:
   name: kaniko
 spec:
   containers:
-  - name: jnlp
-    image: jenkins/jnlp-slave:latest
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     command: ["sleep", "infinity"] #Simplified command
