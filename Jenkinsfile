@@ -9,9 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the code from the Git repository
                 script {
-                    // Retrieve the GIT_COMMIT environment variable
                     env.GIT_COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
                 }
                 git branch: 'main', credentialsId: "${env.GITHUB_CREDENTIALS_ID}", url: 'https://github.com/sreep1207/app.git'
@@ -29,11 +27,10 @@ spec:
   containers:
   - name: jnlp
     image: jenkins/jnlp-slave:latest
-    args: ['${computer.jnlpmac}', '${computer.name}']
+    args: ['${env.NODE_NAME}'] // Using built-in environment variable
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    command: ["sleep"]
-    args: ["infinity"]
+    command: ["sleep", "infinity"] // Simplified command
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
@@ -57,10 +54,8 @@ spec:
             steps {
                 container(name: 'kaniko') {
                     script {
-                        // Define the image tag using GIT_COMMIT
                         IMAGE_TAG="${RELEASE}-${env.GIT_COMMIT}"
                         echo "Image Tag: ${IMAGE_TAG}"
-
                         sh """
                             /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG}
                         """
@@ -71,20 +66,13 @@ spec:
         stage('Update Deployment File') {
             steps {
                 script {
-                    // Configure Git user
                     sh 'git config user.email "sridhar.innoraft@gmail.com"'
                     sh 'git config user.name "sree1207"'
-
-                    // Stash any local changes and pull the latest changes from Git
                     sh """
                     git stash || true
                     git pull https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main
                     """
-
-                    // Update the deployment.yaml with the new image tag
                     sh "sed -i 's|image: sree1207/myapp16:.*|image: sree1207/myapp16:${IMAGE_TAG}|g' app-manifests/deployment.yaml"
-
-                    // Commit and push the changes
                     sh """
                     git add app-manifests/deployment.yaml
                     git commit -m "Update deployment image to version ${IMAGE_TAG}"
