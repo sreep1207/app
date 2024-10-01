@@ -27,7 +27,7 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    command: ["sleep", "infinity"] #Simplified command
+    command: ["sh", "-c", "/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${RELEASE}-${env.GIT_COMMIT} && sleep infinity"]
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
@@ -49,14 +49,8 @@ spec:
                 }
             }
             steps {
-                container(name: 'kaniko',shell: '/busybox/sh') {
-                    script {
-                        IMAGE_TAG="${RELEASE}-${env.GIT_COMMIT}"
-                        echo "Image Tag: ${IMAGE_TAG}"
-                        sh """
-                            /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG}
-                        """
-                    }
+                script {
+                    // No need for container block since the Kaniko executor runs in the pod itself
                 }
             }
         }
@@ -69,10 +63,10 @@ spec:
                     git stash || true
                     git pull https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main
                     """
-                    sh "sed -i 's|image: sree1207/myapp16:.*|image: sree1207/myapp16:${IMAGE_TAG}|g' app-manifests/deployment.yaml"
+                    sh "sed -i 's|image: sree1207/myapp16:.*|image: sree1207/myapp16:${RELEASE}-${env.GIT_COMMIT}|g' app-manifests/deployment.yaml"
                     sh """
                     git add app-manifests/deployment.yaml
-                    git commit -m "Update deployment image to version ${IMAGE_TAG}"
+                    git commit -m "Update deployment image to version ${RELEASE}-${env.GIT_COMMIT}"
                     git push https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
                     """
                 }
