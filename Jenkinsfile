@@ -51,6 +51,8 @@ spec:
                 script {
                     // Output the Docker config for debugging
                     sh '''
+                     echo "Contents of /kaniko:"
+                    ls -l /kaniko
                     echo 'Generated Docker Config:'
                     cat /kaniko/.docker/config.json
                     
