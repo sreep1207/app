@@ -32,6 +32,8 @@ spec:
         mountPath: /kaniko/.docker
       - name: efs-kaniko-pv
         mountPath: /workspace
+    securityContext:
+      runAsUser: 0
   volumes:
     - name: kaniko-secret
       secret:
