@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'main', url: 'https://github.com/sreep1207/app.git', credentialsId: "${GITHUB_CREDENTIALS_ID}"
+                      git branch: 'main', credentialsId: "${env.GITHUB_CREDENTIALS_ID}", url: 'https://github.com/sreep1207/app.git'
                 }
             }
         }
@@ -27,9 +27,6 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     command: ["sh", "-c", "/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/my-app15:${RELEASE}-${env.GIT_COMMIT} && sleep infinity"]
-  - name: kubectl
-    image: bitnami/kubectl:latest  #use an image with kubectl installed
-    command: ["sleep", "infinity"]
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
