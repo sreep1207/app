@@ -59,7 +59,7 @@ spec:
                         echo '{"auths": {"https://index.docker.io/v1/": {"auth": "'\$(echo -n $DOCKER_USER:$DOCKER_PASS | base64)'"}}}' > /kaniko/.docker/config.json
 
                         // Run the Kaniko executor to build and push the image
-                         /kaniko/executor --dockerfile=\$(pwd)/Dockerfile --context=\$(pwd) --destination=sree1207/myapp15:${IMAGE_TAG}
+ 
                         """
                     }
                 }
