@@ -56,7 +56,7 @@ spec:
         }
         stage('Update Deployment File') {
             steps {
-                script {
+                script {it ->
                     sh 'git config user.email "sridhar.innoraft@gmail.com"'
                     sh 'git config user.name "sree1207"'
                     sh """
