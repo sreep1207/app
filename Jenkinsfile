@@ -28,7 +28,8 @@ spec:
     args:
     - "--dockerfile=/workspace/Dockerfile" 
     - "--context=/workspace" 
-    - "--destination=sree1207/myapp15:${env.IMAGE_TAG}" 
+    - "--destination=sree1207/myapp15:${env.IMAGE_TAG}"
+    - "--no-push" 
     - "--verbosity=debug"
     - "--docker-config=/kaniko/.docker/config.json"
     volumeMounts:
