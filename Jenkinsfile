@@ -48,10 +48,14 @@ spec:
                 }
             }
             steps {
-                script {
-                     sh '''
-                        /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp16:${IMAGE_TAG}
-                    '''
+                container(name: 'kaniko') {
+                environment {
+                IMAGE_TAG = "${RELEASE}-${env.GIT_COMMIT}"
+            }
+            sh '''
+                echo Image Tag: ${IMAGE_TAG}
+                /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG}
+            '''
 
                 }
             }
