@@ -25,11 +25,8 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    args: 
-    - "--context=git@github.com:sreep1207/app.git" 
-    - "--destination=sree1207/myapp16:${env.IMAGE_TAG}" 
-    - "--verbosity=debug"
-    - "--docker-config=/kaniko/.docker/config.json"
+    command: ["sleep"]
+    args: ["infinity"]
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
@@ -60,6 +57,7 @@ spec:
                         // Output Docker config for debugging
                 echo 'Generated Docker Config:'
                 cat /kaniko/.docker/config.json
+                         /kaniko/executor --dockerfile=/$(pwd)/Dockerfile --context=/$(pwd) --destination=sree1207/myapp16:${IMAGE_TAG}
                         """
                     }
                 }
