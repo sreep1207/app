@@ -1,87 +1,97 @@
 pipeline {
-    agent any
-    environment {
-        APP_NAME = "app"
-        RELEASE = "1.0.0"
-        DOCKER_CREDENTIALS_ID = 'dockerhub-pwd'
-        GITHUB_CREDENTIALS_ID = 'github'
+    agent {
+        kubernetes {
+            // Define your Kubernetes pod with Kaniko
+            label 'kaniko'
+            defaultContainer 'kaniko'
+            containers {
+                containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: '["/kaniko/executor"]') {
+                    volumeMounts {
+                        mountPath '/workspace', name: 'shared-volume'
+                    }
+                }
+            }
+            volumes {
+                persistentVolumeClaim(claimName: 'efs-kaniko-pvc', mountPath: '/workspace')
+            }
+        }
     }
+
     stages {
         stage('Checkout') {
             steps {
+                // Checkout the codebase
+                checkout scm
+            }
+        }
+
+        stage('Build and Push Docker Image') {
+            steps {
                 script {
-                      git branch: 'main', credentialsId: "${env.GITHUB_CREDENTIALS_ID}", url: 'https://github.com/sreep1207/app.git'
+                    // Set the safe directory for git
+                    sh 'git config --global --add safe.directory /workspace/app'
+
+                    // Get the commit ID
+                    def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                    def dockerImage = "sree1207/my-app15:${commitId}"
+
+                    // Build the Docker image using Kaniko
+                    sh "/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=${dockerImage}"
                 }
             }
         }
-        stage('Build and Push Docker Image') {
-            agent {
-                kubernetes {
-                    yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  name: kaniko
-spec:
-  containers:
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
-    command: ["sh", "-c", "/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/my-app15:${RELEASE}-${env.GIT_COMMIT} && sleep infinity"]
-    volumeMounts:
-      - name: kaniko-secret
-        mountPath: /kaniko/.docker
-      - name: efs-kaniko-pv
-        mountPath: /workspace
-    securityContext:
-      runAsUser: 0
-  volumes:
-    - name: kaniko-secret
-      secret:
-        secretName: docker-hub-secret
-        items:
-          - key: .dockerconfigjson
-            path: config.json
-    - name: efs-kaniko-pv
-      persistentVolumeClaim:
-        claimName: efs-kaniko-pvc 
-"""
-                }
+
+        stage('Update Deployment File') {
+            environment {
+                GIT_REPO_NAME = "app"
+                GIT_USER_NAME = "sreep1207"
             }
             steps {
-               script {
-                    echo 'Building Docker Image with Kaniko'
-                    // Ensure the Kaniko pod has completed before moving to the next step
-                    timeout(time: 10, unit: 'MINUTES') {
-                        waitUntil {
-                            script {
-                                // Check the status of the Kaniko pod
-                                def podStatus = sh(script: "kubectl get pods -l name=kaniko -o jsonpath='{.items[0].status.phase}'", returnStdout: true).trim()
-                                return podStatus == "Succeeded" || podStatus == "Running"
-                            }
-                        }
+                script {
+                    withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                        sh '''
+                        # Navigate to the repository directory
+                        cd /workspace/app
+
+                        echo "Configuring Git..."
+                        git config user.email 'sridhar.innoraft@gmail.com'
+                        git config user.name 'sreep1207'
+
+                        # Check for local changes
+                        if ! git diff-index --quiet HEAD --; then
+                            echo "Local changes detected. Stashing..."
+                            git stash  # Stash any local changes to avoid merge conflicts
+                        fi
+
+                        # Use HTTPS with the GitHub token for authentication
+                        echo "Fetching the latest changes from origin..."
+                        git fetch https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git || exit 1
+
+                        # Ensure we are on the correct branch
+                        git checkout main || git checkout -b main
+
+                        # Pull the latest changes from the remote branch to avoid conflicts
+                        git pull https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git main || exit 1
+
+                        # Get the latest commit ID
+                        COMMIT_ID=$(git rev-parse HEAD)
+
+                        # Update only the image version in the deployment.yaml file
+                        sed -i 's|image: sree1207/my-app15:[^ ]*|image: sree1207/my-app15:'"${COMMIT_ID}"'|g' app-manifests/deployment.yaml
+
+                        # Commit and push changes
+                        git add app-manifests/deployment.yaml
+                        git commit -m "Update deployment image to version ${COMMIT_ID}"
+                        git push https://$GITHUB_TOKEN@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
+                        '''
                     }
                 }
             }
         }
-        stage('Update Deployment File') {
-            steps {
-                script {
-                    // Git configuration
-                    sh 'git config user.email "sridhar.innoraft@gmail.com"'
-                    sh 'git config user.name "sree1207"'
-                    sh 'git remote -v'
-                    sh 'git stash || true'
-                    // Pull the latest code to ensure we have the latest deployment.yaml
-                    sh 'git pull https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main'
-                    // Update deployment.yaml with the new image tag
-                    sh "sed -i 's|image: sree1207/my-app15:.*|image: sree1207/my-app15:${RELEASE}-${env.GIT_COMMIT}|g' app-manifests/deployment.yaml"
-                    sh """
-                    git add app-manifests/deployment.yaml
-                    git commit -m "Update deployment image to version ${RELEASE}-${env.GIT_COMMIT}"
-                    git push https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
-                    """
-                }
-            }
+    }
+    post {
+        always {
+            // Clean up if necessary
         }
     }
 }
