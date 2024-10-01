@@ -10,10 +10,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    echo 'Checking out the repository...'
+                      echo 'Cloning GitHub repository...'
+                    // Clone the repository
                     git branch: 'main', credentialsId: "${env.GITHUB_CREDENTIALS_ID}", url: 'https://github.com/sreep1207/app.git'
-                    env.GIT_COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    echo "Checked out commit: ${env.GIT_COMMIT}"
                 }
             }
         }
