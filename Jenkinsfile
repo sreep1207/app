@@ -28,6 +28,9 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     command: ["sh", "-c", "/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/my-app15:${RELEASE}-${env.GIT_COMMIT} && sleep infinity"]
+  - name: kubectl
+    image: bitnami/kubectl:latest  #use an image with kubectl installed
+    command: ["sleep", "infinity"]
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
