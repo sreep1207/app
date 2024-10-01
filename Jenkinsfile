@@ -3,13 +3,9 @@ pipeline {
         kubernetes {
             label 'kaniko'
             defaultContainer 'kaniko'
-            containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: '["/kaniko/executor"]') {
+            containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: ['/kaniko/executor']) {
                 args '--dockerfile=/workspace/Dockerfile --context=/workspace'
-                alwaysPull true // Optional: Always pull the latest image
-            }
-            // Use a volume mount directly in the container template
-            containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: '["/kaniko/executor"]') {
-                mountPath '/workspace' // Mount the workspace here
+                 //alwaysPull true Optional: Always pull the latest image
             }
         }
     }
@@ -88,7 +84,8 @@ pipeline {
     }
     post {
         always {
-            // Clean up if necessary
+            echo 'Cleaning up after build...'
+            // Additional cleanup actions can be added here
         }
     }
 }
