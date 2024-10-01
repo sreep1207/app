@@ -1,18 +1,15 @@
 pipeline {
     agent {
         kubernetes {
-            // Define your Kubernetes pod with Kaniko
             label 'kaniko'
             defaultContainer 'kaniko'
-            containers {
-                containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: '["/kaniko/executor"]') {
-                    volumeMounts {
-                        mountPath '/workspace', name: 'shared-volume'
-                    }
-                }
+            containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: '["/kaniko/executor"]') {
+                args '--dockerfile=/workspace/Dockerfile --context=/workspace'
+                alwaysPull true // Optional: Always pull the latest image
             }
-            volumes {
-                persistentVolumeClaim(claimName: 'efs-kaniko-pvc', mountPath: '/workspace')
+            // Use a volume mount directly in the container template
+            containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: '["/kaniko/executor"]') {
+                mountPath '/workspace' // Mount the workspace here
             }
         }
     }
