@@ -3,9 +3,9 @@ pipeline {
         kubernetes {
             label 'kaniko'
             defaultContainer 'kaniko'
-            containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: ['/kaniko/executor']) {
+            containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug') {
+                command 'cat' // Keeps the container running, or you can define specific commands here
                 args '--dockerfile=/workspace/Dockerfile --context=/workspace'
-                 //alwaysPull true Optional: Always pull the latest image
             }
         }
     }
