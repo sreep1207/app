@@ -49,8 +49,10 @@ spec:
                 }
             }
             steps {
-           
+               script {
+                    echo 'Building Docker Image with Kaniko'
             }
+          }
         }
         stage('Update Deployment File') {
             steps {
