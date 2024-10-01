@@ -49,10 +49,8 @@ spec:
             }
             steps {
                 container(name: 'kaniko') {
-                environment {
-                IMAGE_TAG = "${RELEASE}-${env.GIT_COMMIT}"
-            }
             sh '''
+                IMAGE_TAG="${RELEASE}-${GIT_COMMIT}"
                 echo Image Tag: ${IMAGE_TAG}
                 /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG}
             '''
