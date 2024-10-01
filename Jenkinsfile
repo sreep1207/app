@@ -49,14 +49,12 @@ spec:
                 }
             }
             steps {
-                script {
-                    // No need for container block since the Kaniko executor runs in the pod itself
-                }
+           
             }
         }
         stage('Update Deployment File') {
             steps {
-                L:script {
+                script {
                     sh 'git config user.email "sridhar.innoraft@gmail.com"'
                     sh 'git config user.name "sree1207"'
                     sh """
