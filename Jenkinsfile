@@ -49,19 +49,16 @@ spec:
             }
             steps {
                 script {
-                    //Setup Docker credentials
-                    withCredentials([usernamePassword(credentialsId: "${env.DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        sh '''
-                        mkdir -p /kaniko/.docker
-                        echo '{"auths": {"https://index.docker.io/v1/": {"auth": "'$(echo -n $DOCKER_USER:$DOCKER_PASS | base64)'"}}}' > /kaniko/.docker/config.json
-
-                        #Run the Kaniko executor to build and push the image
-                         #Output Docker config for debugging
-                echo 'Generated Docker Config:'
-                cat /kaniko/.docker/config.json
-                         /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp16:${IMAGE_TAG}
-                        '''
-                    }
+                    // Output the Docker config for debugging
+                    sh '''
+                    echo 'Generated Docker Config:'
+                    cat /kaniko/.docker/config.json
+                    '''
+                    
+                    // Run the Kaniko executor to build and push the image
+                    sh """
+                    /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG}
+                    """
                 }
             }
         }
@@ -79,12 +76,12 @@ spec:
                     """
 
                     // Update the deployment.yaml with the new image tag
-                    sh "sed -i 's|image: sree1207/myapp16:.*|image: sree1207/myapp16:${env.IMAGE_TAG}|g' app-manifests/deployment.yaml"
+                    sh "sed -i 's|image: sree1207/myapp16:.*|image: sree1207/myapp16:${IMAGE_TAG}|g' app-manifests/deployment.yaml"
 
                     // Commit and push the changes
                     sh """
                     git add app-manifests/deployment.yaml
-                    git commit -m "Update deployment image to version ${env.IMAGE_TAG}"
+                    git commit -m "Update deployment image to version ${IMAGE_TAG}"
                     git push https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
                     """
                 }
