@@ -70,7 +70,7 @@ spec:
                         mkdir -p /kaniko/.docker
                         echo '{"auths": {"https://index.docker.io/v1/": {"auth": "'\$(echo -n $DOCKER_USER:$DOCKER_PASS | base64)'"}}}' > /kaniko/.docker/config.json
 
-                         /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp15:${IMAGE_TAG}
+                         /kaniko/executor --dockerfile=\$(pwd)/Dockerfile --context=\$(pwd) --destination=sree1207/myapp15:${IMAGE_TAG}
                         """
                     }
                 }
