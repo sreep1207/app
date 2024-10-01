@@ -49,11 +49,14 @@ spec:
             }
             steps {
                 container(name: 'kaniko') {
-            sh '''
-                IMAGE_TAG="${RELEASE}-${GIT_COMMIT}"
-                echo Image Tag: ${IMAGE_TAG}
+                 script {
+                        // Define the image tag
+                        IMAGE_TAG="${RELEASE}-${GIT_COMMIT}"
+                        echo "Image Tag: ${IMAGE_TAG}"
+
+            sh """
                 /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG}
-            '''
+            """
 
                 }
             }
