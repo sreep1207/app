@@ -57,8 +57,8 @@ spec:
             sh """
                 /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG}
             """
-
-                }
+                 }
+               }
             }
         }
         stage('Update Deployment File') {
