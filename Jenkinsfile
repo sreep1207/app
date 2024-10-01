@@ -27,7 +27,7 @@ spec:
     image: gcr.io/kaniko-project/executor:debug
     args:
     - "--dockerfile=\$(pwd)/Dockerfile" 
-    - "--context=\$(pwd)" 
+    - "--context=git@github.com:sreep1207/app.git" 
     - "--destination=sree1207/myapp16:${env.IMAGE_TAG}" 
     - "--verbosity=debug"
     - "--docker-config=/kaniko/.docker/config.json"
