@@ -40,6 +40,7 @@ spec:
         RELEASE = "1.0.0"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         GITHUB_CREDENTIALS_ID = 'github'
+        DOCKER_CREDENTIALS_ID = 'dockerhub-pwd'
         JENKINS_URL = 'http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@127.0.0.1:8080/'
     }
     stages {
@@ -51,7 +52,7 @@ spec:
 
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/sreep1207/app.git'
+                git branch: 'main', credentialsId: "${env.GITHUB_CREDENTIALS_ID}", url: 'https://github.com/sreep1207/app.git'
             }
         }
 
@@ -63,12 +64,14 @@ spec:
 
         stage('Build and Push Docker Image') {
             steps {
-                container(name: 'kaniko') {
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        // Create Docker config.json for Kaniko
+                container('kaniko') {
+                    withCredentials([usernamePassword(credentialsId: "${env.DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         sh """
                         mkdir -p /kaniko/.docker
-                        /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp15:${env.IMAGE_TAG} --verbosity=debug --docker-config=/kaniko/.docker/config.json || true
+                        echo '{"auths": {"https://index.docker.io/v1/": {"auth": "'$(echo -n $DOCKER_USER:$DOCKER_PASS | base64)'"}}}' > /kaniko/.docker/config.json
+
+                        /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace \
+                        --destination=sree1207/myapp15:${env.IMAGE_TAG} --verbosity=debug --docker-config=/kaniko/.docker/config.json
                         """
                     }
                 }
@@ -77,28 +80,27 @@ spec:
 
         stage('Update Deployment File') {
             steps {
-                container(name: 'kaniko') { // Use the kaniko container for Git commands
+                container('kaniko') {
                     script {
                         try {
-                            // Set Git config
+                            // Configure Git user
                             sh 'git config user.email "sridhar.innoraft@gmail.com"'
                             sh 'git config user.name "sree1207"'
 
-                            // Fetch the latest changes
+                            // Stash any local changes and pull latest changes from Git
                             sh """
                             git stash || true
-                            git pull https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main
+                            git pull https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main
                             """
 
                             // Update the deployment.yaml with the new image tag
-                            def commitId = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                            sh "sed -i 's|image:sree1207/myapp15:.*|image: sree1207/myapp15:${env.IMAGE_TAG}|g' app-manifests/deployment.yaml"
+                            sh "sed -i 's|image: sree1207/myapp15:.*|image: sree1207/myapp15:${env.IMAGE_TAG}|g' app-manifests/deployment.yaml"
 
                             // Commit and push the changes
                             sh """
                             git add app-manifests/deployment.yaml
-                            git commit -m "Update deployment image to version ${env.IMAGE_TAG} with commit ID ${commitId}"
-                            git push https://${GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
+                            git commit -m "Update deployment image to version ${env.IMAGE_TAG}"
+                            git push https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
                             """
                         } catch (e) {
                             echo "Error occurred: ${e}"
