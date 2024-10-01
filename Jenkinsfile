@@ -24,7 +24,7 @@ metadata:
 spec:
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
+    image: sree1207/kaniko:latest
     command: ["sleep"]
     args: ["infinity"]
     volumeMounts:
