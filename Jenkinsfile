@@ -25,8 +25,7 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    args:
-    - "--dockerfile=\$(pwd)/Dockerfile" 
+    args: 
     - "--context=git@github.com:sreep1207/app.git" 
     - "--destination=sree1207/myapp16:${env.IMAGE_TAG}" 
     - "--verbosity=debug"
