@@ -10,9 +10,11 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
+                    echo 'Checking out the repository...'
+                    git branch: 'main', credentialsId: "${env.GITHUB_CREDENTIALS_ID}", url: 'https://github.com/sreep1207/app.git'
                     env.GIT_COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                    echo "Checked out commit: ${env.GIT_COMMIT}"
                 }
-                git branch: 'main', credentialsId: "${env.GITHUB_CREDENTIALS_ID}", url: 'https://github.com/sreep1207/app.git'
             }
         }
         stage('Build and Push Docker Image') {
@@ -27,7 +29,7 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    command: ["sh", "-c", "/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/my-app15:${RELEASE}-${env.GIT_COMMIT} && sleep infinity"]
+    command: ["sh", "-c", "/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/my-app15:${RELEASE}-${env.GIT_COMMIT}"]
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
@@ -49,26 +51,27 @@ spec:
                 }
             }
             steps {
-               script {
+                script {
                     echo 'Building Docker Image with Kaniko'
+                    sh 'ls -al /workspace'  // Verify files are present
+                }
             }
-          }
         }
         stage('Update Deployment File') {
             steps {
                 script {
+                    echo 'Updating Deployment File...'
                     sh 'git config user.email "sridhar.innoraft@gmail.com"'
                     sh 'git config user.name "sree1207"'
-                    sh 'git remote -v' // Check remote configuration
-                    sh 'git status' // Check the current status
+                    sh 'git remote -v'
+                    sh 'git status'
                     sh 'git stash || true'
-                    sh 'git pull https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main'
-                    sh 'ls -al /workspace' // Check contents of workspace
+                    sh "git pull https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main || exit 1"
                     sh "sed -i 's|image: sree1207/my-app15:.*|image: sree1207/my-app15:${RELEASE}-${env.GIT_COMMIT}|g' app-manifests/deployment.yaml"
                     sh """
                     git add app-manifests/deployment.yaml
                     git commit -m "Update deployment image to version ${RELEASE}-${env.GIT_COMMIT}"
-                    git push https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
+                    git push https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main || exit 1
                     """
                 }
             }
