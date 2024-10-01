@@ -3,13 +3,17 @@ pipeline {
     environment {
         APP_NAME = "app"
         RELEASE = "1.0.0"
-        IMAGE_TAG = "${RELEASE}-${env.GIT_COMMIT}" // Use GIT_COMMIT for tagging
         DOCKER_CREDENTIALS_ID = 'dockerhub-pwd'
         GITHUB_CREDENTIALS_ID = 'github'
     }
     stages {
         stage('Checkout') {
             steps {
+                // Checkout the code from the Git repository
+                script {
+                    // Retrieve the GIT_COMMIT environment variable
+                    env.GIT_COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                }
                 git branch: 'main', credentialsId: "${env.GITHUB_CREDENTIALS_ID}", url: 'https://github.com/sreep1207/app.git'
             }
         }
@@ -52,16 +56,16 @@ spec:
             }
             steps {
                 container(name: 'kaniko') {
-                 script {
-                        // Define the image tag
-                        IMAGE_TAG="${RELEASE}-${GIT_COMMIT}"
+                    script {
+                        // Define the image tag using GIT_COMMIT
+                        IMAGE_TAG="${RELEASE}-${env.GIT_COMMIT}"
                         echo "Image Tag: ${IMAGE_TAG}"
 
-            sh """
-                /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG}
-            """
-                 }
-               }
+                        sh """
+                            /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG}
+                        """
+                    }
+                }
             }
         }
         stage('Update Deployment File') {
