@@ -6,7 +6,6 @@ pipeline {
             containerTemplate(name: 'kaniko', 
                               image: 'gcr.io/kaniko-project/executor:debug', 
                               command: '/kaniko/executor') {
-                args '--dockerfile=/workspace/Dockerfile --context=/workspace'
             }
         }
     }
