@@ -49,14 +49,14 @@ spec:
             }
             steps {
                 script {
-                    // Setup Docker credentials
+                    //Setup Docker credentials
                     withCredentials([usernamePassword(credentialsId: "${env.DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         sh '''
                         mkdir -p /kaniko/.docker
                         echo '{"auths": {"https://index.docker.io/v1/": {"auth": "'$(echo -n $DOCKER_USER:$DOCKER_PASS | base64)'"}}}' > /kaniko/.docker/config.json
 
-                        // Run the Kaniko executor to build and push the image
-                        // Output Docker config for debugging
+                        #Run the Kaniko executor to build and push the image
+                         #Output Docker config for debugging
                 echo 'Generated Docker Config:'
                 cat /kaniko/.docker/config.json
                          /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp16:${IMAGE_TAG}
