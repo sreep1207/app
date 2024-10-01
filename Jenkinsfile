@@ -57,7 +57,7 @@ spec:
                         // Output Docker config for debugging
                 echo 'Generated Docker Config:'
                 cat /kaniko/.docker/config.json
-                         /kaniko/executor --dockerfile=/$(pwd)/Dockerfile --context=/$(pwd) --destination=sree1207/myapp16:${IMAGE_TAG}
+                         /kaniko/executor --dockerfile=\$(pwd)/Dockerfile --context=\$(pwd) --destination=sree1207/myapp16:${IMAGE_TAG}
                         """
                     }
                 }
