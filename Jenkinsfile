@@ -10,8 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    // Checkout the latest code from the specified branch
-                    git branch: 'main', credentialsId: "${env.GITHUB_CREDENTIALS_ID}", url: 'https://github.com/sreep1207/app.git'
+                    git branch: 'main', url: 'https://github.com/sreep1207/app.git', credentialsId: "${GITHUB_CREDENTIALS_ID}"
                 }
             }
         }
