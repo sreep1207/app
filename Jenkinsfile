@@ -59,10 +59,11 @@ spec:
                 script {
                     sh 'git config user.email "sridhar.innoraft@gmail.com"'
                     sh 'git config user.name "sree1207"'
-                    sh """
-                    git stash || true
-                    git pull https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main
-                    """
+                    sh 'git remote -v' // Check remote configuration
+                    sh 'git status' // Check the current status
+                    sh 'git stash || true'
+                    sh 'git pull https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main'
+                    sh 'ls -al /workspace' // Check contents of workspace
                     sh "sed -i 's|image: sree1207/my-app15:.*|image: sree1207/my-app15:${RELEASE}-${env.GIT_COMMIT}|g' app-manifests/deployment.yaml"
                     sh """
                     git add app-manifests/deployment.yaml
