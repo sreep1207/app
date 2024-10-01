@@ -28,7 +28,7 @@ spec:
     args:
     - "--dockerfile=/workspace/Dockerfile" 
     - "--context=/workspace" 
-    - "--destination=sree1207/myapp15:${env.IMAGE_TAG}" 
+    - "--destination=sree1207/myapp14:${env.IMAGE_TAG}" 
     - "--verbosity=debug"
     - "--docker-config=/kaniko/.docker/config.json"
     volumeMounts:
@@ -58,7 +58,6 @@ spec:
                         echo '{"auths": {"https://index.docker.io/v1/": {"auth": "'\$(echo -n $DOCKER_USER:$DOCKER_PASS | base64)'"}}}' > /kaniko/.docker/config.json
 
                         // Run the Kaniko executor to build and push the image
-                /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp15:${env.IMAGE_TAG} --docker-config=/kaniko/.docker/config.json
                         """
                     }
                 }
@@ -78,7 +77,7 @@ spec:
                     """
 
                     // Update the deployment.yaml with the new image tag
-                    sh "sed -i 's|image: sree1207/myapp15:.*|image: sree1207/myapp15:${env.IMAGE_TAG}|g' app-manifests/deployment.yaml"
+                    sh "sed -i 's|image: sree1207/myapp15:.*|image: sree1207/myapp14:${env.IMAGE_TAG}|g' app-manifests/deployment.yaml"
 
                     // Commit and push the changes
                     sh """
