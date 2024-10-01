@@ -10,8 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                      echo 'Cloning GitHub repository...'
-                    // Clone the repository
+                    // Checkout the latest code from the specified branch
                     git branch: 'main', credentialsId: "${env.GITHUB_CREDENTIALS_ID}", url: 'https://github.com/sreep1207/app.git'
                 }
             }
@@ -28,7 +27,7 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    command: ["sh", "-c", "/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/my-app15:${RELEASE}-${env.GIT_COMMIT}"]
+    command: ["sh", "-c", "/kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/my-app15:${RELEASE}-${env.GIT_COMMIT} && sleep infinity"]
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
@@ -50,27 +49,37 @@ spec:
                 }
             }
             steps {
-                script {
+               script {
                     echo 'Building Docker Image with Kaniko'
-                    sh 'ls -al /workspace'  // Verify files are present
+                    // Ensure the Kaniko pod has completed before moving to the next step
+                    timeout(time: 10, unit: 'MINUTES') {
+                        waitUntil {
+                            script {
+                                // Check the status of the Kaniko pod
+                                def podStatus = sh(script: "kubectl get pods -l name=kaniko -o jsonpath='{.items[0].status.phase}'", returnStdout: true).trim()
+                                return podStatus == "Succeeded" || podStatus == "Running"
+                            }
+                        }
+                    }
                 }
             }
         }
         stage('Update Deployment File') {
             steps {
                 script {
-                    echo 'Updating Deployment File...'
+                    // Git configuration
                     sh 'git config user.email "sridhar.innoraft@gmail.com"'
                     sh 'git config user.name "sree1207"'
                     sh 'git remote -v'
-                    sh 'git status'
                     sh 'git stash || true'
-                    sh "git pull https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main || exit 1"
+                    // Pull the latest code to ensure we have the latest deployment.yaml
+                    sh 'git pull https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main'
+                    // Update deployment.yaml with the new image tag
                     sh "sed -i 's|image: sree1207/my-app15:.*|image: sree1207/my-app15:${RELEASE}-${env.GIT_COMMIT}|g' app-manifests/deployment.yaml"
                     sh """
                     git add app-manifests/deployment.yaml
                     git commit -m "Update deployment image to version ${RELEASE}-${env.GIT_COMMIT}"
-                    git push https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main || exit 1
+                    git push https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git HEAD:main
                     """
                 }
             }
