@@ -48,19 +48,11 @@ spec:
                 }
             }
             steps {
-                script {
-                    // Output the Docker config for debugging
-                    sh '''
-                     echo "Contents of /kaniko:"
-                    ls -l /kaniko
-                    echo 'Generated Docker Config:'
-                    cat /kaniko/.docker/config.json
-                    
-                    
-                    #Run the Kaniko executor to build and push the image
-                    
-                    /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp16:${IMAGE_TAG} --verbosity=debug
+                container(name: 'kaniko',shell: '/busybox/sh') {
+                     sh '''
+                        /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp16:${IMAGE_TAG}
                     '''
+
                 }
             }
         }
