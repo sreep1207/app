@@ -68,7 +68,7 @@ spec:
                     withCredentials([usernamePassword(credentialsId: "${env.DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         sh """
                         mkdir -p /kaniko/.docker
-                        echo '{"auths": {"https://index.docker.io/v1/": {"auth": "'$(echo -n $DOCKER_USER:$DOCKER_PASS | base64)'"}}}' > /kaniko/.docker/config.json
+                        echo '{"auths": {"https://index.docker.io/v1/": {"auth": "'\$(echo -n $DOCKER_USER:$DOCKER_PASS | base64)'"}}}' > /kaniko/.docker/config.json
 
                         /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace \
                         --destination=sree1207/myapp15:${env.IMAGE_TAG} --verbosity=debug --docker-config=/kaniko/.docker/config.json
