@@ -3,7 +3,9 @@ pipeline {
         kubernetes {
             label 'kaniko'
             defaultContainer 'kaniko'
-            containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: '/kaniko/executor') {
+            containerTemplate(name: 'kaniko', 
+                              image: 'gcr.io/kaniko-project/executor:debug', 
+                              command: '/kaniko/executor') {
                 args '--dockerfile=/workspace/Dockerfile --context=/workspace'
             }
         }
