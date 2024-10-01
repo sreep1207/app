@@ -28,7 +28,7 @@ spec:
     args:
     - "--dockerfile=/workspace/Dockerfile" 
     - "--context=/workspace" 
-    - "--destination=sree1207/myapp14:${env.IMAGE_TAG}" 
+    - "--destination=sree1207/myapp16:${env.IMAGE_TAG}" 
     - "--verbosity=debug"
     - "--docker-config=/kaniko/.docker/config.json"
     volumeMounts:
@@ -77,7 +77,7 @@ spec:
                     """
 
                     // Update the deployment.yaml with the new image tag
-                    sh "sed -i 's|image: sree1207/myapp15:.*|image: sree1207/myapp14:${env.IMAGE_TAG}|g' app-manifests/deployment.yaml"
+                    sh "sed -i 's|image: sree1207/myapp16:.*|image: sree1207/myapp16:${env.IMAGE_TAG}|g' app-manifests/deployment.yaml"
 
                     // Commit and push the changes
                     sh """
