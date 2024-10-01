@@ -26,8 +26,8 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     args:
-    - "--dockerfile=/workspace/Dockerfile" 
-    - "--context=/workspace" 
+    - "--dockerfile=$(pwd)/Dockerfile" 
+    - "--context=$(pwd)" 
     - "--destination=sree1207/myapp16:${env.IMAGE_TAG}" 
     - "--verbosity=debug"
     - "--docker-config=/kaniko/.docker/config.json"
@@ -58,6 +58,9 @@ spec:
                         echo '{"auths": {"https://index.docker.io/v1/": {"auth": "'\$(echo -n $DOCKER_USER:$DOCKER_PASS | base64)'"}}}' > /kaniko/.docker/config.json
 
                         // Run the Kaniko executor to build and push the image
+                        // Output Docker config for debugging
+                echo 'Generated Docker Config:'
+                cat /kaniko/.docker/config.json
                         """
                     }
                 }
