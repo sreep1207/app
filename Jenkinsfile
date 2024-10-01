@@ -5,7 +5,8 @@ pipeline {
             defaultContainer 'kaniko'
             containerTemplate(name: 'kaniko', 
                               image: 'gcr.io/kaniko-project/executor:debug', 
-                              command: '/kaniko/executor') {
+                              command: '/kaniko/executor',  // Ensure this is a string
+                              alwaysPullImage: true) { // Optionally specify this
             }
         }
     }
