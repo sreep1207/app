@@ -48,7 +48,7 @@ spec:
                 }
             }
             steps {
-                container(name: 'kaniko',shell: '/busybox/sh') {
+                script {
                      sh '''
                         /kaniko/executor --dockerfile=$(pwd)/Dockerfile --context=$(pwd) --destination=sree1207/myapp16:${IMAGE_TAG}
                     '''
