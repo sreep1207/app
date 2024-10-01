@@ -53,12 +53,12 @@ spec:
                     sh '''
                     echo 'Generated Docker Config:'
                     cat /kaniko/.docker/config.json
-                    '''
                     
-                    // Run the Kaniko executor to build and push the image
-                    sh """
-                    /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG}
-                    """
+                    
+                    #Run the Kaniko executor to build and push the image
+                    
+                    /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --destination=sree1207/myapp16:${IMAGE_TAG} --verbosity=debug
+                    '''
                 }
             }
         }
