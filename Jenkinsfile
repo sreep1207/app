@@ -87,7 +87,7 @@ spec:
                             sh 'git config user.email "sridhar.innoraft@gmail.com"'
                             sh 'git config user.name "sree1207"'
 
-                            // Stash any local changes and pull latest changes from Git
+                            // Stash any local changes and pull the latest changes from Git
                             sh """
                             git stash || true
                             git pull https://${env.GITHUB_CREDENTIALS_ID}@github.com/sreep1207/app.git main
