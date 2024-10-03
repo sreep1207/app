@@ -11,6 +11,8 @@ spec:
     volumeMounts:
       - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
+      - name: efs-jenkins-pv
+        mountPath: /var/jenkins_home
   volumes:
   - name: jenkins-docker-cfg
     projected:
@@ -20,3 +22,8 @@ spec:
           items:
             - key: .dockerconfigjson
               path: config.json
+  - name: efs-jenkins-pv
+    persistentVolumeClaim:
+      claimName: efs-jenkins-pvc
+
+
