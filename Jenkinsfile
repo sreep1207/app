@@ -6,7 +6,7 @@ pipeline {
   }
 
   environment {
-    APP_NAME = "myapp16"
+    APP_NAME = "my-app15"
     RELEASE = "1.0.0"
     DOCKER_USER = "sree1207"
     DOCKER_PASS = 'Aeg$12345'
