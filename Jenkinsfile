@@ -1,5 +1,4 @@
 pipeline {
-
   agent {
     kubernetes {
       yamlFile 'kaniko-builder.yaml'
@@ -7,15 +6,14 @@ pipeline {
   }
 
   environment {
-        APP_NAME = "myapp16"
-        RELEASE = "1.0.0"
-        DOCKER_USER = "sree1207"
-        DOCKER_PASS = 'Aeg$12345'
-        IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
-    }
+    APP_NAME = "complete-production-e2e-pipeline"
+    RELEASE = "1.0.0"
+    DOCKER_USER = "sree1207"
+    DOCKER_PASS = 'Aeg$12345'
+    IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
+  }
 
   stages {
-
     stage("Cleanup Workspace") {
       steps {
         cleanWs()
@@ -44,6 +42,25 @@ pipeline {
 
             /kaniko/executor --dockerfile=/var/jenkins_home/workspace/app/Dockerfile --context=/var/jenkins_home/workspace/app --destination=${IMAGE_NAME}:${IMAGE_TAG}
           '''
+        }
+      }
+    }
+
+    // New stage to check the status of the Kaniko pod
+    stage('Check Kaniko Pod Status') {
+      steps {
+        script {
+          echo 'Building Docker Image with Kaniko'
+          // Ensure the Kaniko pod has completed before moving to the next step
+          timeout(time: 10, unit: 'MINUTES') {
+            waitUntil {
+              script {
+                // Check the status of the Kaniko pod
+                def podStatus = sh(script: "kubectl get pods -l name=kaniko -o jsonpath='{.items[0].status.phase}'", returnStdout: true).trim()
+                return podStatus == "Succeeded" || podStatus == "Running"
+              }
+            }
+          }
         }
       }
     }
