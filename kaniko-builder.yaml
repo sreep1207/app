@@ -25,5 +25,3 @@ spec:
   - name: efs-jenkins-pv
     persistentVolumeClaim:
       claimName: efs-jenkins-pvc
-
-
