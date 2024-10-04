@@ -97,27 +97,36 @@ pipeline {
         }
     stage('Update GitHub Repository') {
             steps {
-                script {
-                    // Make changes to the repo if necessary (e.g., updating a version file)
-                    // For example, you could create or update a file with the new image tag
-                    sh '''
-                    git config --global user.email "sridhar.reddy@innoraft.com"
-                    git config --global user.name "sreep1207"
+                script{
+                     sh '''
+                    git config user.email 'sridhar.innoraft@gmail.com'
+                    git config user.name 'sreep1207'
                     git config --global --add safe.directory /var/jenkins_home/workspace/app
+                    # Set Git pull behavior to rebase
+                    git config pull.rebase true
+                    # Ensure we are on the correct branch
+                    git fetch origin
+                    git checkout main || git checkout -b main
+                    # Pull the latest changes from the remote branch
+                    git pull origin main
                     '''
-                    sh '''
-                    echo "IMAGE_TAG=${IMAGE_TAG}" > version.txt
-                    git add version.txt
-                    git commit -m "Update image tag to ${IMAGE_TAG}"
-                    '''
-                    // Checkout the main branch to ensure we're on the right branch
-                    sh 'git checkout main'
-                     // Push the changes back to the GitHub repository
-            withCredentials([usernamePassword(credentialsId: GIT_CREDENTIALS_ID, usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN')]) {
-                sh '''
-                git remote set-url origin https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/sreep1207/app.git
-            git push origin main
-            '''
+
+                    // Get the current commit ID
+                    COMMIT_ID = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+
+                    // Ensure the deployment file exists before trying to update it
+                    if (fileExists('app-manifests/deployment.yaml')) {
+                        // Update the image tag in deployment.yaml
+                        sh '''
+                        sed -i "s|image: sree1207/my-app15:.*|image: sree1207/my-app15:${COMMIT_ID}|g" app-manifests/deployment.yaml
+                        git add app-manifests/deployment.yaml
+                        git commit -m "Update deployment image to commit ${COMMIT_ID}"
+                        git push origin main || exit 1
+                        '''
+                    } else {
+                        echo "Deployment file not found."
+                        error("Deployment file not found.")
+             
             }
          }
      }
