@@ -118,11 +118,15 @@ pipeline {
                     if (fileExists('app-manifests/deployment.yaml')) {
                         // Update the image tag in deployment.yaml
                         sh '''
-                        sed -i "s|image: sree1207/my-app15:.*|image: sree1207/my-app15:${COMMIT_ID}|g" app-manifests/deployment.yaml
+                         sed -i 's|image: sree1207/my-app15:[^ ]*|image: sree1207/my-app15:${IMAGE_TAG}|g' app-manifests/deployment.yaml
+                        git add app-manifests/deployment.yaml
                         git add app-manifests/deployment.yaml
                         git commit -m "Update deployment image to commit ${COMMIT_ID}"
                                '''
-                      
+                         // Verify the changes
+                        echo "After replacement, deployment.yaml contents:"
+                        sh 'cat app-manifests/deployment.yaml'
+
                         // Push the changes back to GitHub
                         withCredentials([usernamePassword(credentialsId: GIT_CREDENTIALS_ID, passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                             sh '''
