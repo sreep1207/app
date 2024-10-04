@@ -6,6 +6,7 @@ pipeline {
             kind: Pod
             spec:
               activeDeadlineSeconds: 1800
+              terminationGracePeriodSeconds: 120
               containers:
                 - name: kaniko
                   image: gcr.io/kaniko-project/executor:debug
@@ -20,11 +21,11 @@ pipeline {
                       mountPath: /var/jenkins_home
                   resources:
                     limits:
-                      memory: "4Gi"  
-                      cpu: "2"        
+                      memory: "2Gi"  
+                      cpu: "1"        
                     requests:
-                      memory: "2Gi"   
-                      cpu: "1"      
+                      memory: "1Gi"   
+                      cpu: "0.5"      
               volumes:
                 - name: jenkins-docker-cfg
                   projected:
