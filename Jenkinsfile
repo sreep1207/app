@@ -76,6 +76,7 @@ pipeline {
             steps {
                 container(name: 'kaniko') {
                     sh '''
+                    ls -la /var/jenkins_home/workspace/app
                     /kaniko/executor --dockerfile=/var/jenkins_home/workspace/app/Dockerfile --context=/var/jenkins_home/workspace/app --destination=${IMAGE_NAME}:${IMAGE_TAG}
                     '''
                 }
