@@ -20,11 +20,11 @@ pipeline {
                       mountPath: /var/jenkins_home
                   resources:
                     limits:
-                      memory: "2Gi"  
-                      cpu: "1"        
+                      memory: "4Gi"  
+                      cpu: "2"        
                     requests:
-                      memory: "1Gi"   
-                      cpu: "0.5"      
+                      memory: "2Gi"   
+                      cpu: "1"      
               volumes:
                 - name: jenkins-docker-cfg
                   projected:
