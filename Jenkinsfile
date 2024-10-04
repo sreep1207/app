@@ -101,6 +101,11 @@ pipeline {
                     // Make changes to the repo if necessary (e.g., updating a version file)
                     // For example, you could create or update a file with the new image tag
                     sh '''
+                    git config --global user.email "sridhar.reddy@innoraft.com"
+                    git config --global user.name "sreep1207"
+                    git config --global --add safe.directory /var/jenkins_home/workspace/app
+                    '''
+                    sh '''
                     echo "IMAGE_TAG=${IMAGE_TAG}" > version.txt
                     git add version.txt
                     git commit -m "Update image tag to ${IMAGE_TAG}"
