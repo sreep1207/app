@@ -6,7 +6,7 @@ pipeline {
             kind: Pod
             spec:
               activeDeadlineSeconds: 3400
-              terminationGracePeriodSeconds: 360
+              terminationGracePeriodSeconds: 1200
               containers:
                 - name: kaniko
                   image: gcr.io/kaniko-project/executor:debug
