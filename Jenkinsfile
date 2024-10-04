@@ -118,7 +118,7 @@ pipeline {
                     if (fileExists('app-manifests/deployment.yaml')) {
                         // Update the image tag in deployment.yaml
                         sh '''
-                         sed -i 's|image: sree1207/my-app15:[^ ]*|image: sree1207/my-app15:${IMAGE_TAG}|g' app-manifests/deployment.yaml
+                         sed -i 's|image: sree1207/my-app15:[^ ]*|image: sree1207/my-app15:'"${IMAGE_TAG}"'|g' app-manifests/deployment.yaml
                         git add app-manifests/deployment.yaml
                         git add app-manifests/deployment.yaml
                         git commit -m "Update deployment image to commit ${COMMIT_ID}"
