@@ -95,6 +95,22 @@ pipeline {
                 }
             }
         }
+    stage('Update GitHub Repository') {
+            steps {
+                script {
+                    // Make changes to the repo if necessary (e.g., updating a version file)
+                    // For example, you could create or update a file with the new image tag
+                    sh '''
+                    echo "IMAGE_TAG=${IMAGE_TAG}" > version.txt
+                    git add version.txt
+                    git commit -m "Update image tag to ${IMAGE_TAG}"
+                    '''
+                }
+                // Push the changes back to the GitHub repository
+                git credentialsId: GIT_CREDENTIALS_ID, url: 'https://github.com/sreep1207/app.git'
+                sh 'git push origin main'
+            }
+        }
     }
 
     post {
