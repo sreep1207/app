@@ -20,7 +20,7 @@ pipeline {
                   imagePullPolicy: Always
                   command:
                     - sleep
-                    args:
+                  args:
                     - "9999999"
                   volumeMounts:
                     - name: jenkins-docker-cfg
@@ -38,11 +38,11 @@ pipeline {
                 - name: jenkins-docker-cfg
                   projected:
                     sources:
-                    - secret:
-                        name: docker-hub-secret
-                        items:
-                          - key: .dockerconfigjson
-                            path: config.json
+                      - secret:
+                          name: docker-hub-secret
+                          items:
+                            - key: .dockerconfigjson
+                              path: config.json
                 - name: efs-jenkins-pv
                   persistentVolumeClaim:
                     claimName: efs-jenkins-pvc
@@ -59,12 +59,6 @@ pipeline {
     }
 
     stages {
-        stage("Cleanup Workspace") {
-            steps {
-                cleanWs()
-            }
-        }
-
         stage("Checkout from SCM") {
             steps {
                 git branch: 'main', credentialsId: GIT_CREDENTIALS_ID, url: 'https://github.com/sreep1207/app.git'
