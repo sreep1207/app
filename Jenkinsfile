@@ -17,13 +17,6 @@ pipeline {
                       mountPath: /kaniko/.docker
                     - name: efs-jenkins-pv
                       mountPath: /var/jenkins_home
-                - name: jenkins-agent
-                  image: jenkins/inbound-agent
-                  args:
-                    - "-url"
-                    - "http://admin:11fbc521a3d5f40fe5c7c05a04032677a3@10.100.23.220:8080/"
-                    - "6c415231f727ece9a9fab366895706e25948fccdaf81d31c669524e74d177e4a"
-                    - "kanikoagent"
               volumes:
                 - name: jenkins-docker-cfg
                   projected:
