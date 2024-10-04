@@ -5,6 +5,7 @@ pipeline {
             apiVersion: v1
             kind: Pod
             spec:
+              activeDeadlineSeconds: 1800
               containers:
                 - name: kaniko
                   image: gcr.io/kaniko-project/executor:debug
