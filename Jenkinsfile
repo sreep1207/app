@@ -17,6 +17,13 @@ pipeline {
                       mountPath: /kaniko/.docker
                     - name: efs-jenkins-pv
                       mountPath: /var/jenkins_home
+                  resources:
+                    limits:
+                      memory: "2Gi"  
+                      cpu: "1"        
+                    requests:
+                      memory: "1Gi"   
+                      cpu: "0.5"      
               volumes:
                 - name: jenkins-docker-cfg
                   projected:
