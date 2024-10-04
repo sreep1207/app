@@ -121,8 +121,14 @@ pipeline {
                         sed -i "s|image: sree1207/my-app15:.*|image: sree1207/my-app15:${COMMIT_ID}|g" app-manifests/deployment.yaml
                         git add app-manifests/deployment.yaml
                         git commit -m "Update deployment image to commit ${COMMIT_ID}"
-                        git push origin main || exit 1
-                        '''
+                               '''
+                      
+                        // Push the changes back to GitHub
+                        withCredentials([usernamePassword(credentialsId: GIT_CREDENTIALS_ID, passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                            sh '''
+                            git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/sreep1207/app.git main
+                            '''
+                        }
                     } else {
                         echo "Deployment file not found."
                         error("Deployment file not found.")
