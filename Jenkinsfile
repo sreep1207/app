@@ -110,10 +110,14 @@ pipeline {
                     git add version.txt
                     git commit -m "Update image tag to ${IMAGE_TAG}"
                     '''
-                }
-                // Push the changes back to the GitHub repository
-                git credentialsId: GIT_CREDENTIALS_ID, url: 'https://github.com/sreep1207/app.git'
-                sh 'git push origin main'
+                    // Checkout the main branch to ensure we're on the right branch
+                    sh 'git checkout main'
+                     // Push the changes back to the GitHub repository
+            withCredentials([string(credentialsId: GIT_CREDENTIALS_ID, variable: 'GITHUB_TOKEN')]) {
+            sh '''
+            git remote set-url origin https://sreep1207:${GITHUB_TOKEN}@github.com/sreep1207/app.git
+            git push origin main
+            '''
             }
         }
     }
