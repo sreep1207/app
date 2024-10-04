@@ -119,10 +119,11 @@ pipeline {
             git push origin main
             '''
             }
-        }
-    }
- }
-    post {
+         }
+     }
+  }
+}    
+post {
         always {
             cleanWs()
         }
