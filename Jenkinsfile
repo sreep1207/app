@@ -25,8 +25,8 @@ pipeline {
                   volumeMounts:
                     - name: jenkins-docker-cfg
                       mountPath: /kaniko/.docker
-                    - name: efs-jenkins-pv
-                      mountPath: /var/jenkins_home
+                    - name: workspace-volume
+                      mountPath: /var/jenkins_home/workspace
                   resources:
                     limits:
                       memory: "2Gi"  
@@ -43,9 +43,9 @@ pipeline {
                           items:
                             - key: .dockerconfigjson
                               path: config.json
-                - name: efs-jenkins-pv
-                  persistentVolumeClaim:
-                    claimName: efs-jenkins-pvc
+                - name: workspace-volume
+                  emptyDir: {}
+
             '''
         }
     }
@@ -118,8 +118,7 @@ pipeline {
                     if (fileExists('app-manifests/deployment.yaml')) {
                         // Update the image tag in deployment.yaml
                         sh '''
-                         sed -i 's|image: sree1207/my-app15:[^ ]*|image: sree1207/my-app15:'"${IMAGE_TAG}"'|g' app-manifests/deployment.yaml
-                        git add app-manifests/deployment.yaml
+                        sed -i 's|image: sree1207/my-app15:[^ ]*|image: sree1207/my-app15:'"${IMAGE_TAG}"'|g' app-manifests/deployment.yaml
                         git add app-manifests/deployment.yaml
                         git commit -m "Update deployment image to commit ${COMMIT_ID}"
                                '''
