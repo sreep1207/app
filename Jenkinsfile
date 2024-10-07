@@ -80,13 +80,13 @@ pipeline {
                     script {
                         echo "Starting Kaniko build..."
                         // Check if the necessary files exist
-                        sh 'ls -la /var/jenkins_home/workspace/app'
+                        sh 'ls -la ${WORKSPACE}'
                         
                         // Run the Kaniko executor to build and push the image
                         sh '''
                         /kaniko/executor \
-                          --dockerfile=/var/jenkins_home/workspace/app/Dockerfile \
-                          --context=/var/jenkins_home/workspace/app \
+                          --dockerfile=${WORKSPACE}/Dockerfile \
+                          --context=${WORKSPACE} \
                           --destination=${IMAGE_NAME}:${IMAGE_TAG} \
                           || { echo "Kaniko build failed"; exit 1; }
                         echo "Kaniko build completed successfully."
@@ -101,7 +101,7 @@ pipeline {
                      sh '''
                     git config user.email 'sridhar.innoraft@gmail.com'
                     git config user.name 'sreep1207'
-                    git config --global --add safe.directory /var/jenkins_home/workspace/app
+                    git config --global --add safe.directory ${WORKSPACE}
                     # Set Git pull behavior to rebase
                     git config pull.rebase true
                     # Ensure we are on the correct branch
