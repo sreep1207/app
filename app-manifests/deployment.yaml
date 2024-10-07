@@ -25,7 +25,7 @@ spec:
           mountPath: /var/www/html/test-drupal
       containers:
       - name: my-app15
-        image: sree1207/my-app15:1.0.0-3db3cd3
+        image: sree1207/my-app15:1.0.0-f65b2f9
         ports:
         - containerPort: 80 
         volumeMounts:
